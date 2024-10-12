@@ -1,0 +1,84 @@
+// Prisma schema for the school application
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin", "linux-musl-arm64-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Subject {
+  id          String        @id @default(uuid())
+  name        String
+  scholarYear ScholarYear[]
+}
+
+model ScholarYear {
+  id        String            @id @default(uuid())
+  year      String
+  subjectId String
+  subject   Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  topics    EvaluationTopic[]
+}
+
+model EvaluationTopic {
+  id            String      @id @default(uuid())
+  name          String
+  scholarYearId String
+  scholarYear   ScholarYear @relation(fields: [scholarYearId], references: [id], onDelete: Cascade)
+  subtopics     SubTopic[]
+}
+
+model SubTopic {
+  id                String          @id @default(uuid())
+  name              String
+  evaluationTopicId String
+  evaluationTopic   EvaluationTopic @relation(fields: [evaluationTopicId], references: [id], onDelete: Cascade)
+  Grade             Grade[]
+}
+
+model Teacher {
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  password     String
+  lastLoggedIn DateTime?
+}
+
+model Class {
+  id       String         @id @default(uuid())
+  name     String
+  year     String
+  students ClassStudent[]
+  Grade    Grade[]
+}
+
+model Student {
+  id      String         @id @default(uuid())
+  name    String
+  classes ClassStudent[]
+  grades  Grade[]
+}
+
+model ClassStudent {
+  id        String  @id @default(uuid())
+  classId   String
+  class     Class   @relation(fields: [classId], references: [id], onDelete: Cascade)
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+model Grade {
+  id         String   @id @default(uuid())
+  subTopicId String
+  subTopic   SubTopic @relation(fields: [subTopicId], references: [id], onDelete: Cascade)
+  studentId  String
+  student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  classId    String
+  class      Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  grade      String // A, B, C, D, E, etc.
+  createdAt  DateTime @default(now())
+}
