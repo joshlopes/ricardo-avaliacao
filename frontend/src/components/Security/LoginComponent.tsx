@@ -46,7 +46,7 @@ const LoginComponent: React.FC = () => {
                     <form onSubmit={handleLogin}>
                         <Stack padding={5} spacing={5}>
                             <TextField
-                                label="Username"
+                                label="Email"
                                 variant="outlined"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}

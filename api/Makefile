@@ -70,8 +70,8 @@ npm-command:
 .PHONY: create-user create.user
 ## [App] Create Initial Admin user
 create-user create.user:
-	$(DOCKER_COMPOSE_EXEC) node-app npx ts-node bin/console create-user admin true true true admin
-	echo "User: admin Password: admin created."
+	$(DOCKER_COMPOSE_EXEC) node-app npx ts-node bin/console create-teacher "admin@example.com" "Super Admin" admin
+	echo "User: admin@example.com Password: admin created."
 
 .PHONY: test run.test
 ## [Tests] Run tests

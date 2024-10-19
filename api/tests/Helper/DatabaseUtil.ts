@@ -9,7 +9,6 @@ export default class DatabaseUtil {
         await prismaClient.$executeRaw`SET FOREIGN_KEY_CHECKS=0`;
 
         await prismaClient.$executeRaw`TRUNCATE TABLE Subject`;
-        await prismaClient.$executeRaw`TRUNCATE TABLE ScholarYear`;
         await prismaClient.$executeRaw`TRUNCATE TABLE EvaluationTopic`;
         await prismaClient.$executeRaw`TRUNCATE TABLE SubTopic`;
         await prismaClient.$executeRaw`TRUNCATE TABLE Teacher`;

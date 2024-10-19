@@ -17,7 +17,7 @@ function App() {
 
     const fetchMe = useCallback(() => {
         if (!user) {
-            api?.get('/users/me')
+            api?.get('/me')
                 .then((response) => {
                     if (!response.ok || !response.body) {
                         throw new Error('Failed to fetch user!')
@@ -59,7 +59,7 @@ function App() {
                     >
                         <List>
                             {navbarItems.map((item, index) => (
-                                user && item.security(user) && <item.component key={item.name} name={item.name} icon={item.icon} path={item.path} />
+                                user && <item.component key={item.name} name={item.name} icon={item.icon} path={item.path} />
                             ))}
                             <ListItem>
                                 <UserIcon /> Hello, {user?.name}

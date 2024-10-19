@@ -84,7 +84,7 @@ async function main() {
         data: {
             id: evaluation1Id,
             name: 'Understanding Numbers',
-            scholarYearId: class1.id,
+            year: '2023',
         },
     });
 
@@ -92,7 +92,7 @@ async function main() {
         data: {
             id: evaluation2Id,
             name: 'Grammar Basics',
-            scholarYearId: class2.id,
+            year: '2023',
         },
     });
 

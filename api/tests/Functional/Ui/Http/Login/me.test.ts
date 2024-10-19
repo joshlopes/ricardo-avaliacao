@@ -8,7 +8,7 @@ import SuperTestRequestBuilder from "../../../../Helper/SuperTestRequestBuilder"
 
 const prismaClient: PrismaClient = myContainer.get(TYPES.PrismaClient);
 
-describe('GET /api/teachers/me', () => {
+describe('GET /api/me', () => {
     beforeEach(async () => {
         await DatabaseUtil.truncateAllTables(prismaClient)
     });
@@ -17,7 +17,7 @@ describe('GET /api/teachers/me', () => {
         const teacher = await createTeacher();
 
         const response: Response = await SuperTestRequestBuilder
-            .get('/api/teachers/me', true)
+            .get('/api/me', true)
             .withUser(teacher)
             .build();
 

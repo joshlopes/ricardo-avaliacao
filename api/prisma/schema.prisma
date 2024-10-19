@@ -17,10 +17,10 @@ model Subject {
 }
 
 model EvaluationTopic {
-  id            String     @id @default(uuid())
-  name          String
-  scholarYearId String
-  subtopics     SubTopic[]
+  id        String     @id @default(uuid())
+  name      String
+  year      String
+  subtopics SubTopic[]
 }
 
 model SubTopic {
