@@ -1,6 +1,6 @@
 import { SubTopicId } from './SubTopicId';
 import EvaluationTopic, { EvaluationTopicArray } from './EvaluationTopic';
-import { Grade, GradeArray } from './Grade';
+import Grade, { GradeArray } from '../School/Grade';
 
 export interface SubTopicArray {
     id: string;

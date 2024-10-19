@@ -13,23 +13,13 @@ datasource db {
 model Subject {
   id                  String                @id @default(uuid())
   name                String
-  scholarYear         ScholarYear[]
   ClassSubjectTeacher ClassSubjectTeacher[]
 }
 
-model ScholarYear {
-  id        String            @id @default(uuid())
-  year      String
-  subjectId String
-  subject   Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
-  topics    EvaluationTopic[]
-}
-
 model EvaluationTopic {
-  id            String      @id @default(uuid())
+  id            String     @id @default(uuid())
   name          String
   scholarYearId String
-  scholarYear   ScholarYear @relation(fields: [scholarYearId], references: [id], onDelete: Cascade)
   subtopics     SubTopic[]
 }
 

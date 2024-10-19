@@ -1,5 +1,5 @@
 import { GradeId } from './GradeId';
-import SubTopic, { SubTopicArray } from './SubTopic';
+import SubTopic, { SubTopicArray } from '../Evaluation/SubTopic';
 import Student, { StudentArray } from './Student';
 import SchoolClass, { SchoolClassArray } from './SchoolClass';
 
