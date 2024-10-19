@@ -11,9 +11,10 @@ datasource db {
 }
 
 model Subject {
-  id          String        @id @default(uuid())
-  name        String
-  scholarYear ScholarYear[]
+  id                  String                @id @default(uuid())
+  name                String
+  scholarYear         ScholarYear[]
+  ClassSubjectTeacher ClassSubjectTeacher[]
 }
 
 model ScholarYear {
@@ -41,19 +42,31 @@ model SubTopic {
 }
 
 model Teacher {
-  id           String    @id @default(uuid())
-  name         String
-  email        String    @unique
-  password     String
-  lastLoggedIn DateTime?
+  id                  String                @id @default(uuid())
+  name                String
+  email               String                @unique
+  password            String
+  lastLoggedIn        DateTime?
+  ClassSubjectTeacher ClassSubjectTeacher[]
 }
 
 model Class {
-  id       String         @id @default(uuid())
-  name     String
-  year     String
-  students ClassStudent[]
-  Grade    Grade[]
+  id                  String                @id @default(uuid())
+  name                String
+  year                String
+  students            ClassStudent[]
+  Grade               Grade[]
+  ClassSubjectTeacher ClassSubjectTeacher[]
+}
+
+model ClassSubjectTeacher {
+  id          String  @id @default(uuid())
+  teacherId   String
+  teacher     Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  classId     String
+  schoolClass Class   @relation(fields: [classId], references: [id], onDelete: Cascade)
+  subjectId   String
+  subject     Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 }
 
 model Student {
