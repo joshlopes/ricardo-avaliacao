@@ -121,3 +121,8 @@ db-generate db.generate:
 ## [DATABASE] Reset Database for tests
 db-test-setup db.test.setup db.tests.setup:
 	$(DOCKER_COMPOSE_EXEC) node-app npm run test:setup
+
+.PHONE: db-seed db.seed
+## [DATABASE] Seed Database
+db-seed db.seed:
+	$(DOCKER_COMPOSE_EXEC) node-app npx prisma db seed

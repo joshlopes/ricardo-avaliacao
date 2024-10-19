@@ -21,8 +21,12 @@
     "lint:fix": "npx eslint . --fix",
     "build": "tsc -p .",
     "prisma:generate": "prisma generate",
+    "test:db:drop": "env-cmd -f .env.test npx prisma migrate reset --force",
     "test:db:push": "env-cmd -f .env.test npx prisma db push",
-    "test:setup": "npm run test:db:push"
+    "test:setup": "npm run test:db:drop && npm run test:db:push"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.9.1",
