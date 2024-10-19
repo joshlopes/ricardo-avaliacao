@@ -18,7 +18,7 @@ describe('CreateTeacher', () => {
     it('should create a user', (done) => {
         // Arrange
         const email = 'test@email.com';
-        const name = 'Test User';
+        const name = 'Test Teacher';
         const password = 'test';
         const command = `ts-node bin/console ${CreateTeacher.commandName} ${email} "${name}" ${password}`;
 
