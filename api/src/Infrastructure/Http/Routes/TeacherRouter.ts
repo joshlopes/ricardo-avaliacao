@@ -1,4 +1,5 @@
 import { list } from '../../../Ui/Http/Teacher/list'
+import { list as listStudents } from '../../../Ui/Http/Teacher/Students/list'
 import { get } from '../../../Ui/Http/Teacher/get'
 import { upsert } from '../../../Ui/Http/Teacher/upsert'
 import { remove } from '../../../Ui/Http/Teacher/delete'
@@ -21,5 +22,10 @@ TeacherRouter.put('/:id([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]
 TeacherRouter.delete('/:id([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})', (req: Request, resp: Response, next: NextFunction) => {
   remove(req, resp).then(next).catch(next)
 })
+
+// Teacher students
+TeacherRouter.get('/:id/students', (req: Request, resp: Response, next: NextFunction) => {
+  listStudents(req, resp).then(next).catch(next)
+});
 
 export default TeacherRouter

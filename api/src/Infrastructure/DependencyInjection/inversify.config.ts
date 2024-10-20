@@ -4,7 +4,7 @@ import CommandHandlerManager from '../CommandHandler/CommandHandlerManager'
 import { TYPES } from './types'
 import { PrismaClient } from '@prisma/client'
 import type TeacherRepository from '../../Domain/Teacher/TeacherRepository'
-import OrmTeacherRepository from '../ORM/User/Prisma/OrmTeacherRepository'
+import OrmTeacherRepository from '../ORM/Teacher/OrmTeacherRepository'
 import LoginCommandHandler from '../../Application/Query/Login/LoginCommandHandler'
 import type SecurityProvider from '../../Domain/Security/SecurityProvider'
 import JwtProvider from '../Security/Jwt/JwtProvider'
@@ -12,9 +12,9 @@ import { type PasswordEncoder } from '../../Domain/Security/PasswordEncoder'
 import EventDispatcher from '../../Application/Event/EventDispatcher/EventDispatcher'
 import CreateTeacher from '../../Ui/Console/CreateTeacher'
 import UpsertTeacherCommandHandler from '../../Application/Write/Teacher/UpsertTeacher/UpsertTeacherCommandHandler'
-import ListAllUsersCommandHandler from '../../Application/Query/User/ListAllUser/ListAllUsersCommandHandler'
+import ListAllTeachersCommandHandler from '../../Application/Query/Teacher/ListAllTeachers/ListAllTeachersCommandHandler'
 import DeleteTeacherCommandHandler from '../../Application/Write/Teacher/DeleteTeacher/DeleteTeacherCommandHandler'
-import GetUserCommandHandler from '../../Application/Query/User/GetUser/GetUserCommandHandler'
+import GetTeacherCommandHandler from '../../Application/Query/Teacher/GetTeacher/GetTeacherCommandHandler'
 import AxiosHttpClient from '../Http/AxiosHttpClient'
 import RetryAxiosHttpClient from '../Http/RetryAxiosHttpClient'
 import { type HttpClient } from '../../Domain/Http/HttpClient'
@@ -25,6 +25,9 @@ import LokiLogProvider from '../Logger/LokiLogProvider'
 import type Logger from '../../Application/Logger/Logger'
 import { isEmpty } from '../../Application/Shared/StringTools'
 import ArgonPasswordEncoder from "../Security/PasswordEncoder/ArgonPasswordEncoder";
+import ListAllTeacherStudentsCommandHandler from "../../Application/Query/Teacher/ListAllTeacherStudents/ListAllTeachersCommandHandler";
+import OrmStudentRepository from "../ORM/School/OrmStudentRepository";
+import StudentRepository from "../../Domain/School/StudentRepository";
 
 const myContainer = new Container()
 
@@ -44,14 +47,16 @@ myContainer.bind<Logger>(TYPES.Logger).toConstantValue(loggerManager.createLogge
 // Repositories
 myContainer.bind<PrismaClient>(TYPES.PrismaClient).toConstantValue(new PrismaClient())
 myContainer.bind<TeacherRepository>(TYPES.TeacherRepository).to(OrmTeacherRepository)
+myContainer.bind<StudentRepository>(TYPES.StudentRepository).to(OrmStudentRepository)
 
 // Command handlers
 myContainer.bind(TYPES.CommandHandler).to(LoginCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(UpsertTeacherCommandHandler)
-myContainer.bind(TYPES.CommandHandler).to(ListAllUsersCommandHandler)
+myContainer.bind(TYPES.CommandHandler).to(ListAllTeachersCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(DeleteTeacherCommandHandler)
-myContainer.bind(TYPES.CommandHandler).to(GetUserCommandHandler)
+myContainer.bind(TYPES.CommandHandler).to(GetTeacherCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(RefreshTokenCommandHandler)
+myContainer.bind(TYPES.CommandHandler).to(ListAllTeacherStudentsCommandHandler)
 myContainer.bind<CommandHandlerManager>(CommandHandlerManager).toSelf()
 
 // Events

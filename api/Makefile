@@ -122,6 +122,11 @@ db-generate db.generate:
 db-test-setup db.test.setup db.tests.setup:
 	$(DOCKER_COMPOSE_EXEC) node-app npm run test:setup
 
+.PHONY: db-dev-setup db.dev.setup
+## [DATABASE] Reset Database for dev
+db-dev-setup db.dev.setup:
+	$(DOCKER_COMPOSE_EXEC) node-app npm run dev:setup
+
 .PHONE: db-seed db.seed
 ## [DATABASE] Seed Database
 db-seed db.seed:

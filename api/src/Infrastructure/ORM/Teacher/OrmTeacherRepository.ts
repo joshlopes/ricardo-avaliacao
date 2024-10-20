@@ -1,12 +1,11 @@
 import { inject, injectable } from 'inversify'
-import TeacherRepository from '../../../../Domain/Teacher/TeacherRepository'
-import { TYPES } from '../../../DependencyInjection/types'
+import TeacherRepository from '../../../Domain/Teacher/TeacherRepository'
+import { TYPES } from '../../DependencyInjection/types'
 import { PrismaClient } from '@prisma/client'
-import Teacher, { TeacherArray } from '../../../../Domain/Teacher/Teacher'
-import RecordNotFound from '../../../../Domain/RecordNotFound'
-import { PasswordEncoder } from '../../../../Domain/Security/PasswordEncoder'
-import TeacherAlreadyExists from '../../../../Domain/Teacher/TeacherAlreadyExists'
-import { TeacherId } from '../../../../Domain/Teacher/TeacherId'
+import Teacher, { TeacherArray } from '../../../Domain/Teacher/Teacher'
+import RecordNotFound from '../../../Domain/RecordNotFound'
+import { PasswordEncoder } from '../../../Domain/Security/PasswordEncoder'
+import { TeacherId } from '../../../Domain/Teacher/TeacherId'
 
 @injectable()
 export default class OrmTeacherRepository implements TeacherRepository {

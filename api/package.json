@@ -21,6 +21,9 @@
     "lint:fix": "npx eslint . --fix",
     "build": "tsc -p .",
     "prisma:generate": "prisma generate",
+    "dev:db:drop": "npx prisma migrate reset --force",
+    "dev:db:push": "npx prisma db push",
+    "dev:setup": "npm run dev:db:drop && npm run dev:db:push",
     "test:db:drop": "env-cmd -f .env.test npx prisma migrate reset --force",
     "test:db:push": "env-cmd -f .env.test npx prisma db push",
     "test:setup": "npm run test:db:drop && npm run test:db:push"

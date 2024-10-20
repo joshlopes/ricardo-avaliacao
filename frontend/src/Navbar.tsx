@@ -4,6 +4,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import GraphIcon from '@mui/icons-material/GraphicEq';
 import LogoutIcon from '@mui/icons-material/Logout';
+import TeacherStudentsComponent from "./components/Teacher/TeacherStudentsComponent";
 
 const NavbarItem = ({ name, icon: Icon, path }: { name: string, icon: any, path: string }) => (
     <Link to={path}>
@@ -21,6 +22,13 @@ export const navbarItems = [
     name: 'Dashboard',
     icon: GraphIcon,
     path: '/',
+    component: NavbarItem,
+    security: () => true
+  },
+  {
+    name: 'Students',
+    icon: GraphIcon,
+    path: '/students',
     component: NavbarItem,
     security: () => true
   },

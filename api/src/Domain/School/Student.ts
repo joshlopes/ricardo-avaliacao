@@ -36,8 +36,8 @@ export default class Student {
         return {
             id: this.id.toString(),
             name: this.name,
-            classes: this.classes ? this.classes.map(cls => cls.toObject()) : undefined,
-            grades: this.grades ? this.grades.map(grade => grade.toObject()) : undefined,
+            //classes: this.classes ? this.classes.map(cls => cls.toObject()) : undefined,
+            //grades: this.grades ? this.grades.map(grade => grade.toObject()) : undefined,
             created_at: this.created_at,
             updated_at: this.updated_at
         };

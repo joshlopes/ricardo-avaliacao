@@ -10,6 +10,7 @@ import UserIcon from "@mui/icons-material/AccountCircle";
 import DashboardComponent from "./components/DashboardComponent";
 import {LogoutComponent} from "./components/Security/LogoutComponent";
 import LoginComponent from "./components/Security/LoginComponent";
+import TeacherStudentsComponent from "./components/Teacher/TeacherStudentsComponent";
 
 function App() {
     const api = useApi();
@@ -59,7 +60,12 @@ function App() {
                     >
                         <List>
                             {navbarItems.map((item, index) => (
-                                user && <item.component key={item.name} name={item.name} icon={item.icon} path={item.path} />
+                                user && <item.component
+                                    key={item.name}
+                                    name={item.name}
+                                    icon={item.icon}
+                                    path={item.path}
+                                />
                             ))}
                             <ListItem>
                                 <UserIcon /> Hello, {user?.name}
@@ -70,6 +76,7 @@ function App() {
                         <Routes>
                             {user ? (<>
                                 <Route path="/" element={<DashboardComponent />} />
+                                <Route path="/students" element={<TeacherStudentsComponent teacherId={user.id} />} />
                                 <Route path="/logout" element={<LogoutComponent />} />
                             </>) : (
                                 <Route path="/*" element={<LoginComponent />} />

@@ -1,4 +1,4 @@
-export type UserInput = {
+export type TeacherInput = {
     id: string
     email: string
     name: string
@@ -7,7 +7,7 @@ export type UserInput = {
 }
 
 export type Teacher = {
-    id: number
+    id: string
     email: string
     name: string
     lastLoggedIn: Date | null
