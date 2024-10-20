@@ -33,6 +33,13 @@ export const navbarItems = [
     security: () => true
   },
   {
+    name: 'Classes',
+    icon: GraphIcon,
+    path: '/classes',
+    component: NavbarItem,
+    security: () => true
+  },
+  {
     name: 'Logout',
     icon: LogoutIcon,
     path: '/logout',

@@ -1,8 +1,15 @@
 import React from 'react';
 import { TableCell, TableRow, Button } from '@mui/material';
 import SharedListTable from "../Shared/SharedListTable";
+import {useParams} from "react-router-dom";
+
+type RouteParams = {
+    [key: number]: string;
+};
 
 const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }) => {
+    const { classId, subjectId,  } = useParams<RouteParams>() as { classId: string, subjectId: string };
+
     const columns = [
         { id: 'id', label: 'ID' },
         { id: 'name', label: 'Name' },
@@ -23,10 +30,10 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
 
     return (
         <SharedListTable
-            apiEndpoint={`/teachers/${teacherId}/students`}
+            apiEndpoint={`/teachers/${teacherId}/classes/${classId}/subject/${subjectId}/students`}
             columns={columns}
             renderRow={renderRow}
-            title="Students for Teacher"
+            title="Students"
         />
     );
 };

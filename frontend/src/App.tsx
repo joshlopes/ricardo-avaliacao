@@ -11,6 +11,7 @@ import DashboardComponent from "./components/DashboardComponent";
 import {LogoutComponent} from "./components/Security/LogoutComponent";
 import LoginComponent from "./components/Security/LoginComponent";
 import TeacherStudentsComponent from "./components/Teacher/TeacherStudentsComponent";
+import TeacherClassesComponent from "./components/Teacher/TeacherClassesComponent";
 
 function App() {
     const api = useApi();
@@ -77,6 +78,8 @@ function App() {
                             {user ? (<>
                                 <Route path="/" element={<DashboardComponent />} />
                                 <Route path="/students" element={<TeacherStudentsComponent teacherId={user.id} />} />
+                                <Route path="/classes" element={<TeacherClassesComponent teacherId={user.id} />} />
+                                <Route path="/classes/:classId/subject/:subjectId/students" element={<TeacherStudentsComponent teacherId={user.id} />} />
                                 <Route path="/logout" element={<LogoutComponent />} />
                             </>) : (
                                 <Route path="/*" element={<LoginComponent />} />

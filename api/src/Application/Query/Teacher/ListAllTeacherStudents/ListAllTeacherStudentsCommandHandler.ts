@@ -1,7 +1,7 @@
 import CommandHandler from '../../../../Domain/Command/CommandHandler'
 import { inject, injectable } from 'inversify'
 import { TYPES } from '../../../../Infrastructure/DependencyInjection/types'
-import ListAllTeacherStudentsCommand from "./ListAllTeachersCommand";
+import ListAllTeacherStudentsCommand from "./ListAllTeacherStudentsCommand";
 import StudentRepository from "../../../../Domain/School/StudentRepository";
 import Student from "../../../../Domain/School/Student";
 

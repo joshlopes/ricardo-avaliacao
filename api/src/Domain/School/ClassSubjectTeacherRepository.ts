@@ -1,5 +1,6 @@
 import { ClassSubjectTeacherId } from "./ClassSubjectTeacherId";
 import ClassSubjectTeacher from "./ClassSubjectTeacher";
+import {TeacherId} from "../Teacher/TeacherId";
 
 export default interface ClassSubjectTeacherRepository {
     /**
@@ -12,4 +13,6 @@ export default interface ClassSubjectTeacherRepository {
     delete: (id: ClassSubjectTeacherId) => Promise<void>;
 
     findAll: () => Promise<ClassSubjectTeacher[]>;
+
+    findByTeacher(teacherId: TeacherId): Promise<ClassSubjectTeacher[]>
 }

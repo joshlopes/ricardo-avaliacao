@@ -6,6 +6,8 @@ import { TeacherId } from '../../../Domain/Teacher/TeacherId'
 import StudentRepository from "../../../Domain/School/StudentRepository";
 import {StudentId} from "../../../Domain/School/StudentId";
 import Student from "../../../Domain/School/Student";
+import {SchoolClassId} from "../../../Domain/School/SchoolClassId";
+import {SubjectId} from "../../../Domain/School/SubjectId";
 
 @injectable()
 export default class OrmStudentRepository implements StudentRepository {
@@ -14,7 +16,7 @@ export default class OrmStudentRepository implements StudentRepository {
     ) {
     }
 
-    async findByTeacher(teacherId: TeacherId): Promise<Student[]> {
+    async findByTeacher(teacherId: TeacherId, schoolClassId?: SchoolClassId, subjectId?: SubjectId): Promise<Student[]> {
         const students = await this.prismaClient.student.findMany({
             where: {
                 classes: {
@@ -23,6 +25,8 @@ export default class OrmStudentRepository implements StudentRepository {
                             ClassSubjectTeacher: {
                                 some: {
                                     teacherId: teacherId.toString(),
+                                    ...(schoolClassId !== undefined ? {classId: schoolClassId.toString()} : {}),
+                                    ...(subjectId !== undefined ? {subjectId: subjectId.toString()} : undefined),
                                 },
                             },
                         },

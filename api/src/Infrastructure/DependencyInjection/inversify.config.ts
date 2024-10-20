@@ -25,9 +25,14 @@ import LokiLogProvider from '../Logger/LokiLogProvider'
 import type Logger from '../../Application/Logger/Logger'
 import { isEmpty } from '../../Application/Shared/StringTools'
 import ArgonPasswordEncoder from "../Security/PasswordEncoder/ArgonPasswordEncoder";
-import ListAllTeacherStudentsCommandHandler from "../../Application/Query/Teacher/ListAllTeacherStudents/ListAllTeachersCommandHandler";
 import OrmStudentRepository from "../ORM/School/OrmStudentRepository";
 import StudentRepository from "../../Domain/School/StudentRepository";
+import ListAllTeacherStudentsCommandHandler
+  from "../../Application/Query/Teacher/ListAllTeacherStudents/ListAllTeacherStudentsCommandHandler";
+import ListAllTeacherClassesCommandHandler
+  from "../../Application/Query/Teacher/ListAllTeacherClasses/ListAllTeachersCommandHandler";
+import OrmSchoolClassRepository from "../ORM/School/OrmSchoolClassRepository";
+import SchoolClassRepository from "../../Domain/School/SchoolClassRepository";
 
 const myContainer = new Container()
 
@@ -48,6 +53,7 @@ myContainer.bind<Logger>(TYPES.Logger).toConstantValue(loggerManager.createLogge
 myContainer.bind<PrismaClient>(TYPES.PrismaClient).toConstantValue(new PrismaClient())
 myContainer.bind<TeacherRepository>(TYPES.TeacherRepository).to(OrmTeacherRepository)
 myContainer.bind<StudentRepository>(TYPES.StudentRepository).to(OrmStudentRepository)
+myContainer.bind<SchoolClassRepository>(TYPES.SchoolClassRepository).to(OrmSchoolClassRepository)
 
 // Command handlers
 myContainer.bind(TYPES.CommandHandler).to(LoginCommandHandler)
@@ -57,6 +63,7 @@ myContainer.bind(TYPES.CommandHandler).to(DeleteTeacherCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(GetTeacherCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(RefreshTokenCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(ListAllTeacherStudentsCommandHandler)
+myContainer.bind(TYPES.CommandHandler).to(ListAllTeacherClassesCommandHandler)
 myContainer.bind<CommandHandlerManager>(CommandHandlerManager).toSelf()
 
 // Events
