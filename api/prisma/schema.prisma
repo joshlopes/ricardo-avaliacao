@@ -14,6 +14,7 @@ model Subject {
   id                  String                @id @default(uuid())
   name                String
   ClassSubjectTeacher ClassSubjectTeacher[]
+  EvaluationTopic     EvaluationTopic[]
 }
 
 model EvaluationTopic {
@@ -21,6 +22,8 @@ model EvaluationTopic {
   name      String
   year      String
   subtopics SubTopic[]
+  subjectId String
+  Subject   Subject    @relation(fields: [subjectId], references: [id])
 }
 
 model SubTopic {

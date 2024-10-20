@@ -111,11 +111,11 @@ async function main() {
     // Create evaluation topics
     const evaluationTopics = await prisma.evaluationTopic.createMany({
         data: [
-            { id: uuidv7(), name: 'Números e Operações', year: '2023' },
-            { id: uuidv7(), name: 'Geometria e Medida', year: '2023' },
-            { id: uuidv7(), name: 'Álgebra', year: '2023' },
-            { id: uuidv7(), name: 'Organização e Tratamento de Dados', year: '2023' },
-            { id: uuidv7(), name: 'Resolução de Problemas e Raciocínio', year: '2023' },
+            { id: uuidv7(), name: 'Números e Operações', year: '2023', subjectId: subject1Id },
+            { id: uuidv7(), name: 'Geometria e Medida', year: '2023', subjectId: subject1Id },
+            { id: uuidv7(), name: 'Álgebra', year: '2023', subjectId: subject1Id },
+            { id: uuidv7(), name: 'Organização e Tratamento de Dados', year: '2023', subjectId: subject1Id },
+            { id: uuidv7(), name: 'Resolução de Problemas e Raciocínio', year: '2023', subjectId: subject1Id },
         ],
     });
 

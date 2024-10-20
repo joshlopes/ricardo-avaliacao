@@ -12,6 +12,10 @@ export default class ListAllTeacherStudentsCommandHandler implements CommandHand
   ) {}
 
   async handle (command: ListAllTeacherStudentsCommand): Promise<Student[]> {
-    return await this.repository.findByTeacher(command.teacherId)
+    return await this.repository.findByTeacher(
+        command.teacherId,
+        command.schoolClassId,
+        command.subjectId,
+    )
   }
 }

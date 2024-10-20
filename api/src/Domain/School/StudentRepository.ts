@@ -1,6 +1,8 @@
 import { StudentId } from "./StudentId";
 import Student from "./Student";
 import {TeacherId} from "../Teacher/TeacherId";
+import {SchoolClassId} from "./SchoolClassId";
+import {SubjectId} from "./SubjectId";
 
 export default interface StudentRepository {
     /**
@@ -14,5 +16,5 @@ export default interface StudentRepository {
 
     findAll: () => Promise<Student[]>;
 
-    findByTeacher(teacherId: TeacherId): Promise<Student[]>;
+    findByTeacher(teacherId: TeacherId, schoolClassId?: SchoolClassId, subjectId?: SubjectId): Promise<Student[]>;
 }
