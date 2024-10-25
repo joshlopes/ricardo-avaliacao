@@ -10,7 +10,7 @@ const execPromise = util.promisify(exec)
 
 async function loadSQLFile (filePath: string): Promise<void> {
   try {
-    const { stdout } = await execPromise(`mysql -h database -u root -proot ricardo-avaliacao < ${filePath}`)
+    const { stdout } = await execPromise(`mysql -h database -u $DATABASE_USER -p$DATABASE_PASSWORD $DATABASE_NAME < ${filePath}`)
     console.log(`SQL file loaded: ${stdout}`)
   } catch (error) {
     console.error('Error loading SQL file', error)
