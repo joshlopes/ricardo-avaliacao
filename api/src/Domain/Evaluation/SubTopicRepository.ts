@@ -1,15 +1,15 @@
-import { SubTopicId } from "./SubTopicId";
-import SubTopic from "./SubTopic";
+import { EvaluationSubTopicId } from "./EvaluationSubTopicId";
+import EvaluationSubTopic from "./EvaluationSubTopic";
 
 export default interface SubTopicRepository {
     /**
      * @throws RecordNotFound
      */
-    get: (id: SubTopicId) => Promise<SubTopic>;
+    get: (id: EvaluationSubTopicId) => Promise<EvaluationSubTopic>;
 
-    upsert: (subTopic: SubTopic) => Promise<SubTopic>;
+    upsert: (subTopic: EvaluationSubTopic) => Promise<EvaluationSubTopic>;
 
-    delete: (id: SubTopicId) => Promise<void>;
+    delete: (id: EvaluationSubTopicId) => Promise<void>;
 
-    findAll: () => Promise<SubTopic[]>;
+    findAll: () => Promise<EvaluationSubTopic[]>;
 }

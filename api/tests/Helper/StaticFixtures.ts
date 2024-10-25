@@ -10,7 +10,7 @@ import SubjectRepository from "../../src/Domain/School/SubjectRepository";
 import {SubjectId} from "../../src/Domain/School/SubjectId";
 import EvaluationTopicRepository from "../../src/Domain/Evaluation/EvaluationTopicRepository";
 import SubTopicRepository from "../../src/Domain/Evaluation/SubTopicRepository";
-import {SubTopicId} from "../../src/Domain/Evaluation/SubTopicId";
+import {EvaluationSubTopicId} from "../../src/Domain/Evaluation/EvaluationSubTopicId";
 import StudentRepository from "../../src/Domain/School/StudentRepository";
 import Student from "../../src/Domain/School/Student";
 import {StudentId} from "../../src/Domain/School/StudentId";
@@ -23,7 +23,7 @@ import {GradeId} from "../../src/Domain/School/GradeId";
 import Subject from "../../src/Domain/School/Subject";
 import EvaluationTopic from "../../src/Domain/Evaluation/EvaluationTopic";
 import {EvaluationTopicId} from "../../src/Domain/Evaluation/EvaluationTopicId";
-import SubTopic from "../../src/Domain/Evaluation/SubTopic";
+import EvaluationSubTopic from "../../src/Domain/Evaluation/EvaluationSubTopic";
 
 export const createTeacher = async (
     email?: string
@@ -84,13 +84,13 @@ export const createEvaluationTopic = async (
 export const createSubTopic = async (
     name?: string,
     evaluationTopic?: EvaluationTopic
-): Promise<SubTopic> => {
+): Promise<EvaluationSubTopic> => {
     const resolvedName = name ?? 'Is able to add and subtract numbers';
     const resolvedEvaluationTopic = evaluationTopic ?? await createEvaluationTopic();
 
     return myContainer.get<SubTopicRepository>(TYPES.SubTopicRepository)
-        .upsert(new SubTopic(
-            SubTopicId.generate(),
+        .upsert(new EvaluationSubTopic(
+            EvaluationSubTopicId.generate(),
             resolvedName,
             resolvedEvaluationTopic
         ));
@@ -125,7 +125,7 @@ export const createClassStudent = async (
 
 export const createGrade = async (
     grade?: GradeEnum,
-    subTopic?: SubTopic,
+    subTopic?: EvaluationSubTopic,
     student?: Student,
     schoolClass?: SchoolClass
 ): Promise<Grade> => {

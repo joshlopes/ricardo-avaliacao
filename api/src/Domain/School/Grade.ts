@@ -1,5 +1,5 @@
 import { GradeId } from './GradeId';
-import SubTopic, { SubTopicArray } from '../Evaluation/SubTopic';
+import EvaluationSubTopic, { EvaluationSubTopicArray } from '../Evaluation/EvaluationSubTopic';
 import Student, { StudentArray } from './Student';
 
 export enum GradeEnum {
@@ -12,7 +12,7 @@ export enum GradeEnum {
 
 export interface GradeArray {
     id: string;
-    subTopic: SubTopicArray;
+    subTopic: EvaluationSubTopicArray;
     student: StudentArray;
     grade: string|GradeEnum;
     created_at?: Date | undefined;
@@ -22,7 +22,7 @@ export default class Grade {
     constructor(
         public id: GradeId,
         public grade: GradeEnum,
-        public subTopic: SubTopic,
+        public subTopic: EvaluationSubTopic,
         public student: Student,
         public created_at?: Date | undefined,
     ) {}
@@ -31,7 +31,7 @@ export default class Grade {
         return new Grade(
             GradeId.fromString(object.id),
             object.grade as GradeEnum,
-            SubTopic.fromObject(object.subTopic),
+            EvaluationSubTopic.fromObject(object.subTopic),
             Student.fromObject(object.student),
             object.created_at,
         );

@@ -11,24 +11,32 @@ datasource db {
 }
 
 model Subject {
-  id                  String                @id @default(uuid())
-  name                String
-  ClassSubjectTeacher ClassSubjectTeacher[]
-  EvaluationTopic     EvaluationTopic[]
+  id                      String                    @id @default(uuid())
+  name                    String
+  ClassSubjectTeacher     ClassSubjectTeacher[]
+  EvaluationTopicCategory EvaluationTopicCategory[]
+}
+
+model EvaluationTopicCategory {
+  id               String            @id @default(uuid())
+  name             String
+  year             String
+  EvaluationTopics EvaluationTopic[]
+  subjectId        String
+  Subject          Subject           @relation(fields: [subjectId], references: [id])
 }
 
 model EvaluationTopic {
-  id        String     @id @default(uuid())
-  name      String
-  year      String
-  subtopics SubTopic[]
-  subjectId String
-  Subject   Subject    @relation(fields: [subjectId], references: [id])
+  id                        String                   @id @default(uuid())
+  name                      String
+  subtopics                 EvaluationSubTopic[]
+  evaluationTopicCategoryId String
+  EvaluationTopicCategory   EvaluationTopicCategory? @relation(fields: [evaluationTopicCategoryId], references: [id])
 }
 
-model SubTopic {
+model EvaluationSubTopic {
   id                String          @id @default(uuid())
-  name              String
+  name              String          @db.Text
   evaluationTopicId String
   evaluationTopic   EvaluationTopic @relation(fields: [evaluationTopicId], references: [id], onDelete: Cascade)
   Grade             Grade[]
@@ -77,11 +85,11 @@ model ClassStudent {
 }
 
 model Grade {
-  id         String   @id @default(uuid())
-  subTopicId String
-  subTopic   SubTopic @relation(fields: [subTopicId], references: [id], onDelete: Cascade)
-  studentId  String
-  student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  grade      String
-  createdAt  DateTime @default(now())
+  id                   String             @id @default(uuid())
+  evaluationSubTopicId String
+  evaluationSubTopic   EvaluationSubTopic @relation(fields: [evaluationSubTopicId], references: [id], onDelete: Cascade)
+  studentId            String
+  student              Student            @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  grade                String
+  createdAt            DateTime           @default(now())
 }
