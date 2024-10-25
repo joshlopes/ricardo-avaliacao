@@ -1,4 +1,4 @@
-import {EvaluationSubtopic} from "./EvaluationSubtopic";
+import {EvaluationSubTopic} from "./EvaluationSubTopic";
 import {Student} from "./Student";
 
 export enum GradeEnum {
@@ -11,7 +11,7 @@ export enum GradeEnum {
 
 export type Grade = {
     id: string;
-    subTopic?: EvaluationSubtopic;
+    evaluationSubTopic?: EvaluationSubTopic;
     student?: Student;
     grade: GradeEnum;
     created_at?: Date | undefined;

@@ -13,7 +13,9 @@ export const getGrades = async (req: Request, resp: Response): Promise<void> => 
     ),
     resp,
     (grade: Grade[]) => {
-      resp.status(200).send(grade.map((grade: Grade) => grade.toObject()))
+      resp.status(200).send({
+        results: grade.map((grade: Grade) => grade.toObject())
+      })
     }
   )
 }

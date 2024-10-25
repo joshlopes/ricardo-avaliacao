@@ -47,6 +47,7 @@ import type SubjectRepository from '../../Domain/School/SubjectRepository'
 import OrmSubjectRepository from '../ORM/School/OrmSubjectRepository'
 import type EvaluationSubTopicRepository from '../../Domain/Evaluation/EvaluationSubTopicRepository'
 import OrmEvaluationSubTopicsRepository from '../ORM/School/OrmEvaluationSubTopicsRepository'
+import SetStudentGradeHandler from "../../Application/Write/Student/SetStudentGrade/SetStudentGradeHandler";
 
 const myContainer = new Container()
 
@@ -85,6 +86,7 @@ myContainer.bind(TYPES.CommandHandler).to(ListAllTeacherStudentsCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(ListAllTeacherClassesCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(GetStudentSubjectGradesCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(GetEvaluationCategoriesHandler)
+myContainer.bind(TYPES.CommandHandler).to(SetStudentGradeHandler)
 myContainer.bind<CommandHandlerManager>(CommandHandlerManager).toSelf()
 
 // Events

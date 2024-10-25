@@ -1,4 +1,4 @@
-import { getGrades } from '../../../Ui/Http/Student/grades'
+import { getGrades } from '../../../Ui/Http/Student/getGrades'
 import { Router, type Response, type Request, type NextFunction } from 'express'
 import { getEvaluationCategories } from '../../../Ui/Http/Subject/getEvaluationCategories'
 
