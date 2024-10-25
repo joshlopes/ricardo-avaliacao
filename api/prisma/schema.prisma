@@ -11,49 +11,62 @@ datasource db {
 }
 
 model Subject {
-  id          String        @id @default(uuid())
-  name        String
-  scholarYear ScholarYear[]
+  id                  String                @id @default(uuid())
+  name                String
+  ClassSubjectTeacher ClassSubjectTeacher[]
+  EvaluationCategory  EvaluationCategory[]
 }
 
-model ScholarYear {
-  id        String            @id @default(uuid())
-  year      String
-  subjectId String
-  subject   Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
-  topics    EvaluationTopic[]
+model EvaluationCategory {
+  id               String            @id @default(uuid())
+  name             String
+  year             String
+  EvaluationTopics EvaluationTopic[]
+  subjectId        String
+  Subject          Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 }
 
 model EvaluationTopic {
-  id            String      @id @default(uuid())
-  name          String
-  scholarYearId String
-  scholarYear   ScholarYear @relation(fields: [scholarYearId], references: [id], onDelete: Cascade)
-  subtopics     SubTopic[]
+  id                   String               @id @default(uuid())
+  name                 String
+  subtopics            EvaluationSubTopic[]
+  evaluationCategoryId String
+  EvaluationCategory   EvaluationCategory   @relation(fields: [evaluationCategoryId], references: [id], onDelete: Cascade)
 }
 
-model SubTopic {
+model EvaluationSubTopic {
   id                String          @id @default(uuid())
-  name              String
+  name              String          @db.Text
   evaluationTopicId String
   evaluationTopic   EvaluationTopic @relation(fields: [evaluationTopicId], references: [id], onDelete: Cascade)
   Grade             Grade[]
 }
 
 model Teacher {
-  id           String    @id @default(uuid())
-  name         String
-  email        String    @unique
-  password     String
-  lastLoggedIn DateTime?
+  id                  String                @id @default(uuid())
+  name                String
+  email               String                @unique
+  password            String
+  lastLoggedIn        DateTime?
+  ClassSubjectTeacher ClassSubjectTeacher[]
 }
 
 model Class {
-  id       String         @id @default(uuid())
-  name     String
-  year     String
-  students ClassStudent[]
-  Grade    Grade[]
+  id                  String                @id @default(uuid())
+  name                String
+  year                String
+  students            ClassStudent[]
+  ClassSubjectTeacher ClassSubjectTeacher[]
+}
+
+model ClassSubjectTeacher {
+  id          String  @id @default(uuid())
+  teacherId   String
+  teacher     Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  classId     String
+  schoolClass Class   @relation(fields: [classId], references: [id], onDelete: Cascade)
+  subjectId   String
+  Subject     Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 }
 
 model Student {
@@ -72,13 +85,11 @@ model ClassStudent {
 }
 
 model Grade {
-  id         String   @id @default(uuid())
-  subTopicId String
-  subTopic   SubTopic @relation(fields: [subTopicId], references: [id], onDelete: Cascade)
-  studentId  String
-  student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  classId    String
-  class      Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
-  grade      String // A, B, C, D, E, etc.
-  createdAt  DateTime @default(now())
+  id                   String             @id @default(uuid())
+  evaluationSubTopicId String
+  evaluationSubTopic   EvaluationSubTopic @relation(fields: [evaluationSubTopicId], references: [id], onDelete: Cascade)
+  studentId            String
+  student              Student            @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  grade                String
+  createdAt            DateTime           @default(now())
 }

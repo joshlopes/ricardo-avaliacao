@@ -17,9 +17,9 @@ export default class CreateTeacher implements ConsoleCommand {
   }
 
   public async run (inputArgs: any): Promise<number> {
-    const email = inputArgs[0]
-    const name = inputArgs[1]
-    const rawPassword = inputArgs[2]
+    const email = inputArgs[0] as string
+    const name = inputArgs[1] as string
+    const rawPassword = inputArgs[2] as string
 
     await this.commandHandlerManager.handle(
       new UpsertTeacherCommand(

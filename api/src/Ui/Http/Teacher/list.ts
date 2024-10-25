@@ -1,11 +1,11 @@
 import { type Request, type Response } from 'express'
 import { handleCommand } from '../handleCommandUtil'
 import type Teacher from '../../../Domain/Teacher/Teacher'
-import ListAllUsersCommand from '../../../Application/Query/User/ListAllUser/ListAllUsersCommand'
+import ListAllTeachersCommand from '../../../Application/Query/Teacher/ListAllTeachers/ListAllTeachersCommand'
 
 export const list = async (req: Request, resp: Response): Promise<void> => {
   await handleCommand(
-    new ListAllUsersCommand(),
+    new ListAllTeachersCommand(),
     resp,
     (users: Teacher[]) => {
       resp.status(200).send({

@@ -23,7 +23,7 @@ export const upsert = async (req: Request, resp: Response): Promise<void> => {
 
   await handleCommand(
     new UpsertTeacherCommand(
-        req.params.id === undefined ? TeacherId.generate() : TeacherId.fromString(req.params.id),
+      req.params.id === undefined ? TeacherId.generate() : TeacherId.fromString(req.params.id),
       castToString(req.body.email),
       castToString(req.body.name),
       castToStringOrUndefined(req.body.raw_password)

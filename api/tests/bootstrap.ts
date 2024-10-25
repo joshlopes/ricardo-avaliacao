@@ -6,7 +6,7 @@ import {TYPES} from "../src/Infrastructure/DependencyInjection/types";
 
 dotenv.config({
     path: path.join(__dirname, '/../.env.test'),
-    override: false,
+    override: true,
     debug: false
 })
 

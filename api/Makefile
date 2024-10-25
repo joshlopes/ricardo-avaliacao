@@ -70,8 +70,8 @@ npm-command:
 .PHONY: create-user create.user
 ## [App] Create Initial Admin user
 create-user create.user:
-	$(DOCKER_COMPOSE_EXEC) node-app npx ts-node bin/console create-user admin true true true admin
-	echo "User: admin Password: admin created."
+	$(DOCKER_COMPOSE_EXEC) node-app npx ts-node bin/console create-teacher "admin@example.com" "Super Admin" admin
+	echo "User: admin@example.com Password: admin created."
 
 .PHONY: test run.test
 ## [Tests] Run tests
@@ -121,3 +121,13 @@ db-generate db.generate:
 ## [DATABASE] Reset Database for tests
 db-test-setup db.test.setup db.tests.setup:
 	$(DOCKER_COMPOSE_EXEC) node-app npm run test:setup
+
+.PHONY: db-dev-setup db.dev.setup
+## [DATABASE] Reset Database for dev
+db-dev-setup db.dev.setup:
+	$(DOCKER_COMPOSE_EXEC) node-app npm run dev:setup
+
+.PHONE: db-seed db.seed
+## [DATABASE] Seed Database
+db-seed db.seed:
+	$(DOCKER_COMPOSE_EXEC) node-app npx prisma db seed

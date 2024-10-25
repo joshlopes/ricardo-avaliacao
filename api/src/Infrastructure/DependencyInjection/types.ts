@@ -12,6 +12,15 @@ const TYPES = {
 
   // Repositories
   TeacherRepository: Symbol.for('TeacherRepository'),
+  SchoolClassRepository: Symbol.for('SchoolClassRepository'),
+  SubjectRepository: Symbol.for('SubjectRepository'),
+  EvaluationCategoryRepository: Symbol.for('EvaluationCategoryRepository'),
+  EvaluationTopicRepository: Symbol.for('EvaluationTopicRepository'),
+  EvaluationSubTopicRepository: Symbol.for('EvaluationSubTopicRepository'),
+  GradeRepository: Symbol.for('GradeRepository'),
+  StudentRepository: Symbol.for('StudentRepository'),
+  ClassStudentRepository: Symbol.for('ClassStudentRepository'),
+  ClassSubjectTeacherRepository: Symbol.for('ClassSubjectTeacherRepository'),
 
   // Clients
   HttpClient: Symbol.for('HttpClient'),
