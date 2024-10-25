@@ -31,6 +31,7 @@ export default class OrmEvaluationSubTopicsRepository implements EvaluationSubTo
     }
 
     const data = {
+      id: object.id.toString(),
       name: object.name,
       evaluationTopicId: object.evaluationTopic.id.toString()
     }

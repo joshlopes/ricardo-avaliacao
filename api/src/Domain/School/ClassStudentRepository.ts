@@ -7,7 +7,7 @@ export default interface ClassStudentRepository {
      */
   get: (id: ClassStudentId) => Promise<ClassStudent>
 
-  upsert: (classStudent: ClassStudent) => Promise<ClassStudent>
+  create: (classStudent: ClassStudent) => Promise<ClassStudent>
 
   delete: (id: ClassStudentId) => Promise<void>
 

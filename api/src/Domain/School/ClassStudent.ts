@@ -6,26 +6,29 @@ export interface ClassStudentArray {
   id: string
   schoolClass?: SchoolClassArray
   student?: StudentArray
-  created_at?: Date | undefined
-  updated_at?: Date | undefined
 }
 
 export default class ClassStudent {
   constructor (
     public id: ClassStudentId,
     public schoolClass?: SchoolClass,
-    public student?: Student,
-    public created_at?: Date | undefined,
-    public updated_at?: Date | undefined
-  ) {}
+    public student?: Student
+  ) {
+  }
+
+  public static create (schoolClass: SchoolClass, student: Student): ClassStudent {
+    return new ClassStudent(
+      ClassStudentId.generate(),
+      schoolClass,
+      student
+    )
+  }
 
   public static fromObject (object: ClassStudentArray): ClassStudent {
     return new ClassStudent(
       ClassStudentId.fromString(object.id),
       object.schoolClass !== undefined ? SchoolClass.fromObject(object.schoolClass) : undefined,
-      object.student !== undefined ? Student.fromObject(object.student) : undefined,
-      object.created_at,
-      object.updated_at
+      object.student !== undefined ? Student.fromObject(object.student) : undefined
     )
   }
 
@@ -33,9 +36,7 @@ export default class ClassStudent {
     return {
       id: this.id.toString(),
       schoolClass: this.schoolClass !== undefined ? this.schoolClass.toObject() : undefined,
-      student: this.student !== undefined ? this.student.toObject() : undefined,
-      created_at: this.created_at,
-      updated_at: this.updated_at
+      student: this.student !== undefined ? this.student.toObject() : undefined
     }
   }
 }

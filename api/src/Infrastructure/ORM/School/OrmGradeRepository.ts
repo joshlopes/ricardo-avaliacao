@@ -86,6 +86,7 @@ export default class OrmGradeRepository implements GradeRepository {
 
   async upsert (grade: Grade): Promise<Grade> {
     const data = {
+      id: grade.id.toString(),
       grade: grade.grade.toString(),
       student: { connect: { id: grade.student.id.toString() } },
       evaluationSubTopic: { connect: { id: grade.evaluationSubTopic.id.toString() } }
