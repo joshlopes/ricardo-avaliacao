@@ -5,7 +5,7 @@ import RecordNotFound from '../../../Domain/RecordNotFound'
 import { TeacherId } from '../../../Domain/Teacher/TeacherId'
 import StudentRepository from '../../../Domain/School/StudentRepository'
 import { StudentId } from '../../../Domain/School/StudentId'
-import Student from '../../../Domain/School/Student'
+import Student, { StudentArray } from '../../../Domain/School/Student'
 import { SchoolClassId } from '../../../Domain/School/SchoolClassId'
 import { SubjectId } from '../../../Domain/School/SubjectId'
 
@@ -35,7 +35,7 @@ export default class OrmStudentRepository implements StudentRepository {
       }
     })
 
-    return students.map((student: any) => Student.fromObject(student))
+    return students.map((student: StudentArray) => Student.fromObject(student))
   }
 
   public async get (id: StudentId): Promise<Student> {
@@ -75,6 +75,6 @@ export default class OrmStudentRepository implements StudentRepository {
   async findAll (): Promise<Student[]> {
     const students = await this.prismaClient.student.findMany()
 
-    return students.map((student: any) => Student.fromObject(student))
+    return students.map((student: StudentArray) => Student.fromObject(student))
   }
 }

@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 import RecordNotFound from '../../../Domain/RecordNotFound'
 import { SubjectId } from '../../../Domain/School/SubjectId'
 import EvaluationTopicRepository from '../../../Domain/Evaluation/EvaluationTopicRepository'
-import EvaluationTopic from '../../../Domain/Evaluation/EvaluationTopic'
+import EvaluationTopic, { EvaluationTopicArray } from '../../../Domain/Evaluation/EvaluationTopic'
 import { EvaluationTopicId } from '../../../Domain/Evaluation/EvaluationTopicId'
 
 @injectable()
@@ -32,7 +32,7 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
       }
     })
 
-    return objects.map((object: any) => EvaluationTopic.fromObject(object))
+    return objects.map((object: EvaluationTopicArray) => EvaluationTopic.fromObject(object))
   }
 
   public async get (id: EvaluationTopicId): Promise<EvaluationTopic> {
@@ -96,6 +96,6 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
       }
     })
 
-    return objects.map((object: any) => EvaluationTopic.fromObject(object))
+    return objects.map((object: EvaluationTopicArray) => EvaluationTopic.fromObject(object))
   }
 }

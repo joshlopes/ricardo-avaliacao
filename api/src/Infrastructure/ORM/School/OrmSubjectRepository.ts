@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 import RecordNotFound from '../../../Domain/RecordNotFound'
 import SubjectRepository from '../../../Domain/School/SubjectRepository'
 import { SubjectId } from '../../../Domain/School/SubjectId'
-import Subject from '../../../Domain/School/Subject'
+import Subject, { SubjectArray } from '../../../Domain/School/Subject'
 
 @injectable()
 export default class OrmSubjectRepository implements SubjectRepository {
@@ -52,6 +52,6 @@ export default class OrmSubjectRepository implements SubjectRepository {
   async findAll (): Promise<Subject[]> {
     const objects = await this.prismaClient.subject.findMany()
 
-    return objects.map((object: any) => Subject.fromObject(object))
+    return objects.map((object: SubjectArray) => Subject.fromObject(object))
   }
 }

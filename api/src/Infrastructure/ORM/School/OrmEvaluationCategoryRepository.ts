@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 import RecordNotFound from '../../../Domain/RecordNotFound'
 import { SubjectId } from '../../../Domain/School/SubjectId'
 import EvaluationCategoryRepository from '../../../Domain/Evaluation/EvaluationCategoryRepository'
-import EvaluationCategory from '../../../Domain/Evaluation/EvaluationCategory'
+import EvaluationCategory, { EvaluationCategoryArray } from '../../../Domain/Evaluation/EvaluationCategory'
 import { EvaluationCategoryId } from '../../../Domain/Evaluation/EvaluationCategoryId'
 
 @injectable()
@@ -35,7 +35,7 @@ export default class OrmEvaluationCategoryRepository implements EvaluationCatego
       }
     })
 
-    return objects.map((object: any) => EvaluationCategory.fromObject(object))
+    return objects.map((object: EvaluationCategoryArray) => EvaluationCategory.fromObject(object))
   }
 
   public async get (id: EvaluationCategoryId): Promise<EvaluationCategory> {
@@ -87,6 +87,6 @@ export default class OrmEvaluationCategoryRepository implements EvaluationCatego
       }
     })
 
-    return objects.map((object: any) => EvaluationCategory.fromObject(object))
+    return objects.map((object: EvaluationCategoryArray) => EvaluationCategory.fromObject(object))
   }
 }

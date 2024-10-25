@@ -5,7 +5,7 @@ import RecordNotFound from '../../../Domain/RecordNotFound'
 import { TeacherId } from '../../../Domain/Teacher/TeacherId'
 import { ClassSubjectTeacherId } from '../../../Domain/School/ClassSubjectTeacherId'
 import ClassSubjectTeacherRepository from '../../../Domain/School/ClassSubjectTeacherRepository'
-import ClassSubjectTeacher from '../../../Domain/School/ClassSubjectTeacher'
+import ClassSubjectTeacher, { ClassSubjectTeacherArray } from '../../../Domain/School/ClassSubjectTeacher'
 
 @injectable()
 export default class OrmClassSubjectTeacherRepository implements ClassSubjectTeacherRepository {
@@ -26,7 +26,7 @@ export default class OrmClassSubjectTeacherRepository implements ClassSubjectTea
       }
     })
 
-    return classes.map((classSubjectTeacher: any) => ClassSubjectTeacher.fromObject(classSubjectTeacher))
+    return classes.map((classSubjectTeacher: ClassSubjectTeacherArray) => ClassSubjectTeacher.fromObject(classSubjectTeacher))
   }
 
   public async get (id: ClassSubjectTeacherId): Promise<ClassSubjectTeacher> {
@@ -84,6 +84,6 @@ export default class OrmClassSubjectTeacherRepository implements ClassSubjectTea
       }
     })
 
-    return classSubjectTeachers.map((classSubjectTeacher: any) => ClassSubjectTeacher.fromObject(classSubjectTeacher))
+    return classSubjectTeachers.map((classSubjectTeacher: ClassSubjectTeacherArray) => ClassSubjectTeacher.fromObject(classSubjectTeacher))
   }
 }

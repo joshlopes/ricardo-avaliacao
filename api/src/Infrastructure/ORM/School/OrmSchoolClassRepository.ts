@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 import RecordNotFound from '../../../Domain/RecordNotFound'
 import { TeacherId } from '../../../Domain/Teacher/TeacherId'
 import SchoolClassRepository from '../../../Domain/School/SchoolClassRepository'
-import SchoolClass from '../../../Domain/School/SchoolClass'
+import SchoolClass, { SchoolClassArray } from '../../../Domain/School/SchoolClass'
 import { SchoolClassId } from '../../../Domain/School/SchoolClassId'
 
 @injectable()
@@ -34,7 +34,7 @@ export default class OrmSchoolClassRepository implements SchoolClassRepository {
       }
     })
 
-    return classes.map((schoolClass: any) => SchoolClass.fromObject(schoolClass))
+    return classes.map((schoolClass: SchoolClassArray) => SchoolClass.fromObject(schoolClass))
   }
 
   public async get (id: SchoolClassId): Promise<SchoolClass> {
@@ -75,6 +75,6 @@ export default class OrmSchoolClassRepository implements SchoolClassRepository {
   async findAll (): Promise<SchoolClass[]> {
     const schoolClasses = await this.prismaClient.class.findMany()
 
-    return schoolClasses.map((schoolClass: any) => SchoolClass.fromObject(schoolClass))
+    return schoolClasses.map((schoolClass: SchoolClassArray) => SchoolClass.fromObject(schoolClass))
   }
 }

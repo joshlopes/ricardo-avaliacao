@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 import RecordNotFound from '../../../Domain/RecordNotFound'
 import EvaluationSubTopicRepository from '../../../Domain/Evaluation/EvaluationSubTopicRepository'
 import { EvaluationSubTopicId } from '../../../Domain/Evaluation/EvaluationSubTopicId'
-import EvaluationSubTopic from '../../../Domain/Evaluation/EvaluationSubTopic'
+import EvaluationSubTopic, { EvaluationSubTopicArray } from '../../../Domain/Evaluation/EvaluationSubTopic'
 
 @injectable()
 export default class OrmEvaluationSubTopicsRepository implements EvaluationSubTopicRepository {
@@ -57,6 +57,6 @@ export default class OrmEvaluationSubTopicsRepository implements EvaluationSubTo
   async findAll (): Promise<EvaluationSubTopic[]> {
     const objects = await this.prismaClient.evaluationSubTopic.findMany()
 
-    return objects.map((object: any) => EvaluationSubTopic.fromObject(object))
+    return objects.map((object: EvaluationSubTopicArray) => EvaluationSubTopic.fromObject(object))
   }
 }
