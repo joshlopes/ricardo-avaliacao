@@ -47,7 +47,7 @@ import type SubjectRepository from '../../Domain/School/SubjectRepository'
 import OrmSubjectRepository from '../ORM/School/OrmSubjectRepository'
 import type EvaluationSubTopicRepository from '../../Domain/Evaluation/EvaluationSubTopicRepository'
 import OrmEvaluationSubTopicsRepository from '../ORM/School/OrmEvaluationSubTopicsRepository'
-import SetStudentGradeHandler from "../../Application/Write/Student/SetStudentGrade/SetStudentGradeHandler";
+import SetStudentGradeHandler from '../../Application/Write/Student/SetStudentGrade/SetStudentGradeHandler'
 
 const myContainer = new Container()
 

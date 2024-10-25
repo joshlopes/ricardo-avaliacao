@@ -7,7 +7,7 @@ import { SubjectId } from '../../../Domain/School/SubjectId'
 import GradeRepository from '../../../Domain/School/GradeRepository'
 import { GradeId } from '../../../Domain/School/GradeId'
 import Grade from '../../../Domain/School/Grade'
-import {EvaluationSubTopicId} from "../../../Domain/Evaluation/EvaluationSubTopicId";
+import { EvaluationSubTopicId } from '../../../Domain/Evaluation/EvaluationSubTopicId'
 
 @injectable()
 export default class OrmGradeRepository implements GradeRepository {
@@ -49,7 +49,7 @@ export default class OrmGradeRepository implements GradeRepository {
     return grades.map((grade) => Grade.fromObject(grade))
   }
 
-  async findByStudentAndSubtopic(studentId: StudentId, evaluationSubtopicId: EvaluationSubTopicId): Promise<Grade | null> {
+  async findByStudentAndSubtopic (studentId: StudentId, evaluationSubtopicId: EvaluationSubTopicId): Promise<Grade | null> {
     const grade = await this.prismaClient.grade.findFirst({
       where: {
         studentId: studentId.toString(),
@@ -65,7 +65,7 @@ export default class OrmGradeRepository implements GradeRepository {
       return null
     }
 
-    return Grade.fromObject(grade);
+    return Grade.fromObject(grade)
   }
 
   public async get (id: GradeId): Promise<Grade> {

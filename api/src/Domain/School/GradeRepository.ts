@@ -2,7 +2,7 @@ import { type GradeId } from './GradeId'
 import type Grade from './Grade'
 import { type StudentId } from './StudentId'
 import { type SubjectId } from './SubjectId'
-import {EvaluationSubTopicId} from "../Evaluation/EvaluationSubTopicId";
+import { type EvaluationSubTopicId } from '../Evaluation/EvaluationSubTopicId'
 
 export default interface GradeRepository {
   /**
@@ -18,5 +18,5 @@ export default interface GradeRepository {
 
   findBySubjectAndStudent: (studentId: StudentId, subjectId: SubjectId) => Promise<Grade[]>
 
-  findByStudentAndSubtopic(studentId: StudentId, evaluationSubtopicId: EvaluationSubTopicId): Promise<Grade|null>;
+  findByStudentAndSubtopic: (studentId: StudentId, evaluationSubtopicId: EvaluationSubTopicId) => Promise<Grade | null>
 }
