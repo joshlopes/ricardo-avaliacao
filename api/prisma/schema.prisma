@@ -11,27 +11,27 @@ datasource db {
 }
 
 model Subject {
-  id                      String                    @id @default(uuid())
-  name                    String
-  ClassSubjectTeacher     ClassSubjectTeacher[]
-  EvaluationTopicCategory EvaluationTopicCategory[]
+  id                  String                @id @default(uuid())
+  name                String
+  ClassSubjectTeacher ClassSubjectTeacher[]
+  EvaluationCategory  EvaluationCategory[]
 }
 
-model EvaluationTopicCategory {
+model EvaluationCategory {
   id               String            @id @default(uuid())
   name             String
   year             String
   EvaluationTopics EvaluationTopic[]
   subjectId        String
-  Subject          Subject           @relation(fields: [subjectId], references: [id])
+  Subject          Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 }
 
 model EvaluationTopic {
-  id                        String                   @id @default(uuid())
-  name                      String
-  subtopics                 EvaluationSubTopic[]
-  evaluationTopicCategoryId String
-  EvaluationTopicCategory   EvaluationTopicCategory? @relation(fields: [evaluationTopicCategoryId], references: [id])
+  id                   String               @id @default(uuid())
+  name                 String
+  subtopics            EvaluationSubTopic[]
+  evaluationCategoryId String
+  EvaluationCategory   EvaluationCategory   @relation(fields: [evaluationCategoryId], references: [id], onDelete: Cascade)
 }
 
 model EvaluationSubTopic {

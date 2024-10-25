@@ -24,6 +24,9 @@ import Subject from "../../src/Domain/School/Subject";
 import EvaluationTopic from "../../src/Domain/Evaluation/EvaluationTopic";
 import {EvaluationTopicId} from "../../src/Domain/Evaluation/EvaluationTopicId";
 import EvaluationSubTopic from "../../src/Domain/Evaluation/EvaluationSubTopic";
+import EvaluationCategoryRepository from "../../src/Domain/Evaluation/EvaluationCategoryRepository";
+import EvaluationCategory from "../../src/Domain/Evaluation/EvaluationCategory";
+import {EvaluationCategoryId} from "../../src/Domain/Evaluation/EvaluationCategoryId";
 
 export const createTeacher = async (
     email?: string
@@ -56,20 +59,32 @@ export const createSchoolClass = async (
 
 export const createSubject = async (
     name?: string,
-    year?: string
 ): Promise<Subject> => {
     return myContainer.get<SubjectRepository>(TYPES.SubjectRepository)
         .upsert(new Subject(
             SubjectId.generate(),
             name ?? 'Math',
-            year ?? '2023'
+            new Date(),
         ));
 };
 
-export const createEvaluationTopic = async (
+export const createEvaluationCategory = async (
     name?: string,
     subject?: Subject,
-    year?: string
+    year?: string,
+): Promise<EvaluationCategory> => {
+    return myContainer.get<EvaluationCategoryRepository>(TYPES.EvaluationCategoryRepository)
+        .upsert(new EvaluationCategory(
+            EvaluationCategoryId.generate(),
+            name ?? 'Numbers',
+            year ?? '5',
+            subject ?? await createSubject()
+        ));
+}
+
+export const createEvaluationTopic = async (
+    name?: string,
+    category?: EvaluationCategory
 ): Promise<EvaluationTopic> => {
     const resolvedName = name ?? 'Understanding Numbers';
 
@@ -77,7 +92,7 @@ export const createEvaluationTopic = async (
         .upsert(new EvaluationTopic(
             EvaluationTopicId.generate(),
             resolvedName,
-            year ?? '2023',
+            category ?? await createEvaluationCategory()
         ));
 };
 
@@ -127,11 +142,9 @@ export const createGrade = async (
     grade?: GradeEnum,
     subTopic?: EvaluationSubTopic,
     student?: Student,
-    schoolClass?: SchoolClass
 ): Promise<Grade> => {
     const resolvedSubTopic = subTopic ?? await createSubTopic();
     const resolvedStudent = student ?? await createStudent();
-    const resolvedSchoolClass = schoolClass ?? await createSchoolClass();
 
     return myContainer.get<GradeRepository>(TYPES.GradeRepository)
         .upsert(new Grade(
@@ -139,6 +152,5 @@ export const createGrade = async (
             grade ?? GradeEnum.NOT_WORKED,
             resolvedSubTopic,
             resolvedStudent,
-            resolvedSchoolClass,
         ));
 };

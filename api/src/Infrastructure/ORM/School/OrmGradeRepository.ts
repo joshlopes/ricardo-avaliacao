@@ -19,19 +19,25 @@ export default class OrmGradeRepository implements GradeRepository {
         const grades = await this.prismaClient.grade.findMany({
             where: {
                 studentId: studentId.toString(),
-                subTopic: {
+                evaluationSubTopic: {
                     evaluationTopic: {
-                        subjectId: subjectId.toString()
+                        EvaluationCategory: {
+                            subjectId: subjectId.toString()
+                        }
                     }
                 }
             },
             include: {
                 student: true,
-                subTopic: {
+                evaluationSubTopic: {
                     include: {
                         evaluationTopic: {
                             include: {
-                                Subject: true
+                                EvaluationCategory: {
+                                    include: {
+                                        Subject: true
+                                    }
+                                }
                             }
                         }
                     }
@@ -47,7 +53,7 @@ export default class OrmGradeRepository implements GradeRepository {
             where: { id: id.toString() },
             include: {
                 student: true,
-                subTopic: true,
+                evaluationSubTopic: true,
             }
         })
 
@@ -62,7 +68,7 @@ export default class OrmGradeRepository implements GradeRepository {
         const data = {
             grade: grade.grade.toString(),
             student: {connect: {id: grade.student.id.toString()}},
-            subTopic: {connect: {id: grade.subTopic.id.toString()}},
+            evaluationSubTopic: {connect: {id: grade.evaluationSubTopic.id.toString()}},
         };
 
         const upsertedObj = await this.prismaClient.grade.upsert({
@@ -74,7 +80,7 @@ export default class OrmGradeRepository implements GradeRepository {
             },
             include: {
                 student: true,
-                subTopic: true,
+                evaluationSubTopic: true,
             }
         });
 
@@ -93,7 +99,7 @@ export default class OrmGradeRepository implements GradeRepository {
         const grades = await this.prismaClient.grade.findMany({
             include: {
                 student: true,
-                subTopic: true,
+                evaluationSubTopic: true,
             }
         })
 

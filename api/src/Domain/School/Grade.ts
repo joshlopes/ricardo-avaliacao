@@ -12,7 +12,7 @@ export enum GradeEnum {
 
 export interface GradeArray {
     id: string;
-    subTopic: EvaluationSubTopicArray;
+    evaluationSubTopic: EvaluationSubTopicArray;
     student: StudentArray;
     grade: string|GradeEnum;
     created_at?: Date | undefined;
@@ -22,7 +22,7 @@ export default class Grade {
     constructor(
         public id: GradeId,
         public grade: GradeEnum,
-        public subTopic: EvaluationSubTopic,
+        public evaluationSubTopic: EvaluationSubTopic,
         public student: Student,
         public created_at?: Date | undefined,
     ) {}
@@ -31,7 +31,7 @@ export default class Grade {
         return new Grade(
             GradeId.fromString(object.id),
             object.grade as GradeEnum,
-            EvaluationSubTopic.fromObject(object.subTopic),
+            EvaluationSubTopic.fromObject(object.evaluationSubTopic),
             Student.fromObject(object.student),
             object.created_at,
         );
@@ -40,7 +40,7 @@ export default class Grade {
     public toObject(): GradeArray {
         return {
             id: this.id.toString(),
-            subTopic: this.subTopic.toObject(),
+            evaluationSubTopic: this.evaluationSubTopic.toObject(),
             student: this.student.toObject(),
             grade: this.grade,
             created_at: this.created_at,

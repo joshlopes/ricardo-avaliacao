@@ -14,6 +14,7 @@ const TYPES = {
   TeacherRepository: Symbol.for('TeacherRepository'),
   SchoolClassRepository: Symbol.for('SchoolClassRepository'),
   SubjectRepository: Symbol.for('SubjectRepository'),
+  EvaluationCategoryRepository: Symbol.for('EvaluationCategoryRepository'),
   EvaluationTopicRepository: Symbol.for('EvaluationTopicRepository'),
   SubTopicRepository: Symbol.for('SubTopicRepository'),
   GradeRepository: Symbol.for('GradeRepository'),

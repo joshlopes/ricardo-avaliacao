@@ -7,7 +7,7 @@ CREATE TABLE `Subject` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `EvaluationTopicCategory` (
+CREATE TABLE `EvaluationCategory` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `year` VARCHAR(191) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE `EvaluationTopicCategory` (
 CREATE TABLE `EvaluationTopic` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
-    `evaluationTopicCategoryId` VARCHAR(191) NOT NULL,
+    `evaluationCategoryId` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -94,10 +94,10 @@ CREATE TABLE `Grade` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `EvaluationTopicCategory` ADD CONSTRAINT `EvaluationTopicCategory_subjectId_fkey` FOREIGN KEY (`subjectId`) REFERENCES `Subject`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `EvaluationCategory` ADD CONSTRAINT `EvaluationCategory_subjectId_fkey` FOREIGN KEY (`subjectId`) REFERENCES `Subject`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `EvaluationTopic` ADD CONSTRAINT `EvaluationTopic_evaluationTopicCategoryId_fkey` FOREIGN KEY (`evaluationTopicCategoryId`) REFERENCES `EvaluationTopicCategory`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `EvaluationTopic` ADD CONSTRAINT `EvaluationTopic_evaluationCategoryId_fkey` FOREIGN KEY (`evaluationCategoryId`) REFERENCES `EvaluationCategory`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `EvaluationSubTopic` ADD CONSTRAINT `EvaluationSubTopic_evaluationTopicId_fkey` FOREIGN KEY (`evaluationTopicId`) REFERENCES `EvaluationTopic`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

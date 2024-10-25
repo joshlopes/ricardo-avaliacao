@@ -17,10 +17,16 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
     async findBySubject(subjectId: SubjectId): Promise<EvaluationTopic[]> {
         const objects = await this.prismaClient.evaluationTopic.findMany({
             where: {
-                subjectId: subjectId.toString()
+                EvaluationCategory: {
+                    subjectId: subjectId.toString()
+                }
             },
             include: {
-                Subject: true,
+                EvaluationCategory: {
+                    include: {
+                        Subject: true,
+                    }
+                },
                 subtopics: true
             }
         })
@@ -32,7 +38,11 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
         const object = await this.prismaClient.evaluationTopic.findUnique({
             where: { id: id.toString() },
             include: {
-                Subject: true,
+                EvaluationCategory: {
+                    include: {
+                        Subject: true
+                    }
+                },
             }
         })
 
@@ -46,9 +56,8 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
     async upsert (evaluationTopic: EvaluationTopic): Promise<EvaluationTopic> {
         const data = {
             name: evaluationTopic.name,
-            year: evaluationTopic.year,
             created_at: evaluationTopic.created_at,
-            subjectId: evaluationTopic.subject.id.toString(),
+            evaluationCategoryId: evaluationTopic.evaluationCategory.id.toString(),
             updated_at: new Date(),
         };
 
@@ -57,7 +66,11 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
             update: data,
             create: data,
             include: {
-                Subject: true,
+                EvaluationCategory: {
+                    include: {
+                        Subject: true,
+                    }
+                }
             }
         });
 
@@ -75,7 +88,12 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
     async findAll (): Promise<EvaluationTopic[]> {
         const objects = await this.prismaClient.evaluationTopic.findMany({
             include: {
-                Subject: true,
+                EvaluationCategory: {
+                    include: {
+                        Subject: true
+                    }
+                },
+                subtopics: true
             }
         })
 

@@ -1,6 +1,6 @@
 -- Create Evaluation Topic Category for 'números e operações'
 SET @NumerosOperacoesCategoryId = UUID();
-INSERT INTO EvaluationTopicCategory (id, name, year, subjectId)
+INSERT INTO EvaluationCategory (id, name, year, subjectId)
 VALUES
     (@NumerosOperacoesCategoryId, 'Números e operações', '5', (SELECT id FROM Subject WHERE name = 'Math'));
 
@@ -8,7 +8,7 @@ VALUES
 SET @NumerosNaturaisTopicId = UUID();
 SET @FracoesDecimaisTopicId = UUID();
 SET @PercentagensTopicId = UUID();
-INSERT INTO EvaluationTopic (id, name, evaluationTopicCategoryId)
+INSERT INTO EvaluationTopic (id, name, evaluationCategoryId)
 VALUES
     (@NumerosNaturaisTopicId, 'Números Naturais', @NumerosOperacoesCategoryId),
     (@FracoesDecimaisTopicId, 'Frações Decimais', @NumerosOperacoesCategoryId),
@@ -43,7 +43,7 @@ VALUES
 
 -- Create Evaluation Topic Category for 'geometria e medida'
 SET @GeometriaMedidaCategoryId = UUID();
-INSERT INTO EvaluationTopicCategory (id, name, year, subjectId)
+INSERT INTO EvaluationCategory (id, name, year, subjectId)
 VALUES
     (@GeometriaMedidaCategoryId, 'Geometria e medida', '5', (SELECT id FROM Subject WHERE name = 'Math'));
 
@@ -52,7 +52,7 @@ SET @FigurasPlanasTopicId = UUID();
 SET @TriangulosTopicId = UUID();
 SET @AreasTopicId = UUID();
 SET @SolidosGeometricosTopicId = UUID();
-INSERT INTO EvaluationTopic (id, name, evaluationTopicCategoryId)
+INSERT INTO EvaluationTopic (id, name, evaluationCategoryId)
 VALUES
     (@FigurasPlanasTopicId, 'Figuras Planas', @GeometriaMedidaCategoryId),
     (@TriangulosTopicId, 'Triângulos', @GeometriaMedidaCategoryId),
@@ -94,13 +94,13 @@ VALUES
 
 -- Create Evaluation Topic Category for 'álgebra'
 SET @ÁlgebraCategoryId = UUID();
-INSERT INTO EvaluationTopicCategory (id, name, year, subjectId)
+INSERT INTO EvaluationCategory (id, name, year, subjectId)
 VALUES
     (@ÁlgebraCategoryId, 'Álgebra', '5', (SELECT id FROM Subject WHERE name = 'Math'));
 
 -- Create Evaluation Topic for 'Sequências e regularidades'
 SET @SequenciasTopicId = UUID();
-INSERT INTO EvaluationTopic (id, name, evaluationTopicCategoryId)
+INSERT INTO EvaluationTopic (id, name, evaluationCategoryId)
 VALUES
     (@SequenciasTopicId, 'Sequências e regularidades', @ÁlgebraCategoryId);
 
@@ -112,7 +112,7 @@ VALUES
 
 -- Create Evaluation Topic Category for 'organização e tratamento de dados'
 SET @OrganizacaoCategoryId = UUID();
-INSERT INTO EvaluationTopicCategory (id, name, year, subjectId)
+INSERT INTO EvaluationCategory (id, name, year, subjectId)
 VALUES
     (@OrganizacaoCategoryId, 'Organização e tratamento de dados', '5', (SELECT id FROM Subject WHERE name = 'Math'));
 
@@ -121,7 +121,7 @@ SET @DadosTopicId = UUID();
 SET @ProblemasTopicId = UUID();
 SET @RaciocinioTopicId = UUID();
 SET @ComunicacaoTopicId = UUID();
-INSERT INTO EvaluationTopic (id, name, evaluationTopicCategoryId)
+INSERT INTO EvaluationTopic (id, name, evaluationCategoryId)
 VALUES
     (@DadosTopicId, 'Dados e probabilidades', @OrganizacaoCategoryId),
     (@ProblemasTopicId, 'Resolução de problemas', @OrganizacaoCategoryId),
