@@ -41,12 +41,12 @@ import GetEvaluationCategoriesHandler
   from '../../Application/Query/Subject/GetEvaluationCategories/GetEvaluationCategoriesHandler'
 import OrmEvaluationTopicsRepository from '../ORM/School/OrmEvaluationTopicsRepository'
 import type EvaluationTopicRepository from '../../Domain/Evaluation/EvaluationTopicRepository'
-import EvaluationCategoryRepository from "../../Domain/Evaluation/EvaluationCategoryRepository";
-import OrmEvaluationCategoryRepository from "../ORM/School/OrmEvaluationCategoryRepository";
-import SubjectRepository from "../../Domain/School/SubjectRepository";
-import OrmSubjectRepository from "../ORM/School/OrmSubjectRepository";
-import EvaluationSubTopicRepository from "../../Domain/Evaluation/EvaluationSubTopicRepository";
-import OrmEvaluationSubTopicsRepository from "../ORM/School/OrmEvaluationSubTopicsRepository";
+import type EvaluationCategoryRepository from '../../Domain/Evaluation/EvaluationCategoryRepository'
+import OrmEvaluationCategoryRepository from '../ORM/School/OrmEvaluationCategoryRepository'
+import type SubjectRepository from '../../Domain/School/SubjectRepository'
+import OrmSubjectRepository from '../ORM/School/OrmSubjectRepository'
+import type EvaluationSubTopicRepository from '../../Domain/Evaluation/EvaluationSubTopicRepository'
+import OrmEvaluationSubTopicsRepository from '../ORM/School/OrmEvaluationSubTopicsRepository'
 
 const myContainer = new Container()
 

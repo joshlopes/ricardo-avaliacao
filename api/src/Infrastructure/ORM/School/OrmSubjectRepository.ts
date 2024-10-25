@@ -2,9 +2,9 @@ import { inject, injectable } from 'inversify'
 import { TYPES } from '../../DependencyInjection/types'
 import { PrismaClient } from '@prisma/client'
 import RecordNotFound from '../../../Domain/RecordNotFound'
-import SubjectRepository from "../../../Domain/School/SubjectRepository";
-import {SubjectId} from "../../../Domain/School/SubjectId";
-import Subject from "../../../Domain/School/Subject";
+import SubjectRepository from '../../../Domain/School/SubjectRepository'
+import { SubjectId } from '../../../Domain/School/SubjectId'
+import Subject from '../../../Domain/School/Subject'
 
 @injectable()
 export default class OrmSubjectRepository implements SubjectRepository {
@@ -27,7 +27,7 @@ export default class OrmSubjectRepository implements SubjectRepository {
 
   async upsert (subject: Subject): Promise<Subject> {
     const data = {
-      name: subject.name,
+      name: subject.name
     }
 
     const upsertedObj = await this.prismaClient.subject.upsert({
@@ -35,7 +35,7 @@ export default class OrmSubjectRepository implements SubjectRepository {
       update: data,
       create: {
         ...data
-      },
+      }
     })
 
     return Subject.fromObject(upsertedObj)

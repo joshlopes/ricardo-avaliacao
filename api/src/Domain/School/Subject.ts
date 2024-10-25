@@ -8,20 +8,20 @@ export interface SubjectArray {
 export default class Subject {
   constructor (
     public id: SubjectId,
-    public name: string,
+    public name: string
   ) {}
 
   public static fromObject (object: SubjectArray): Subject {
     return new Subject(
       SubjectId.fromString(object.id),
-      object.name,
+      object.name
     )
   }
 
   public toObject (): SubjectArray {
     return {
       id: this.id.toString(),
-      name: this.name,
+      name: this.name
     }
   }
 }

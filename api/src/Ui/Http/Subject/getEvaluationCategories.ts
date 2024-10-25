@@ -2,7 +2,7 @@ import { type Request, type Response } from 'express'
 import { handleCommand } from '../handleCommandUtil'
 import { SubjectId } from '../../../Domain/School/SubjectId'
 import GetEvaluationCategories from '../../../Application/Query/Subject/GetEvaluationCategories/GetEvaluationCategories'
-import EvaluationCategory from "../../../Domain/Evaluation/EvaluationCategory";
+import type EvaluationCategory from '../../../Domain/Evaluation/EvaluationCategory'
 
 export const getEvaluationCategories = async (req: Request, resp: Response): Promise<void> => {
   await handleCommand(

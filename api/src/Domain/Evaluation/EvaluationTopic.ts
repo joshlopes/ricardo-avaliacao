@@ -14,7 +14,7 @@ export default class EvaluationTopic {
     public id: EvaluationTopicId,
     public name: string,
     public evaluationCategory: EvaluationCategory,
-    public subtopics?: EvaluationSubTopic[],
+    public subtopics?: EvaluationSubTopic[]
   ) {}
 
   public static fromObject (object: EvaluationTopicArray): EvaluationTopic {
@@ -22,7 +22,7 @@ export default class EvaluationTopic {
       EvaluationTopicId.fromString(object.id),
       object.name,
       EvaluationCategory.fromObject(object.EvaluationCategory),
-      object.subtopics ? object.subtopics.map(subtopic => EvaluationSubTopic.fromObject(subtopic)) : undefined,
+      object.subtopics !== undefined ? object.subtopics.map(subtopic => EvaluationSubTopic.fromObject(subtopic)) : undefined
     )
   }
 
@@ -31,7 +31,7 @@ export default class EvaluationTopic {
       id: this.id.toString(),
       name: this.name,
       EvaluationCategory: this.evaluationCategory.toObject(),
-      subtopics: this.subtopics ? this.subtopics.map(subtopic => subtopic.toObject()) : undefined,
+      subtopics: this.subtopics !== undefined ? this.subtopics.map(subtopic => subtopic.toObject()) : undefined
     }
   }
 }

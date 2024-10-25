@@ -22,8 +22,8 @@ export default class ClassStudent {
   public static fromObject (object: ClassStudentArray): ClassStudent {
     return new ClassStudent(
       ClassStudentId.fromString(object.id),
-      object.schoolClass ? SchoolClass.fromObject(object.schoolClass) : undefined,
-      object.student ? Student.fromObject(object.student) : undefined,
+      object.schoolClass !== undefined ? SchoolClass.fromObject(object.schoolClass) : undefined,
+      object.student !== undefined ? Student.fromObject(object.student) : undefined,
       object.created_at,
       object.updated_at
     )
@@ -32,8 +32,8 @@ export default class ClassStudent {
   public toObject (): ClassStudentArray {
     return {
       id: this.id.toString(),
-      schoolClass: this.schoolClass ? this.schoolClass.toObject() : undefined,
-      student: this.student ? this.student.toObject() : undefined,
+      schoolClass: this.schoolClass !== undefined ? this.schoolClass.toObject() : undefined,
+      student: this.student !== undefined ? this.student.toObject() : undefined,
       created_at: this.created_at,
       updated_at: this.updated_at
     }

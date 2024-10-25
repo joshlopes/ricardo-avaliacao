@@ -25,8 +25,8 @@ export default class EvaluationSubTopic {
     return new EvaluationSubTopic(
       EvaluationSubTopicId.fromString(object.id),
       object.name,
-      object.evaluationTopic ? EvaluationTopic.fromObject(object.evaluationTopic) : undefined,
-      object.grades ? object.grades.map(grade => Grade.fromObject(grade)) : undefined,
+      object.evaluationTopic !== undefined ? EvaluationTopic.fromObject(object.evaluationTopic) : undefined,
+      object.grades !== undefined ? object.grades.map(grade => Grade.fromObject(grade)) : undefined,
       object.created_at,
       object.updated_at
     )
@@ -36,8 +36,8 @@ export default class EvaluationSubTopic {
     return {
       id: this.id.toString(),
       name: this.name,
-      evaluationTopic: this.evaluationTopic ? this.evaluationTopic.toObject() : undefined,
-      grades: this.grades ? this.grades.map(grade => grade.toObject()) : undefined,
+      evaluationTopic: this.evaluationTopic !== undefined ? this.evaluationTopic.toObject() : undefined,
+      grades: this.grades !== undefined ? this.grades.map(grade => grade.toObject()) : undefined,
       created_at: this.created_at,
       updated_at: this.updated_at
     }

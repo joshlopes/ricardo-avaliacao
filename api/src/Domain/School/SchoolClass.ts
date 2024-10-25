@@ -31,9 +31,9 @@ export default class SchoolClass {
       SchoolClassId.fromString(object.id),
       object.name,
       object.year,
-      object.students ? object.students.map(student => ClassStudent.fromObject(student)) : undefined,
-      object.grades ? object.grades.map(grade => Grade.fromObject(grade)) : undefined,
-      object.ClassSubjectTeacher ? object.ClassSubjectTeacher.map(classSubjectTeacher => ClassSubjectTeacher.fromObject(classSubjectTeacher)) : undefined,
+      object.students !== undefined ? object.students.map(student => ClassStudent.fromObject(student)) : undefined,
+      object.grades !== undefined ? object.grades.map(grade => Grade.fromObject(grade)) : undefined,
+      object.ClassSubjectTeacher !== undefined ? object.ClassSubjectTeacher.map(classSubjectTeacher => ClassSubjectTeacher.fromObject(classSubjectTeacher)) : undefined,
       object.created_at,
       object.updated_at
     )
@@ -44,9 +44,9 @@ export default class SchoolClass {
       id: this.id.toString(),
       name: this.name,
       year: this.year,
-      students: this.students ? this.students.map(student => student.toObject()) : undefined,
-      grades: this.grades ? this.grades.map(grade => grade.toObject()) : undefined,
-      ClassSubjectTeacher: this.classSubjectTeacher ? this.classSubjectTeacher.map(classSubjectTeacher => classSubjectTeacher.toObject()) : undefined,
+      students: this.students !== undefined ? this.students.map(student => student.toObject()) : undefined,
+      grades: this.grades !== undefined ? this.grades.map(grade => grade.toObject()) : undefined,
+      ClassSubjectTeacher: this.classSubjectTeacher !== undefined ? this.classSubjectTeacher.map(classSubjectTeacher => classSubjectTeacher.toObject()) : undefined,
       created_at: this.created_at,
       updated_at: this.updated_at
     }

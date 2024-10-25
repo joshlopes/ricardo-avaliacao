@@ -19,7 +19,7 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
       where: {
         EvaluationCategory: {
           subjectId: subjectId.toString(),
-          year: year
+          year
         }
       },
       include: {
@@ -57,7 +57,7 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
   async upsert (evaluationTopic: EvaluationTopic): Promise<EvaluationTopic> {
     const data = {
       name: evaluationTopic.name,
-      evaluationCategoryId: evaluationTopic.evaluationCategory.id.toString(),
+      evaluationCategoryId: evaluationTopic.evaluationCategory.id.toString()
     }
 
     const upsertedObj = await this.prismaClient.evaluationTopic.upsert({

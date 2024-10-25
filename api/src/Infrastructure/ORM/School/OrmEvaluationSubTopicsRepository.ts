@@ -2,9 +2,9 @@ import { inject, injectable } from 'inversify'
 import { TYPES } from '../../DependencyInjection/types'
 import { PrismaClient } from '@prisma/client'
 import RecordNotFound from '../../../Domain/RecordNotFound'
-import EvaluationSubTopicRepository from "../../../Domain/Evaluation/EvaluationSubTopicRepository";
-import {EvaluationSubTopicId} from "../../../Domain/Evaluation/EvaluationSubTopicId";
-import EvaluationSubTopic from "../../../Domain/Evaluation/EvaluationSubTopic";
+import EvaluationSubTopicRepository from '../../../Domain/Evaluation/EvaluationSubTopicRepository'
+import { EvaluationSubTopicId } from '../../../Domain/Evaluation/EvaluationSubTopicId'
+import EvaluationSubTopic from '../../../Domain/Evaluation/EvaluationSubTopic'
 
 @injectable()
 export default class OrmEvaluationSubTopicsRepository implements EvaluationSubTopicRepository {
@@ -40,7 +40,7 @@ export default class OrmEvaluationSubTopicsRepository implements EvaluationSubTo
       update: data,
       create: {
         ...data
-      },
+      }
     })
 
     return EvaluationSubTopic.fromObject(upsertedObj)

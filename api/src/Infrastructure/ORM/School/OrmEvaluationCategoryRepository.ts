@@ -3,9 +3,9 @@ import { TYPES } from '../../DependencyInjection/types'
 import { PrismaClient } from '@prisma/client'
 import RecordNotFound from '../../../Domain/RecordNotFound'
 import { SubjectId } from '../../../Domain/School/SubjectId'
-import EvaluationCategoryRepository from "../../../Domain/Evaluation/EvaluationCategoryRepository";
-import EvaluationCategory from "../../../Domain/Evaluation/EvaluationCategory";
-import {EvaluationCategoryId} from "../../../Domain/Evaluation/EvaluationCategoryId";
+import EvaluationCategoryRepository from '../../../Domain/Evaluation/EvaluationCategoryRepository'
+import EvaluationCategory from '../../../Domain/Evaluation/EvaluationCategory'
+import { EvaluationCategoryId } from '../../../Domain/Evaluation/EvaluationCategoryId'
 
 @injectable()
 export default class OrmEvaluationCategoryRepository implements EvaluationCategoryRepository {
@@ -18,7 +18,7 @@ export default class OrmEvaluationCategoryRepository implements EvaluationCatego
     const objects = await this.prismaClient.evaluationCategory.findMany({
       where: {
         subjectId: subjectId.toString(),
-        year: year
+        year
       },
       include: {
         Subject: true,
@@ -29,9 +29,9 @@ export default class OrmEvaluationCategoryRepository implements EvaluationCatego
               include: {
                 Subject: true
               }
-              }
+            }
           }
-        },
+        }
       }
     })
 
@@ -57,7 +57,7 @@ export default class OrmEvaluationCategoryRepository implements EvaluationCatego
     const data = {
       name: evaluationCategory.name,
       year: evaluationCategory.year,
-      subjectId: evaluationCategory.subject.id.toString(),
+      subjectId: evaluationCategory.subject.id.toString()
     }
 
     const upsertedObj = await this.prismaClient.evaluationCategory.upsert({

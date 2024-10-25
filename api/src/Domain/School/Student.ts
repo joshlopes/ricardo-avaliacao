@@ -25,8 +25,8 @@ export default class Student {
     return new Student(
       StudentId.fromString(object.id),
       object.name,
-      object.classes ? object.classes.map(cls => ClassStudent.fromObject(cls)) : undefined,
-      object.grades ? object.grades.map(grade => Grade.fromObject(grade)) : undefined,
+      object.classes !== undefined ? object.classes.map(cls => ClassStudent.fromObject(cls)) : undefined,
+      object.grades !== undefined ? object.grades.map(grade => Grade.fromObject(grade)) : undefined,
       object.created_at,
       object.updated_at
     )
