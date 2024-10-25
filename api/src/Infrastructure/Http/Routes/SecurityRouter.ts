@@ -2,8 +2,8 @@ import { login } from '../../../Ui/Http/Login/login'
 import { Router, type Response, type Request, type NextFunction } from 'express'
 import { refresh } from '../../../Ui/Http/Login/refresh'
 import { logout } from '../../../Ui/Http/Login/logout'
-import {authenticateMiddleware} from "../MiddleAware/AuthenticateMiddleware";
-import {me} from "../../../Ui/Http/Login/me";
+import { authenticateMiddleware } from '../MiddleAware/AuthenticateMiddleware'
+import { me } from '../../../Ui/Http/Login/me'
 
 const SecurityRouter = Router()
 

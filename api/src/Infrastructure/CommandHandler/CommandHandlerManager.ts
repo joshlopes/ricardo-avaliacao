@@ -23,7 +23,7 @@ export default class CommandHandlerManager {
   public async handle (command: Command): Promise<any> {
     const handler = this.handlersMap.get(command.constructor.name)
     if (handler !== undefined) {
-      this.logger.info(`Handling command ${command.constructor.name}`)
+      this.logger.info(`Handling command ${command.constructor.name}`, command)
       return await handler.handle(command)
     }
 

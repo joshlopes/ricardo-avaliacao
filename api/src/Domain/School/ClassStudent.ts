@@ -1,41 +1,41 @@
-import { ClassStudentId } from './ClassStudentId';
-import SchoolClass, { SchoolClassArray } from './SchoolClass';
-import Student, { StudentArray } from './Student';
+import { ClassStudentId } from './ClassStudentId'
+import SchoolClass, { type SchoolClassArray } from './SchoolClass'
+import Student, { type StudentArray } from './Student'
 
 export interface ClassStudentArray {
-    id: string;
-    schoolClass?: SchoolClassArray;
-    student?: StudentArray;
-    created_at?: Date | undefined;
-    updated_at?: Date | undefined;
+  id: string
+  schoolClass?: SchoolClassArray
+  student?: StudentArray
+  created_at?: Date | undefined
+  updated_at?: Date | undefined
 }
 
 export default class ClassStudent {
-    constructor(
-        public id: ClassStudentId,
-        public schoolClass?: SchoolClass,
-        public student?: Student,
-        public created_at?: Date | undefined,
-        public updated_at?: Date | undefined
-    ) {}
+  constructor (
+    public id: ClassStudentId,
+    public schoolClass?: SchoolClass,
+    public student?: Student,
+    public created_at?: Date | undefined,
+    public updated_at?: Date | undefined
+  ) {}
 
-    public static fromObject(object: ClassStudentArray): ClassStudent {
-        return new ClassStudent(
-            ClassStudentId.fromString(object.id),
-            object.schoolClass ? SchoolClass.fromObject(object.schoolClass) : undefined,
-            object.student ? Student.fromObject(object.student) : undefined,
-            object.created_at,
-            object.updated_at
-        );
-    }
+  public static fromObject (object: ClassStudentArray): ClassStudent {
+    return new ClassStudent(
+      ClassStudentId.fromString(object.id),
+      object.schoolClass ? SchoolClass.fromObject(object.schoolClass) : undefined,
+      object.student ? Student.fromObject(object.student) : undefined,
+      object.created_at,
+      object.updated_at
+    )
+  }
 
-    public toObject(): ClassStudentArray {
-        return {
-            id: this.id.toString(),
-            schoolClass: this.schoolClass ? this.schoolClass.toObject() : undefined,
-            student: this.student ? this.student.toObject() : undefined,
-            created_at: this.created_at,
-            updated_at: this.updated_at
-        };
+  public toObject (): ClassStudentArray {
+    return {
+      id: this.id.toString(),
+      schoolClass: this.schoolClass ? this.schoolClass.toObject() : undefined,
+      student: this.student ? this.student.toObject() : undefined,
+      created_at: this.created_at,
+      updated_at: this.updated_at
     }
+  }
 }

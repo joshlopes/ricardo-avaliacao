@@ -1,18 +1,18 @@
-import { EvaluationTopicId } from "./EvaluationTopicId";
-import EvaluationTopic from "./EvaluationTopic";
-import {SubjectId} from "../School/SubjectId";
+import { type EvaluationTopicId } from './EvaluationTopicId'
+import type EvaluationTopic from './EvaluationTopic'
+import { type SubjectId } from '../School/SubjectId'
 
 export default interface EvaluationTopicRepository {
-    /**
+  /**
      * @throws RecordNotFound
      */
-    get: (id: EvaluationTopicId) => Promise<EvaluationTopic>;
+  get: (id: EvaluationTopicId) => Promise<EvaluationTopic>
 
-    upsert: (evaluationTopic: EvaluationTopic) => Promise<EvaluationTopic>;
+  upsert: (evaluationTopic: EvaluationTopic) => Promise<EvaluationTopic>
 
-    delete: (id: EvaluationTopicId) => Promise<void>;
+  delete: (id: EvaluationTopicId) => Promise<void>
 
-    findAll: () => Promise<EvaluationTopic[]>;
+  findAll: () => Promise<EvaluationTopic[]>
 
-    findBySubject(subjectId: SubjectId): Promise<EvaluationTopic[]>;
+  findBySubjectAndYear: (subjectId: SubjectId, year: string) => Promise<EvaluationTopic[]>
 }

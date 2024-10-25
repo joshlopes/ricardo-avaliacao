@@ -7,6 +7,7 @@ import {Student} from "../../types/Student";
 import {enqueueSnackbar} from "notistack";
 import {useApi} from "../../context/ApiProvider";
 import {EvaluationTopic} from "../../types/EvaluationTopic";
+import {EvaluationCategory} from "../../types/EvaluationCategory";
 
 type RouteParams = {
     [key: number]: string;
@@ -21,17 +22,17 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
     const api = useApi();
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
-    const [evaluationTopics, setEvaluationTopics] = useState<EvaluationTopic[]>([]);
+    const [evaluationCategories, setEvaluationCategories] = useState<EvaluationCategory[]>([]);
     const firstRender = React.useRef(true);
 
     const fetchData = useCallback(() => {
         setIsLoading(true);
         setHasError(false);
-        setEvaluationTopics([]);
-        api?.get(`/subject/${subject.id}/evaluationTopics`)
+        setEvaluationCategories([]);
+        api?.get(`/subject/${subject.id}/year/${schoolClass.year}/evaluation-categories`)
             .then((response) => {
                 if (response.ok && response.body) {
-                    setEvaluationTopics(response.body.results);
+                    setEvaluationCategories(response.body.results);
                     return;
                 }
 
@@ -41,7 +42,7 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
                 console.error('Error:', error);
                 enqueueSnackbar('Failed to fetch data!', { variant: 'error' });
                 setHasError(true);
-                setEvaluationTopics([]);
+                setEvaluationCategories([]);
             })
             .finally(() => setIsLoading(false));
     }, [subject, student]);
@@ -71,29 +72,36 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
                         </Button>
                     </Grid>
                 </Grid>
-            ) : evaluationTopics.map((evaluationTopic: EvaluationTopic) => (
+            ) : evaluationCategories.map((evaluationCategory: EvaluationCategory) => (
                     <>
                         <Grid xs={12}>
-                            <Typography variant="h6">{evaluationTopic.name}</Typography>
+                            <Typography variant="h6">{evaluationCategory.name} YEAR: {evaluationCategory.year}</Typography>
                         </Grid>
-                        <Grid xs={12}>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Topic</TableCell>
-                                        <TableCell>Grade</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {evaluationTopic.subtopics.map((subtopic) => (
-                                        <TableRow key={subtopic.id}>
-                                            <TableCell>{subtopic.name}</TableCell>
-                                            <TableCell>A</TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </Grid>
+                        {evaluationCategory.EvaluationTopics.map((evaluationTopic: EvaluationTopic) => (
+                            <>
+                                <Grid xs={12}>
+                                    <Typography variant="h6">{evaluationTopic.name}</Typography>
+                                </Grid>
+                                <Grid xs={12}>
+                                    <Table>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Topic</TableCell>
+                                                <TableCell>Grade</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {evaluationTopic.subtopics.map((subtopic) => (
+                                                <TableRow key={subtopic.id}>
+                                                    <TableCell>{subtopic.name}</TableCell>
+                                                    <TableCell>A</TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </Grid>
+                            </>
+                        ))}
                     </>
                 ))
             }

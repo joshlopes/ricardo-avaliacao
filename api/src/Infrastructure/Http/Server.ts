@@ -7,7 +7,7 @@ import { authenticateMiddleware } from './MiddleAware/AuthenticateMiddleware'
 import { myContainer } from '../DependencyInjection/inversify.config'
 import { TYPES } from '../DependencyInjection/types'
 import type Logger from '../../Application/Logger/Logger'
-import SubjectRouter from "./Routes/SubjectRouter";
+import SubjectRouter from './Routes/SubjectRouter'
 
 dotenv.config({ override: false })
 
@@ -31,7 +31,7 @@ app.use('/api', SecurityRouter)
 app.use('/api/teachers', (req: Request, resp: Response, next: NextFunction) => {
   authenticateMiddleware(req, resp).then(next).catch(next)
 }, TeacherRouter)
-app.use('/api/subject', (req: Request, resp: Response, next: NextFunction) => {
+app.use('/api/Subject', (req: Request, resp: Response, next: NextFunction) => {
   authenticateMiddleware(req, resp).then(next).catch(next)
 }, SubjectRouter)
 

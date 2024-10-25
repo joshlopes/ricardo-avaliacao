@@ -1,15 +1,15 @@
-import { SubjectId } from "./SubjectId";
-import Subject from "./Subject";
+import { type SubjectId } from './SubjectId'
+import type Subject from './Subject'
 
 export default interface SubjectRepository {
-    /**
+  /**
      * @throws RecordNotFound
      */
-    get: (id: SubjectId) => Promise<Subject>;
+  get: (id: SubjectId) => Promise<Subject>
 
-    upsert: (subject: Subject) => Promise<Subject>;
+  upsert: (subject: Subject) => Promise<Subject>
 
-    delete: (id: SubjectId) => Promise<void>;
+  delete: (id: SubjectId) => Promise<void>
 
-    findAll: () => Promise<Subject[]>;
+  findAll: () => Promise<Subject[]>
 }

@@ -68,7 +68,7 @@ async function main() {
         data: {
             id: class1Id,
             name: '5A',
-            year: '2023',
+            year: '5',
         },
     });
 
@@ -76,7 +76,7 @@ async function main() {
         data: {
             id: class2Id,
             name: '5B',
-            year: '2023',
+            year: '5',
         },
     });
 

@@ -24,23 +24,29 @@ import LoggerManager from '../../Application/Logger/LoggerManager'
 import LokiLogProvider from '../Logger/LokiLogProvider'
 import type Logger from '../../Application/Logger/Logger'
 import { isEmpty } from '../../Application/Shared/StringTools'
-import ArgonPasswordEncoder from "../Security/PasswordEncoder/ArgonPasswordEncoder";
-import OrmStudentRepository from "../ORM/School/OrmStudentRepository";
-import StudentRepository from "../../Domain/School/StudentRepository";
+import ArgonPasswordEncoder from '../Security/PasswordEncoder/ArgonPasswordEncoder'
+import OrmStudentRepository from '../ORM/School/OrmStudentRepository'
+import type StudentRepository from '../../Domain/School/StudentRepository'
 import ListAllTeacherStudentsCommandHandler
-  from "../../Application/Query/Teacher/ListAllTeacherStudents/ListAllTeacherStudentsCommandHandler";
+  from '../../Application/Query/Teacher/ListAllTeacherStudents/ListAllTeacherStudentsCommandHandler'
 import ListAllTeacherClassesCommandHandler
-  from "../../Application/Query/Teacher/ListAllTeacherClasses/ListAllTeachersCommandHandler";
-import OrmSchoolClassRepository from "../ORM/School/OrmSchoolClassRepository";
-import SchoolClassRepository from "../../Domain/School/SchoolClassRepository";
-import GradeRepository from "../../Domain/School/GradeRepository";
-import OrmGradeRepository from "../ORM/School/OrmGradeRepository";
+  from '../../Application/Query/Teacher/ListAllTeacherClasses/ListAllTeachersCommandHandler'
+import OrmSchoolClassRepository from '../ORM/School/OrmSchoolClassRepository'
+import type SchoolClassRepository from '../../Domain/School/SchoolClassRepository'
+import type GradeRepository from '../../Domain/School/GradeRepository'
+import OrmGradeRepository from '../ORM/School/OrmGradeRepository'
 import GetStudentSubjectGradesCommandHandler
-  from "../../Application/Query/Student/GetStudentGrades/GetStudentSubjectGradesCommandHandler";
-import GetEvaluationTopicsCommandHandler
-  from "../../Application/Query/Subject/GetEvaluationTopics/GetEvaluationTopicsCommandHandler";
-import OrmEvaluationTopicsRepository from "../ORM/School/OrmEvaluationTopicsRepository";
-import EvaluationTopicRepository from "../../Domain/Evaluation/EvaluationTopicRepository";
+  from '../../Application/Query/Student/GetStudentGrades/GetStudentSubjectGradesCommandHandler'
+import GetEvaluationCategoriesHandler
+  from '../../Application/Query/Subject/GetEvaluationCategories/GetEvaluationCategoriesHandler'
+import OrmEvaluationTopicsRepository from '../ORM/School/OrmEvaluationTopicsRepository'
+import type EvaluationTopicRepository from '../../Domain/Evaluation/EvaluationTopicRepository'
+import EvaluationCategoryRepository from "../../Domain/Evaluation/EvaluationCategoryRepository";
+import OrmEvaluationCategoryRepository from "../ORM/School/OrmEvaluationCategoryRepository";
+import SubjectRepository from "../../Domain/School/SubjectRepository";
+import OrmSubjectRepository from "../ORM/School/OrmSubjectRepository";
+import EvaluationSubTopicRepository from "../../Domain/Evaluation/EvaluationSubTopicRepository";
+import OrmEvaluationSubTopicsRepository from "../ORM/School/OrmEvaluationSubTopicsRepository";
 
 const myContainer = new Container()
 
@@ -64,6 +70,9 @@ myContainer.bind<StudentRepository>(TYPES.StudentRepository).to(OrmStudentReposi
 myContainer.bind<GradeRepository>(TYPES.GradeRepository).to(OrmGradeRepository)
 myContainer.bind<EvaluationTopicRepository>(TYPES.EvaluationTopicRepository).to(OrmEvaluationTopicsRepository)
 myContainer.bind<SchoolClassRepository>(TYPES.SchoolClassRepository).to(OrmSchoolClassRepository)
+myContainer.bind<EvaluationCategoryRepository>(TYPES.EvaluationCategoryRepository).to(OrmEvaluationCategoryRepository)
+myContainer.bind<SubjectRepository>(TYPES.SubjectRepository).to(OrmSubjectRepository)
+myContainer.bind<EvaluationSubTopicRepository>(TYPES.EvaluationSubTopicRepository).to(OrmEvaluationSubTopicsRepository)
 
 // Command handlers
 myContainer.bind(TYPES.CommandHandler).to(LoginCommandHandler)
@@ -75,7 +84,7 @@ myContainer.bind(TYPES.CommandHandler).to(RefreshTokenCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(ListAllTeacherStudentsCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(ListAllTeacherClassesCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(GetStudentSubjectGradesCommandHandler)
-myContainer.bind(TYPES.CommandHandler).to(GetEvaluationTopicsCommandHandler)
+myContainer.bind(TYPES.CommandHandler).to(GetEvaluationCategoriesHandler)
 myContainer.bind<CommandHandlerManager>(CommandHandlerManager).toSelf()
 
 // Events

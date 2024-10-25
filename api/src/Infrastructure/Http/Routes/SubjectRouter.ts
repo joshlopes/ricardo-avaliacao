@@ -1,11 +1,11 @@
 import { getGrades } from '../../../Ui/Http/Student/grades'
 import { Router, type Response, type Request, type NextFunction } from 'express'
-import {getEvaluationTopics} from "../../../Ui/Http/Student/getEvaluationTopics";
+import { getEvaluationCategories } from '../../../Ui/Http/Subject/getEvaluationCategories'
 
 const SubjectRouter = Router()
 
-SubjectRouter.get('/:subjectId/evaluationTopics', (req: Request, resp: Response, next: NextFunction) => {
-  getEvaluationTopics(req, resp).then(next).catch(next)
+SubjectRouter.get('/:subjectId/year/:year/evaluation-categories', (req: Request, resp: Response, next: NextFunction) => {
+  getEvaluationCategories(req, resp).then(next).catch(next)
 })
 
 SubjectRouter.get('/:subjectId/student/:studentId/grades', (req: Request, resp: Response, next: NextFunction) => {

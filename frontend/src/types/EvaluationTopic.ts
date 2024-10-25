@@ -1,10 +1,9 @@
-import {Subject} from "./Subject";
-import {Subtopic} from "./Subtopic";
+import {EvaluationSubtopic} from "./EvaluationSubtopic";
+import {EvaluationCategory} from "./EvaluationCategory";
 
 export type EvaluationTopic = {
     id: string,
     name: string,
-    year: string,
-    Subject: Subject,
-    subtopics: Subtopic[],
+    evaluationCategory: EvaluationCategory,
+    subtopics: EvaluationSubtopic[],
 }

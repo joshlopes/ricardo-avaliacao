@@ -61,17 +61,17 @@ export default class OrmTeacherRepository implements TeacherRepository {
       lastLoggedIn: teacher.lastLoggedIn,
       ...teacher.rawPassword !== null ? { password: await this.passwordEncoder.hash(teacher.rawPassword) } : {}
     }
-    
+
     const upsertedTeacher = await this.prismaClient.teacher.upsert({
       where: { id: teacher.id.toString() },
       update: data,
       create: {
         ...data,
-        password: data.password ?? (() => { throw new Error('Password is required'); })()
+        password: data.password ?? (() => { throw new Error('Password is required') })()
       }
-    });
+    })
 
-    return Teacher.fromObject(upsertedTeacher);
+    return Teacher.fromObject(upsertedTeacher)
   }
 
   async delete (id: TeacherId): Promise<void> {

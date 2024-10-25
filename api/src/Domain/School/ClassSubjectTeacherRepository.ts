@@ -1,18 +1,18 @@
-import { ClassSubjectTeacherId } from "./ClassSubjectTeacherId";
-import ClassSubjectTeacher from "./ClassSubjectTeacher";
-import {TeacherId} from "../Teacher/TeacherId";
+import { type ClassSubjectTeacherId } from './ClassSubjectTeacherId'
+import type ClassSubjectTeacher from './ClassSubjectTeacher'
+import { type TeacherId } from '../Teacher/TeacherId'
 
 export default interface ClassSubjectTeacherRepository {
-    /**
+  /**
      * @throws RecordNotFound
      */
-    get: (id: ClassSubjectTeacherId) => Promise<ClassSubjectTeacher>;
+  get: (id: ClassSubjectTeacherId) => Promise<ClassSubjectTeacher>
 
-    upsert: (classSubjectTeacher: ClassSubjectTeacher) => Promise<ClassSubjectTeacher>;
+  upsert: (classSubjectTeacher: ClassSubjectTeacher) => Promise<ClassSubjectTeacher>
 
-    delete: (id: ClassSubjectTeacherId) => Promise<void>;
+  delete: (id: ClassSubjectTeacherId) => Promise<void>
 
-    findAll: () => Promise<ClassSubjectTeacher[]>;
+  findAll: () => Promise<ClassSubjectTeacher[]>
 
-    findByTeacher(teacherId: TeacherId): Promise<ClassSubjectTeacher[]>
+  findByTeacher: (teacherId: TeacherId) => Promise<ClassSubjectTeacher[]>
 }

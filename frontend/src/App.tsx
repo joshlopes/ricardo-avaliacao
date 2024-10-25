@@ -12,7 +12,7 @@ import {LogoutComponent} from "./components/Security/LogoutComponent";
 import LoginComponent from "./components/Security/LoginComponent";
 import TeacherStudentsComponent from "./components/Teacher/TeacherStudentsComponent";
 import TeacherClassesComponent from "./components/Teacher/TeacherClassesComponent";
-import StudentGrade from "./components/Teacher/StudentGrade";
+import StudentGrade from "./components/Grade/StudentGrade";
 
 function App() {
     const api = useApi();
@@ -80,7 +80,7 @@ function App() {
                                 <Route path="/" element={<DashboardComponent />} />
                                 <Route path="/students" element={<TeacherStudentsComponent teacherId={user.id} />} />
                                 <Route path="/classes" element={<TeacherClassesComponent teacherId={user.id} />} />
-                                <Route path="/classes/:classId/subject/:subjectId/students" element={<TeacherStudentsComponent teacherId={user.id} />} />
+                                <Route path="/classes/:classId/Subject/:subjectId/students" element={<TeacherStudentsComponent teacherId={user.id} />} />
                                 <Route path="/student-grade" element={<StudentGrade teacherId={user.id}/>} />
                                 <Route path="/logout" element={<LogoutComponent />} />
                             </>) : (

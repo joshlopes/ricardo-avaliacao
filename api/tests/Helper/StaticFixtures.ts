@@ -9,7 +9,7 @@ import {SchoolClassId} from "../../src/Domain/School/SchoolClassId";
 import SubjectRepository from "../../src/Domain/School/SubjectRepository";
 import {SubjectId} from "../../src/Domain/School/SubjectId";
 import EvaluationTopicRepository from "../../src/Domain/Evaluation/EvaluationTopicRepository";
-import SubTopicRepository from "../../src/Domain/Evaluation/SubTopicRepository";
+import EvaluationSubTopicRepository from "../../src/Domain/Evaluation/EvaluationSubTopicRepository";
 import {EvaluationSubTopicId} from "../../src/Domain/Evaluation/EvaluationSubTopicId";
 import StudentRepository from "../../src/Domain/School/StudentRepository";
 import Student from "../../src/Domain/School/Student";
@@ -64,7 +64,6 @@ export const createSubject = async (
         .upsert(new Subject(
             SubjectId.generate(),
             name ?? 'Math',
-            new Date(),
         ));
 };
 
@@ -96,14 +95,14 @@ export const createEvaluationTopic = async (
         ));
 };
 
-export const createSubTopic = async (
+export const createEvaluationSubtopic = async (
     name?: string,
     evaluationTopic?: EvaluationTopic
 ): Promise<EvaluationSubTopic> => {
     const resolvedName = name ?? 'Is able to add and subtract numbers';
     const resolvedEvaluationTopic = evaluationTopic ?? await createEvaluationTopic();
 
-    return myContainer.get<SubTopicRepository>(TYPES.SubTopicRepository)
+    return myContainer.get<EvaluationSubTopicRepository>(TYPES.EvaluationSubTopicRepository)
         .upsert(new EvaluationSubTopic(
             EvaluationSubTopicId.generate(),
             resolvedName,
@@ -143,7 +142,7 @@ export const createGrade = async (
     subTopic?: EvaluationSubTopic,
     student?: Student,
 ): Promise<Grade> => {
-    const resolvedSubTopic = subTopic ?? await createSubTopic();
+    const resolvedSubTopic = subTopic ?? await createEvaluationSubtopic();
     const resolvedStudent = student ?? await createStudent();
 
     return myContainer.get<GradeRepository>(TYPES.GradeRepository)

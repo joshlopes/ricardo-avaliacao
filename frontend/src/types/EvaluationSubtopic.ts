@@ -1,6 +1,6 @@
 import {EvaluationTopic} from "./EvaluationTopic";
 
-export type Subtopic = {
+export type EvaluationSubtopic = {
     id: string,
     name: string,
     evaluationTopic?: EvaluationTopic

@@ -27,11 +27,11 @@ TeacherRouter.delete('/:id([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA
 // Teacher students
 TeacherRouter.get('/:id/classes/:classId/subject/:subjectId/students', (req: Request, resp: Response, next: NextFunction) => {
   listStudents(req, resp).then(next).catch(next)
-});
+})
 
 // Teacher Classes
 TeacherRouter.get('/:id/classes', (req: Request, resp: Response, next: NextFunction) => {
   listClasses(req, resp).then(next).catch(next)
-});
+})
 
 export default TeacherRouter
