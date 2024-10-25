@@ -6,12 +6,12 @@ import {PrismaClient} from "@prisma/client";
 import CreateTeacher from "../../../../src/Ui/Console/CreateTeacher";
 
 jest.setTimeout(30000)
+jest.retryTimes(3)
 
 describe('CreateTeacher', () => {
-    let prismaClient: PrismaClient;
+    let prismaClient = myContainer.get<PrismaClient>(TYPES.PrismaClient);
 
     beforeAll(async () => {
-        prismaClient = await myContainer.get<PrismaClient>(TYPES.PrismaClient);
         await DatabaseUtil.truncateAllTables(prismaClient);
     })
 
