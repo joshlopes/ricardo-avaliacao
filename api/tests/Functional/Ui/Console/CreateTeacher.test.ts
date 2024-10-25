@@ -6,7 +6,6 @@ import {PrismaClient} from "@prisma/client";
 import CreateTeacher from "../../../../src/Ui/Console/CreateTeacher";
 
 jest.setTimeout(30000)
-jest.retryTimes(3)
 
 describe('CreateTeacher', () => {
     let prismaClient = myContainer.get<PrismaClient>(TYPES.PrismaClient);
@@ -15,12 +14,12 @@ describe('CreateTeacher', () => {
         await DatabaseUtil.truncateAllTables(prismaClient);
     })
 
-    it('should create a user', (done) => {
+    it('create', (done) => {
         // Arrange
         const email = 'test@email.com';
         const name = 'Test Teacher';
         const password = 'test';
-        const command = `ts-node bin/console ${CreateTeacher.commandName} ${email} "${name}" ${password}`;
+        const command = `env-cmd -f .env.test ts-node bin/console ${CreateTeacher.commandName} ${email} "${name}" ${password}`;
 
         expect(prismaClient.teacher.findMany()).resolves.toHaveLength(0);
 
