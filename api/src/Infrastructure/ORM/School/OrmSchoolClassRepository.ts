@@ -27,7 +27,7 @@ export default class OrmSchoolClassRepository implements SchoolClassRepository {
         ClassSubjectTeacher: {
           include: {
             teacher: true,
-            subject: true,
+            Subject: true,
             schoolClass: true
           }
         }

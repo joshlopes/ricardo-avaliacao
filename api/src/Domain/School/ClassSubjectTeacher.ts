@@ -7,7 +7,7 @@ export interface ClassSubjectTeacherArray {
   id: string
   teacher: TeacherArray
   schoolClass: SchoolClassArray
-  subject: SubjectArray
+  Subject: SubjectArray
   created_at?: Date | undefined
   updated_at?: Date | undefined
 }
@@ -27,7 +27,7 @@ export default class ClassSubjectTeacher {
       ClassSubjectTeacherId.fromString(object.id),
       Teacher.fromObject(object.teacher),
       SchoolClass.fromObject(object.schoolClass),
-      Subject.fromObject(object.subject),
+      Subject.fromObject(object.Subject),
       object.created_at,
       object.updated_at
     )
@@ -36,12 +36,9 @@ export default class ClassSubjectTeacher {
   public toObject (): ClassSubjectTeacherArray {
     return {
       id: this.id.toString(),
-      // teacherId: this.teacher.id.toString(),
       teacher: this.teacher.toObject(),
-      // classId: this.schoolClass.id.toString(),
       schoolClass: this.schoolClass.toObject(),
-      // subjectId: this.Subject.id.toString(),
-      subject: this.subject.toObject(),
+      Subject: this.subject.toObject(),
       created_at: this.created_at,
       updated_at: this.updated_at
     }

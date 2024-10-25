@@ -21,7 +21,7 @@ export default class OrmClassSubjectTeacherRepository implements ClassSubjectTea
       },
       include: {
         schoolClass: true,
-        subject: true,
+        Subject: true,
         teacher: true
       }
     })
@@ -34,7 +34,7 @@ export default class OrmClassSubjectTeacherRepository implements ClassSubjectTea
       where: { id: id.toString() },
       include: {
         schoolClass: true,
-        subject: true,
+        Subject: true,
         teacher: true
       }
     })
@@ -50,7 +50,7 @@ export default class OrmClassSubjectTeacherRepository implements ClassSubjectTea
     const data = {
       teacher: { connect: { id: classSubjectTeacher.teacher.id.toString() } },
       schoolClass: { connect: { id: classSubjectTeacher.schoolClass.id.toString() } },
-      subject: { connect: { id: classSubjectTeacher.subject.id.toString() } }
+      Subject: { connect: { id: classSubjectTeacher.subject.id.toString() } }
     }
 
     const upsertedObj = await this.prismaClient.classSubjectTeacher.upsert({
@@ -59,7 +59,7 @@ export default class OrmClassSubjectTeacherRepository implements ClassSubjectTea
       create: data,
       include: {
         schoolClass: true,
-        subject: true,
+        Subject: true,
         teacher: true
       }
     })
@@ -80,7 +80,7 @@ export default class OrmClassSubjectTeacherRepository implements ClassSubjectTea
       include: {
         schoolClass: true,
         teacher: true,
-        subject: true
+        Subject: true
       }
     })
 
