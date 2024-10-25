@@ -1,58 +1,49 @@
 import { GradeId } from './GradeId';
 import SubTopic, { SubTopicArray } from '../Evaluation/SubTopic';
 import Student, { StudentArray } from './Student';
-import SchoolClass, { SchoolClassArray } from './SchoolClass';
 
 export enum GradeEnum {
-    A = 'A',
-    B = 'B',
-    C = 'C',
-    D = 'D',
-    E = 'E'
+    NOT_WORKED = 'NOT_WORKED',
+    EMERGENT = 'EMERGENT',
+    DEVELOPING = 'DEVELOPING',
+    ACHIEVED = 'ACHIEVED',
+    MASTERED = 'MASTERED'
 }
 
 export interface GradeArray {
     id: string;
-    subTopic?: SubTopicArray;
-    student?: StudentArray;
-    schoolClass?: SchoolClassArray;
-    grade: GradeEnum; // A, B, C, D, E, etc.
+    subTopic: SubTopicArray;
+    student: StudentArray;
+    grade: string|GradeEnum;
     created_at?: Date | undefined;
-    updated_at?: Date | undefined;
 }
 
 export default class Grade {
     constructor(
         public id: GradeId,
         public grade: GradeEnum,
-        public subTopic?: SubTopic,
-        public student?: Student,
-        public schoolClass?: SchoolClass,
+        public subTopic: SubTopic,
+        public student: Student,
         public created_at?: Date | undefined,
-        public updated_at?: Date | undefined
     ) {}
 
     public static fromObject(object: GradeArray): Grade {
         return new Grade(
             GradeId.fromString(object.id),
-            object.grade,
-            object.subTopic ? SubTopic.fromObject(object.subTopic) : undefined,
-            object.student ? Student.fromObject(object.student) : undefined,
-            object.schoolClass ? SchoolClass.fromObject(object.schoolClass) : undefined,
+            object.grade as GradeEnum,
+            SubTopic.fromObject(object.subTopic),
+            Student.fromObject(object.student),
             object.created_at,
-            object.updated_at
         );
     }
 
     public toObject(): GradeArray {
         return {
             id: this.id.toString(),
-            subTopic: this.subTopic ? this.subTopic.toObject() : undefined,
-            student: this.student ? this.student.toObject() : undefined,
-            schoolClass: this.schoolClass ? this.schoolClass.toObject() : undefined,
+            subTopic: this.subTopic.toObject(),
+            student: this.student.toObject(),
             grade: this.grade,
             created_at: this.created_at,
-            updated_at: this.updated_at
         };
     }
 }

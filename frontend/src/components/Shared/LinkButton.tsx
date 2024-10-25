@@ -10,6 +10,7 @@ interface LinkButtonProps {
     label?: string
     onClick?: () => void
     to?: string
+    data?: any
 }
 
 const LinkButton: React.FC<LinkButtonProps> = (
@@ -20,6 +21,7 @@ const LinkButton: React.FC<LinkButtonProps> = (
         label,
         onClick,
         to,
+        data,
     }) => {
     const {user} = useUserStore();
 
@@ -39,6 +41,9 @@ const LinkButton: React.FC<LinkButtonProps> = (
     }
     if (onClick) {
         buttonProps['onClick'] = onClick
+    }
+    if (data) {
+        buttonProps['state'] = data
     }
 
     return (<>

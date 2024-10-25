@@ -26,13 +26,6 @@ export const navbarItems = [
     security: () => true
   },
   {
-    name: 'Students',
-    icon: GraphIcon,
-    path: '/students',
-    component: NavbarItem,
-    security: () => true
-  },
-  {
     name: 'Classes',
     icon: GraphIcon,
     path: '/classes',

@@ -48,7 +48,6 @@ model Class {
   name                String
   year                String
   students            ClassStudent[]
-  Grade               Grade[]
   ClassSubjectTeacher ClassSubjectTeacher[]
 }
 
@@ -83,8 +82,6 @@ model Grade {
   subTopic   SubTopic @relation(fields: [subTopicId], references: [id], onDelete: Cascade)
   studentId  String
   student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  classId    String
-  class      Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
-  grade      String // A, B, C, D, E, etc.
+  grade      String
   createdAt  DateTime @default(now())
 }

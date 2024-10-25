@@ -1,5 +1,6 @@
 import { EvaluationTopicId } from "./EvaluationTopicId";
 import EvaluationTopic from "./EvaluationTopic";
+import {SubjectId} from "../School/SubjectId";
 
 export default interface EvaluationTopicRepository {
     /**
@@ -12,4 +13,6 @@ export default interface EvaluationTopicRepository {
     delete: (id: EvaluationTopicId) => Promise<void>;
 
     findAll: () => Promise<EvaluationTopic[]>;
+
+    findBySubject(subjectId: SubjectId): Promise<EvaluationTopic[]>;
 }

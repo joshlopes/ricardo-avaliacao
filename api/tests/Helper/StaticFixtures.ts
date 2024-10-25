@@ -136,7 +136,7 @@ export const createGrade = async (
     return myContainer.get<GradeRepository>(TYPES.GradeRepository)
         .upsert(new Grade(
             GradeId.generate(),
-            grade ?? GradeEnum.A,
+            grade ?? GradeEnum.NOT_WORKED,
             resolvedSubTopic,
             resolvedStudent,
             resolvedSchoolClass,

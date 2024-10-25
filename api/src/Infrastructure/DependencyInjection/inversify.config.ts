@@ -33,6 +33,14 @@ import ListAllTeacherClassesCommandHandler
   from "../../Application/Query/Teacher/ListAllTeacherClasses/ListAllTeachersCommandHandler";
 import OrmSchoolClassRepository from "../ORM/School/OrmSchoolClassRepository";
 import SchoolClassRepository from "../../Domain/School/SchoolClassRepository";
+import GradeRepository from "../../Domain/School/GradeRepository";
+import OrmGradeRepository from "../ORM/School/OrmGradeRepository";
+import GetStudentSubjectGradesCommandHandler
+  from "../../Application/Query/Student/GetStudentGrades/GetStudentSubjectGradesCommandHandler";
+import GetEvaluationTopicsCommandHandler
+  from "../../Application/Query/Subject/GetEvaluationTopics/GetEvaluationTopicsCommandHandler";
+import OrmEvaluationTopicsRepository from "../ORM/School/OrmEvaluationTopicsRepository";
+import EvaluationTopicRepository from "../../Domain/Evaluation/EvaluationTopicRepository";
 
 const myContainer = new Container()
 
@@ -53,6 +61,8 @@ myContainer.bind<Logger>(TYPES.Logger).toConstantValue(loggerManager.createLogge
 myContainer.bind<PrismaClient>(TYPES.PrismaClient).toConstantValue(new PrismaClient())
 myContainer.bind<TeacherRepository>(TYPES.TeacherRepository).to(OrmTeacherRepository)
 myContainer.bind<StudentRepository>(TYPES.StudentRepository).to(OrmStudentRepository)
+myContainer.bind<GradeRepository>(TYPES.GradeRepository).to(OrmGradeRepository)
+myContainer.bind<EvaluationTopicRepository>(TYPES.EvaluationTopicRepository).to(OrmEvaluationTopicsRepository)
 myContainer.bind<SchoolClassRepository>(TYPES.SchoolClassRepository).to(OrmSchoolClassRepository)
 
 // Command handlers
@@ -64,6 +74,8 @@ myContainer.bind(TYPES.CommandHandler).to(GetTeacherCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(RefreshTokenCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(ListAllTeacherStudentsCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(ListAllTeacherClassesCommandHandler)
+myContainer.bind(TYPES.CommandHandler).to(GetStudentSubjectGradesCommandHandler)
+myContainer.bind(TYPES.CommandHandler).to(GetEvaluationTopicsCommandHandler)
 myContainer.bind<CommandHandlerManager>(CommandHandlerManager).toSelf()
 
 // Events

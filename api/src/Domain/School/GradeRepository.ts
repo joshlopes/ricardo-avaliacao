@@ -1,5 +1,7 @@
 import { GradeId } from "./GradeId";
 import Grade from "./Grade";
+import {StudentId} from "./StudentId";
+import {SubjectId} from "./SubjectId";
 
 export default interface GradeRepository {
     /**
@@ -12,4 +14,6 @@ export default interface GradeRepository {
     delete: (id: GradeId) => Promise<void>;
 
     findAll: () => Promise<Grade[]>;
+    
+    findBySubjectAndStudent(studentId: StudentId, subjectId: SubjectId): Promise<Grade[]>;
 }

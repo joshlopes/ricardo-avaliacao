@@ -1,5 +1,6 @@
-import { PrismaClient } from '@prisma/client';
-import { v7 as uuidv7 } from 'uuid';
+import {PrismaClient} from '@prisma/client';
+import {v7 as uuidv7} from 'uuid';
+import {GradeEnum} from "../src/Domain/School/Grade";
 
 const prisma = new PrismaClient();
 
@@ -175,9 +176,11 @@ async function main() {
     // Create grades for some subtopics
     await prisma.grade.createMany({
         data: [
-            { id: uuidv7(), subTopicId: subtopics[0].id, studentId: students[0].id, classId: class1.id, grade: 'A', createdAt: new Date() },
-            { id: uuidv7(), subTopicId: subtopics[0].id, studentId: students[1].id, classId: class1.id, grade: 'B', createdAt: new Date() },
-            { id: uuidv7(), subTopicId: subtopics[1].id, studentId: students[5].id, classId: class2.id, grade: 'A', createdAt: new Date() },
+            { id: uuidv7(), subTopicId: subtopics[0].id, studentId: students[0].id, classId: class1.id, grade: GradeEnum.NOT_WORKED, createdAt: new Date() },
+            { id: uuidv7(), subTopicId: subtopics[1].id, studentId: students[0].id, classId: class1.id, grade: GradeEnum.EMERGENT, createdAt: new Date() },
+            { id: uuidv7(), subTopicId: subtopics[2].id, studentId: students[0].id, classId: class1.id, grade: GradeEnum.DEVELOPING, createdAt: new Date() },
+            { id: uuidv7(), subTopicId: subtopics[0].id, studentId: students[1].id, classId: class1.id, grade: GradeEnum.EMERGENT, createdAt: new Date() },
+            { id: uuidv7(), subTopicId: subtopics[1].id, studentId: students[5].id, classId: class2.id, grade: GradeEnum.DEVELOPING, createdAt: new Date() },
         ],
     });
 }

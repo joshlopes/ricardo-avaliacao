@@ -26,6 +26,10 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
                     variant="contained"
                     to={`/classes/${schoolClass.id}/subject/${classSubjectTeacher.subject.id}/students`}
                     label="View Students"
+                    data={{
+                        schoolClass: schoolClass,
+                        subject: classSubjectTeacher.subject,
+                    }}
                 />
             </TableCell>
         </TableRow>))
