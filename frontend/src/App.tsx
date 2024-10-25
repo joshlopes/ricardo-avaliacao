@@ -1,18 +1,28 @@
-import React, {useCallback, useEffect} from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import { Drawer, List } from '@mui/material';
-import { Box } from '@mui/system';
-import { navbarItems } from './Navbar';
-import {useUserStore} from "./stores/useUserStore";
-import {useApi} from "./context/ApiProvider";
-import ListItem from "@mui/material/ListItem";
-import UserIcon from "@mui/icons-material/AccountCircle";
+import React, { useCallback, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+    Box,
+    AppBar,
+    Toolbar,
+    Typography,
+    Avatar,
+    Drawer,
+    List,
+    Container,
+    CssBaseline,
+    ThemeProvider,
+} from '@mui/material';
+import { useUserStore } from "./stores/useUserStore";
+import { useApi } from "./context/ApiProvider";
 import DashboardComponent from "./components/DashboardComponent";
-import {LogoutComponent} from "./components/Security/LogoutComponent";
+import { LogoutComponent } from "./components/Security/LogoutComponent";
 import LoginComponent from "./components/Security/LoginComponent";
 import TeacherStudentsComponent from "./components/Teacher/TeacherStudentsComponent";
 import TeacherClassesComponent from "./components/Teacher/TeacherClassesComponent";
 import StudentGrade from "./components/Grade/StudentGrade";
+import { navbarItems } from './Navbar';
+import { theme } from './styles/theme';
+import { LAYOUT_STYLES } from './styles/constants';
 
 function App() {
     const api = useApi();
@@ -23,9 +33,8 @@ function App() {
             api?.get('/me')
                 .then((response) => {
                     if (!response.ok || !response.body) {
-                        throw new Error('Failed to fetch user!')
+                        throw new Error('Failed to fetch user!');
                     }
-
                     setUser(response.body);
                 })
                 .catch((error) => {
@@ -45,52 +54,73 @@ function App() {
         }
     }, [fetchMe, securityTokens]);
 
+    if (!securityTokens || !user) {
+        return (
+            <ThemeProvider theme={theme}>
+                <Router><LoginComponent /></Router>
+            </ThemeProvider>
+        );
+    }
+
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <Router>
-                <Box sx={{ display: 'flex' }}>
-                    {securityTokens && <Drawer
-                        variant="permanent"
-                        sx={{
-                            width: 240,
-                            flexShrink: 0,
-                            '& .MuiDrawer-paper': {
-                                width: 240,
-                                boxSizing: 'border-box',
-                            },
-                        }}
-                    >
-                        <List>
-                            {navbarItems.map((item, index) => (
-                                user && <item.component
-                                    key={item.name}
-                                    name={item.name}
-                                    icon={item.icon}
-                                    path={item.path}
-                                />
+                <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+                    <CssBaseline />
+
+                    <AppBar position="fixed" sx={LAYOUT_STYLES.appBar}>
+                        <Toolbar>
+                            <Typography variant="h6" color="primary" sx={{ flexGrow: 1, fontWeight: 600 }}>
+                                Teacher Dashboard
+                            </Typography>
+                            {user && (
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                    <Typography color="textPrimary">
+                                        {user.name}
+                                    </Typography>
+                                    <Avatar sx={{ bgcolor: 'primary.main' }}>
+                                        {user.name.charAt(0)}
+                                    </Avatar>
+                                </Box>
+                            )}
+                        </Toolbar>
+                    </AppBar>
+
+                    <Drawer variant="permanent" sx={LAYOUT_STYLES.drawer}>
+                        <List sx={{ px: 2, py: 4 }}>
+                            {navbarItems.map((item) => (
+                                user && (
+                                    <React.Fragment key={item.name}>
+                                        <item.component
+                                            name={item.name}
+                                            icon={item.icon}
+                                            path={item.path}
+                                        />
+                                    </React.Fragment>
+                                )
                             ))}
-                            <ListItem>
-                                <UserIcon /> Hello, {user?.name}
-                            </ListItem>
                         </List>
-                    </Drawer>}
-                    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                        <Routes>
-                            {user ? (<>
+                    </Drawer>
+
+                    <Box component="main" sx={LAYOUT_STYLES.mainContent}>
+                        <Container maxWidth="xl">
+                            <Routes>
                                 <Route path="/" element={<DashboardComponent />} />
                                 <Route path="/students" element={<TeacherStudentsComponent teacherId={user.id} />} />
                                 <Route path="/classes" element={<TeacherClassesComponent teacherId={user.id} />} />
-                                <Route path="/classes/:classId/Subject/:subjectId/students" element={<TeacherStudentsComponent teacherId={user.id} />} />
+                                <Route
+                                    path="/classes/:classId/Subject/:subjectId/students"
+                                    element={<TeacherStudentsComponent teacherId={user.id} />}
+                                />
                                 <Route path="/student-grade" element={<StudentGrade teacherId={user.id}/>} />
                                 <Route path="/logout" element={<LogoutComponent />} />
-                            </>) : (
                                 <Route path="/*" element={<LoginComponent />} />
-                            )}
-                        </Routes>
+                            </Routes>
+                        </Container>
                     </Box>
                 </Box>
             </Router>
-        </>
+        </ThemeProvider>
     );
 }
 

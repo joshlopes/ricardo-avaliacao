@@ -1,60 +1,152 @@
 import React from 'react';
-import { TableCell, TableRow, Button } from '@mui/material';
-import SharedListTable from "../Shared/SharedListTable";
-import {useLocation, useParams} from "react-router-dom";
-import {Subject} from "../../types/Subject";
-import {SchoolClass} from "../../types/SchoolClass";
-import {Student} from "../../types/Student";
+import {
+    Box,
+    Card,
+    CardContent,
+    Typography,
+    Grid,
+    IconButton,
+    Breadcrumbs,
+    Link,
+    Avatar,
+    useTheme,
+    Paper,
+} from '@mui/material';
+import { useLocation, useNavigate } from "react-router-dom";
+import { Subject } from "../../types/Subject";
+import { SchoolClass } from "../../types/SchoolClass";
+import { Student } from "../../types/Student";
 import LinkButton from "../Shared/LinkButton";
-
-type RouteParams = {
-    [key: number]: string;
-};
-
-type LocationState = {
-    subject?: Subject,
-    schoolClass?: SchoolClass,
-}
+import { useApi } from "../../context/ApiProvider";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import PersonIcon from '@mui/icons-material/Person';
+import {NAVIGATION_STYLES, SHARED_STYLES, STUDENT_STYLES} from '../../styles/constants';
 
 const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }) => {
+    const theme = useTheme();
     const location = useLocation();
-    const subject = location.state.subject as Subject
-    const schoolClass = location.state.schoolClass as SchoolClass
+    const navigate = useNavigate();
+    const api = useApi();
+    const [students, setStudents] = React.useState<Student[]>([]);
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState<string | null>(null);
 
-    const { classId, subjectId,  } = useParams<RouteParams>() as { classId: string, subjectId: string };
+    const subject = location.state?.subject as Subject;
+    const schoolClass = location.state?.schoolClass as SchoolClass;
 
-    const columns = [
-        { id: 'id', label: 'ID' },
-        { id: 'name', label: 'Name' },
-        { id: 'action', label: 'Action' },
-    ];
+    React.useEffect(() => {
+        const fetchStudents = async () => {
+            try {
+                const response = await api?.get(
+                    `/teachers/${teacherId}/classes/${schoolClass.id}/subject/${subject.id}/students`
+                );
+                if (response?.ok && response.body) {
+                    setStudents(response.body.results);
+                } else {
+                    throw new Error('Failed to fetch students');
+                }
+            } catch (err) {
+                setError('Failed to load students');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const renderRow = (student: Student) => (
-        <TableRow key={student.id}>
-            <TableCell>{student.id}</TableCell>
-            <TableCell>{student.name}</TableCell>
-            <TableCell>
-                <LinkButton
-                    variant="contained"
-                    to={`/student-grade`}
-                    data={{
-                        schoolClass: schoolClass,
-                        subject: subject,
-                        student: student,
-                    }}
-                    label="View Grades"
-                    />
-            </TableCell>
-        </TableRow>
+        if (schoolClass && subject) {
+            fetchStudents();
+        }
+    }, [teacherId, schoolClass, subject, api]);
+
+    const renderStudentCard = (student: Student) => (
+        <Grid item xs={12} sm={6} md={4} lg={3} key={student.id}>
+            <Card elevation={0} sx={SHARED_STYLES.card}>
+                <CardContent>
+                    <Box sx={STUDENT_STYLES.studentInfo}>
+                        <Avatar sx={SHARED_STYLES.avatar}>
+                            <PersonIcon />
+                        </Avatar>
+                        <Box>
+                            <Typography variant="h6" sx={{ fontWeight: 500 }}>
+                                {student.name}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Student ID: {student.id}
+                            </Typography>
+                        </Box>
+                    </Box>
+                    <Box sx={SHARED_STYLES.cardActions}>
+                        <LinkButton
+                            variant="contained"
+                            to="/student-grade"
+                            label="View Grades"
+                            data={{
+                                schoolClass: schoolClass,
+                                subject: subject,
+                                student: student,
+                            }}
+                        />
+                    </Box>
+                </CardContent>
+            </Card>
+        </Grid>
     );
 
+    if (loading) {
+        return (
+            <Box sx={{ py: 2 }}>
+                <Typography variant="h5" sx={SHARED_STYLES.pageTitle}>
+                    Loading Students...
+                </Typography>
+            </Box>
+        );
+    }
+
+    if (error) {
+        return (
+            <Box sx={{ py: 2 }}>
+                <Typography variant="h5" sx={SHARED_STYLES.pageTitle}>
+                    Students
+                </Typography>
+                <Box sx={{ mt: 3, color: 'error.main' }}>{error}</Box>
+            </Box>
+        );
+    }
+
     return (
-        <SharedListTable
-            apiEndpoint={`/teachers/${teacherId}/classes/${classId}/subject/${subjectId}/students`}
-            columns={columns}
-            renderRow={renderRow}
-            title={`${schoolClass.name} ${subject.name} Students`}
-        />
+        <Box sx={{ maxWidth: '100%', mb: 2 }}>
+            <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
+                <IconButton
+                    onClick={() => navigate(-1)}
+                    size="small"
+                    sx={NAVIGATION_STYLES.backButton}
+                >
+                    <ArrowBackIcon />
+                </IconButton>
+                <Breadcrumbs
+                    separator={<NavigateNextIcon fontSize="small" />}
+                    sx={NAVIGATION_STYLES.breadcrumbs}
+                >
+                    <Link component="button" onClick={() => navigate('/classes')} underline="hover" color="inherit">
+                        Classes
+                    </Link>
+                    <Typography color="text.primary">{schoolClass.name}</Typography>
+                </Breadcrumbs>
+            </Box>
+
+            <Paper elevation={0} sx={SHARED_STYLES.gradientHeader}>
+                <Typography variant="h5" fontWeight="500">
+                    {schoolClass.name} Students
+                </Typography>
+                <Typography variant="subtitle1" sx={{ opacity: 0.9 }}>
+                    {subject.name} - Year {schoolClass.year}
+                </Typography>
+            </Paper>
+
+            <Grid container spacing={3}>
+                {students.map(renderStudentCard)}
+            </Grid>
+        </Box>
     );
 };
 
