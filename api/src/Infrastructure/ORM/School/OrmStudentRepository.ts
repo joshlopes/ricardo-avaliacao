@@ -35,7 +35,7 @@ export default class OrmStudentRepository implements StudentRepository {
       }
     })
 
-    return students.map((student) => Student.fromObject(student))
+    return students.map((student: any) => Student.fromObject(student))
   }
 
   public async get (id: StudentId): Promise<Student> {
@@ -75,6 +75,6 @@ export default class OrmStudentRepository implements StudentRepository {
   async findAll (): Promise<Student[]> {
     const students = await this.prismaClient.student.findMany()
 
-    return students.map((student) => Student.fromObject(student))
+    return students.map((student: any) => Student.fromObject(student))
   }
 }

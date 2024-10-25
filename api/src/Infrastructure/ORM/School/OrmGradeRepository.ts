@@ -46,7 +46,7 @@ export default class OrmGradeRepository implements GradeRepository {
       }
     })
 
-    return grades.map((grade) => Grade.fromObject(grade))
+    return grades.map((grade: any) => Grade.fromObject(grade))
   }
 
   async findByStudentAndSubtopic (studentId: StudentId, evaluationSubtopicId: EvaluationSubTopicId): Promise<Grade | null> {
@@ -123,6 +123,6 @@ export default class OrmGradeRepository implements GradeRepository {
       }
     })
 
-    return grades.map((grade) => Grade.fromObject(grade))
+    return grades.map((grade: any) => Grade.fromObject(grade))
   }
 }

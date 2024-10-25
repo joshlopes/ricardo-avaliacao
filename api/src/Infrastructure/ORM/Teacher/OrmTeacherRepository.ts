@@ -85,6 +85,6 @@ export default class OrmTeacherRepository implements TeacherRepository {
   async findAll (): Promise<Teacher[]> {
     const teachers = await this.prismaClient.teacher.findMany()
 
-    return teachers.map((user) => Teacher.fromObject(user))
+    return teachers.map((user: any) => Teacher.fromObject(user))
   }
 }

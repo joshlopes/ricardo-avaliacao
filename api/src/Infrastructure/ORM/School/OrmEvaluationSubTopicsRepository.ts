@@ -57,6 +57,6 @@ export default class OrmEvaluationSubTopicsRepository implements EvaluationSubTo
   async findAll (): Promise<EvaluationSubTopic[]> {
     const objects = await this.prismaClient.evaluationSubTopic.findMany()
 
-    return objects.map((object) => EvaluationSubTopic.fromObject(object))
+    return objects.map((object: any) => EvaluationSubTopic.fromObject(object))
   }
 }

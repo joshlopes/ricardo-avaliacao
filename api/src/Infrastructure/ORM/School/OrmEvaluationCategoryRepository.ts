@@ -35,7 +35,7 @@ export default class OrmEvaluationCategoryRepository implements EvaluationCatego
       }
     })
 
-    return objects.map((object) => EvaluationCategory.fromObject(object))
+    return objects.map((object: any) => EvaluationCategory.fromObject(object))
   }
 
   public async get (id: EvaluationCategoryId): Promise<EvaluationCategory> {
@@ -87,6 +87,6 @@ export default class OrmEvaluationCategoryRepository implements EvaluationCatego
       }
     })
 
-    return objects.map((object) => EvaluationCategory.fromObject(object))
+    return objects.map((object: any) => EvaluationCategory.fromObject(object))
   }
 }

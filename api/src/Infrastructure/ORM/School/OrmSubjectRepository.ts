@@ -52,6 +52,6 @@ export default class OrmSubjectRepository implements SubjectRepository {
   async findAll (): Promise<Subject[]> {
     const objects = await this.prismaClient.subject.findMany()
 
-    return objects.map((object) => Subject.fromObject(object))
+    return objects.map((object: any) => Subject.fromObject(object))
   }
 }

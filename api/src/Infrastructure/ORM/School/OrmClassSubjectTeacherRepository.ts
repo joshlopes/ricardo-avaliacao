@@ -26,7 +26,7 @@ export default class OrmClassSubjectTeacherRepository implements ClassSubjectTea
       }
     })
 
-    return classes.map((classSubjectTeacher) => ClassSubjectTeacher.fromObject(classSubjectTeacher))
+    return classes.map((classSubjectTeacher: any) => ClassSubjectTeacher.fromObject(classSubjectTeacher))
   }
 
   public async get (id: ClassSubjectTeacherId): Promise<ClassSubjectTeacher> {
@@ -84,6 +84,6 @@ export default class OrmClassSubjectTeacherRepository implements ClassSubjectTea
       }
     })
 
-    return classSubjectTeachers.map((classSubjectTeacher) => ClassSubjectTeacher.fromObject(classSubjectTeacher))
+    return classSubjectTeachers.map((classSubjectTeacher: any) => ClassSubjectTeacher.fromObject(classSubjectTeacher))
   }
 }

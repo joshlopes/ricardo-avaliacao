@@ -32,7 +32,7 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
       }
     })
 
-    return objects.map((object) => EvaluationTopic.fromObject(object))
+    return objects.map((object: any) => EvaluationTopic.fromObject(object))
   }
 
   public async get (id: EvaluationTopicId): Promise<EvaluationTopic> {
@@ -96,6 +96,6 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
       }
     })
 
-    return objects.map((object) => EvaluationTopic.fromObject(object))
+    return objects.map((object: any) => EvaluationTopic.fromObject(object))
   }
 }
