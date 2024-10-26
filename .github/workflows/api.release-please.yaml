@@ -16,10 +16,8 @@ jobs:
       - uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
-          release-type: node
-          package-name: 'API'
-          path: 'api'
-          tag-separator: '/'
-          versioning-strategy: 'auto'
-          tag-prefix: 'api-'
-          create-release: true
+          release-type: node # Adjust based on your actual project type (e.g., 'python', 'go', etc.)
+          path: 'api' # Make sure this path is correct
+          include-component-in-tag: true
+          skip-github-pull-request: false
+          skip-github-release: false
