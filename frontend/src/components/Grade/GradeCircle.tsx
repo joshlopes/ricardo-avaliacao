@@ -16,9 +16,9 @@ function getGradeColor(grade: GradeEnum | undefined): string {
         case GradeEnum.ACHIEVED:
             return '#4CAF50';
         case GradeEnum.EMERGENT:
-            return '#F44336';
+            return '#FF9800';
         case GradeEnum.IN_PROGRESS:
-            return '#FFC107';
+            return '#FFEB3B';
         case GradeEnum.NOT_WORKED:
         default:
             return '#9E9E9E';
@@ -28,15 +28,32 @@ function getGradeColor(grade: GradeEnum | undefined): string {
 function getGradeLetter(grade: GradeEnum | undefined): string {
     switch (grade) {
         case GradeEnum.MASTERED:
-            return 'M';
+            return 'C';
         case GradeEnum.ACHIEVED:
             return 'A';
         case GradeEnum.EMERGENT:
             return 'E';
         case GradeEnum.IN_PROGRESS:
-            return 'IP';
+            return 'D';
         case GradeEnum.NOT_WORKED:
-            return 'NW';
+            return 'N';
+        default:
+            return '';
+    }
+}
+
+function getGradeLabel(grade: GradeEnum | undefined): string {
+    switch (grade) {
+        case GradeEnum.MASTERED:
+            return 'Consolidada';
+        case GradeEnum.ACHIEVED:
+            return 'Atingida';
+        case GradeEnum.EMERGENT:
+            return 'Emergente';
+        case GradeEnum.IN_PROGRESS:
+            return 'Em desenvolvimento';
+        case GradeEnum.NOT_WORKED:
+            return 'Não trabalhada';
         default:
             return '';
     }
@@ -122,7 +139,7 @@ const GradeCircle: React.FC<GradeCircleProps> = ({ grade, subTopic, onChange }) 
                                     }}
                                 />
                             </ListItemIcon>
-                            <ListItemText primary={key} />
+                            <ListItemText primary={getGradeLabel(GradeEnum[key as keyof typeof GradeEnum])} />
                         </ListItemButton>
                     ))}
                 </List>
