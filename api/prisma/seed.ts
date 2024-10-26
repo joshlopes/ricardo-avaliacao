@@ -124,8 +124,8 @@ async function main (): Promise<void> {
   })
 
   // Load Evaluation topics from SQL file using Prisma
-  const sqlFilePath = path.resolve(__dirname, 'fixtures/evaluation/math_5year.sql')
-  await loadSQLFile(sqlFilePath)
+  await loadSQLFile(path.resolve(__dirname, 'fixtures/evaluation/math_5year.sql'))
+  await loadSQLFile(path.resolve(__dirname, 'fixtures/evaluation/math_6year.sql'))
 
   // Retrieve EvaluationSubTopic IDs for Grade creation
   const evaluationSubTopics = await prisma.evaluationSubTopic.findMany({

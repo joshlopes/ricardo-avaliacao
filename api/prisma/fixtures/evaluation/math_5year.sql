@@ -1,10 +1,4 @@
-SET FOREIGN_KEY_CHECKS = 0;
-
-TRUNCATE TABLE EvaluationSubTopic;
-TRUNCATE TABLE EvaluationTopic;
-TRUNCATE TABLE EvaluationCategory;
-
-SET @subjectId = (SELECT id FROM Subject WHERE name = 'Matemática');
+SET @subjectId = (SELECT id FROM Subject WHERE name = 'Matemática' OR name = 'Math' LIMIT 1);
 
 -- Set UUID for Evaluation Category 'Números'
 SET @category_numeros = UUID();
@@ -238,5 +232,3 @@ INSERT INTO EvaluationSubTopic (id, name, evaluationTopicId) VALUES (UUID(), 'Re
 INSERT INTO EvaluationSubTopic (id, name, evaluationTopicId) VALUES (UUID(), 'Aplicar ideias matemáticas na resolução de problemas de contextos diversos (outras áreas do saber, realidade, profissões).', @topic_conexoes_matematicas);
 INSERT INTO EvaluationSubTopic (id, name, evaluationTopicId) VALUES (UUID(), 'Interpretar matematicamente situações do mundo real, construir modelos matemáticos adequados, e reconhecer a utilidade e poder da Matemática na previsão e intervenção nessas situações.', @topic_conexoes_matematicas);
 INSERT INTO EvaluationSubTopic (id, name, evaluationTopicId) VALUES (UUID(), 'Identificar a presença da Matemática em contextos externos e compreender o seu papel na criação e construção da realidade.', @topic_conexoes_matematicas);
-
-SET FOREIGN_KEY_CHECKS = 1;
