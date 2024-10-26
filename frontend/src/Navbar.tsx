@@ -2,7 +2,6 @@ import { Link, useLocation } from 'react-router-dom';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import ClassIcon from '@mui/icons-material/Class';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Box } from '@mui/material';
@@ -38,13 +37,6 @@ const NavbarItem = ({ name, icon: Icon, path }: { name: string, icon: any, path:
 };
 
 export const navbarItems = [
-  {
-    name: 'Dashboard',
-    icon: DashboardIcon,
-    path: '/',
-    component: NavbarItem,
-    security: () => true
-  },
   {
     name: 'Classes',
     icon: ClassIcon,
