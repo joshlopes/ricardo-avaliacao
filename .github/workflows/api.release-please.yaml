@@ -1,6 +1,10 @@
 
 name: "Api: Release please"
 
+defaults:
+  run:
+    working-directory: "api"
+
 on:
   push:
     branches:
