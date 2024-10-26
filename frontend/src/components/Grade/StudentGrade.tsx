@@ -174,7 +174,9 @@ const StudentGrade: React.FC<{ teacherId: string }> = ({ teacherId }) => {
             </Box>
 
             <Paper elevation={0} sx={SHARED_STYLES.gradientHeader}>
-                <Typography variant="h5" fontWeight="500">{student.name}</Typography>
+                <Typography variant="h5" fontWeight="500">
+                    {t("Grades")}: {student.name}
+                </Typography>
                 <Typography variant="subtitle1" sx={{ opacity: 0.9 }}>
                     {subject.name} - {schoolClass.name} - {schoolClass.year} Ano
                 </Typography>

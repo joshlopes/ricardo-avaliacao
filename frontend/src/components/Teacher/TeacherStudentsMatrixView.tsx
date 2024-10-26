@@ -208,7 +208,7 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
             <Paper elevation={0} sx={SHARED_STYLES.gradientHeader}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                     <Typography variant="h5" fontWeight="500">
-                        {schoolClass.name} Grade Matrix
+                        {schoolClass.name} {t("Grade Matrix")}
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 1 }}>
                         <Tooltip title="Switch to card view">
