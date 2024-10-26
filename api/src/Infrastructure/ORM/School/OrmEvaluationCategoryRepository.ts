@@ -55,6 +55,7 @@ export default class OrmEvaluationCategoryRepository implements EvaluationCatego
 
   async upsert (evaluationCategory: EvaluationCategory): Promise<EvaluationCategory> {
     const data = {
+      id: evaluationCategory.id.toString(),
       name: evaluationCategory.name,
       year: evaluationCategory.year,
       subjectId: evaluationCategory.subject.id.toString()

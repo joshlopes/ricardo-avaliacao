@@ -13,7 +13,7 @@ import {
 
 const prismaClient: PrismaClient = myContainer.get(TYPES.PrismaClient);
 
-describe('POST /api/subject/:subjectId/year/:year/evaluation-categories', () => {
+describe('POST /api/Subject/:subjectId/year/:year/evaluation-categories', () => {
     beforeEach(async () => {
         await DatabaseUtil.truncateAllTables(prismaClient)
     });

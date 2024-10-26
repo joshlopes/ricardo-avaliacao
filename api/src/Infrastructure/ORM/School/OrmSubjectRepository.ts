@@ -27,15 +27,14 @@ export default class OrmSubjectRepository implements SubjectRepository {
 
   async upsert (subject: Subject): Promise<Subject> {
     const data = {
+      id: subject.id.toString(),
       name: subject.name
     }
 
     const upsertedObj = await this.prismaClient.subject.upsert({
       where: { id: subject.id.toString() },
       update: data,
-      create: {
-        ...data
-      }
+      create: data
     })
 
     return Subject.fromObject(upsertedObj)

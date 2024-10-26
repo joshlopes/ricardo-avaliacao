@@ -48,6 +48,7 @@ export default class OrmClassSubjectTeacherRepository implements ClassSubjectTea
 
   async upsert (classSubjectTeacher: ClassSubjectTeacher): Promise<ClassSubjectTeacher> {
     const data = {
+      id: classSubjectTeacher.id.toString(),
       teacher: { connect: { id: classSubjectTeacher.teacher.id.toString() } },
       schoolClass: { connect: { id: classSubjectTeacher.schoolClass.id.toString() } },
       Subject: { connect: { id: classSubjectTeacher.subject.id.toString() } }

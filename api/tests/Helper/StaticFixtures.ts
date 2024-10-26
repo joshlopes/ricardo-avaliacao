@@ -129,8 +129,7 @@ export const createClassStudent = async (
     const resolvedSchoolClass = schoolClass ?? await createSchoolClass();
     const resolvedStudent = student ?? await createStudent();
 
-    return myContainer.get<ClassStudentRepository>(TYPES.ClassStudentRepository)
-        .upsert(new ClassStudent(
+    return myContainer.get<ClassStudentRepository>(TYPES.ClassStudentRepository).create(new ClassStudent(
             ClassStudentId.generate(),
             resolvedSchoolClass,
             resolvedStudent

@@ -13,8 +13,8 @@ describe('OrmSchoolClassRepository', () => {
 
     it('findByTeacherId', async () => {
         const teacher = await createTeacher();
-        const schoolClass = await createSchoolClass('5a', '2024');
+        const schoolClass = await createSchoolClass('5a', '5');
 
-        // TODO
+
     })
 })
