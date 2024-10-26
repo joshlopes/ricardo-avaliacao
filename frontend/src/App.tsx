@@ -1,13 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 import {
     Box,
     AppBar,
     Toolbar,
     Typography,
-    Avatar,
-    Drawer,
-    List,
     Container,
     CssBaseline,
     ThemeProvider,
@@ -22,11 +19,12 @@ import StudentGrade from "./components/Grade/StudentGrade";
 import { navbarItems } from './Navbar';
 import { theme } from './styles/theme';
 import { LAYOUT_STYLES } from './styles/constants';
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
+import UserMenu from './components/User/UserMenu';
 
 function App() {
     const api = useApi();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const { user, setUser, securityTokens, setApiSecurityTokens } = useUserStore();
 
     const fetchMe = useCallback(() => {
@@ -71,38 +69,36 @@ function App() {
 
                     <AppBar position="fixed" sx={LAYOUT_STYLES.appBar}>
                         <Toolbar>
-                            <img src={"/logo.svg"} width={60}/>
-                            <Typography variant="h6" color="primary" sx={{ flexGrow: 1, fontWeight: 600 }}>
-                                Avaliu - Software de Avaliação das Aprendizagens
+                            <img src={"/logo.svg"} width={60} alt="Logo" />
+                            <Typography variant="h6" color="primary" sx={{ ml: 2, fontWeight: 600 }}>
+                                Avaliu - Avaliação das Aprendizagens
                             </Typography>
-                            {user && (
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                                    <Typography color="textPrimary">
-                                        {user.name}
-                                    </Typography>
-                                    <Avatar sx={{ bgcolor: 'primary.main' }}>
-                                        {user.name.charAt(0)}
-                                    </Avatar>
-                                </Box>
-                            )}
+
+                            <Box sx={LAYOUT_STYLES.navContainer}>
+                                {navbarItems.filter(item => item.name !== 'Logout').map((item) => (
+                                    <NavLink
+                                        key={item.name}
+                                        to={item.path}
+                                        className={({ isActive }) =>
+                                            isActive ? 'active' : ''
+                                        }
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        <Box sx={LAYOUT_STYLES.navItem}>
+                                            <item.icon sx={LAYOUT_STYLES.navIcon} />
+                                            <Typography sx={LAYOUT_STYLES.navText}>
+                                                {t(item.name)}
+                                            </Typography>
+                                        </Box>
+                                    </NavLink>
+                                ))}
+                            </Box>
+
+                            <Box sx={{ ml: 'auto' }}>
+                                <UserMenu userName={user.name} />
+                            </Box>
                         </Toolbar>
                     </AppBar>
-
-                    <Drawer variant="permanent" sx={LAYOUT_STYLES.drawer}>
-                        <List sx={{ px: 2, py: 4 }}>
-                            {navbarItems.map((item) => (
-                                user && (
-                                    <React.Fragment key={item.name}>
-                                        <item.component
-                                            name={t(item.name)}
-                                            icon={item.icon}
-                                            path={item.path}
-                                        />
-                                    </React.Fragment>
-                                )
-                            ))}
-                        </List>
-                    </Drawer>
 
                     <Box component="main" sx={LAYOUT_STYLES.mainContent}>
                         <Container maxWidth="xl">

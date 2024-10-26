@@ -89,16 +89,35 @@ export const LAYOUT_STYLES = {
         backgroundColor: 'white',
         boxShadow: '0 2px 4px rgba(0,0,0,0.08)',
     },
-    drawer: {
-        width: DRAWER_WIDTH,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-            width: DRAWER_WIDTH,
-            boxSizing: 'border-box',
-            borderRight: '1px solid rgba(0, 0, 0, 0.08)',
-            boxShadow: 'none',
-            mt: '64px',
+    navContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 2,
+    },
+    navItem: {
+        color: 'grey.700',
+        textDecoration: 'none',
+        padding: '8px 16px',
+        borderRadius: 1,
+        transition: 'all 0.2s',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 1,
+        '&:hover': {
+            backgroundColor: 'rgba(0, 0, 0, 0.04)',
         },
+        '&.active': {
+            backgroundColor: 'primary.lighter',
+            color: 'primary.main',
+        },
+    },
+    navIcon: {
+        color: 'inherit',
+        fontSize: '1.3rem',
+    },
+    navText: {
+        fontWeight: 500,
+        fontSize: '0.875rem',
     },
 };
 
