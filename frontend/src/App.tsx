@@ -69,6 +69,7 @@ function App() {
 
                     <AppBar position="fixed" sx={LAYOUT_STYLES.appBar}>
                         <Toolbar>
+                            <img src={"/logo.svg"} width={60}/>
                             <Typography variant="h6" color="primary" sx={{ flexGrow: 1, fontWeight: 600 }}>
                                 Avaliu - Software de Avaliação
                             </Typography>
