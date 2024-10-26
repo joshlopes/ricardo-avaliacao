@@ -1,6 +1,6 @@
 {
-  "name": "ricardo-avaliacao",
-  "version": "0.1.0",
+  "name": "api",
+  "version": "0.0.1",
   "description": "PoC for school grades",
   "author": "josluis.lopes@gmail.com",
   "license": "MIT",
