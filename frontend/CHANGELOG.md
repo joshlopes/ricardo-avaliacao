@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/joshlopes/ricardo-avaliacao/compare/frontend-v0.1.0...frontend-v0.1.1) (2024-10-26)
+
+
+### Bug Fixes
+
+* little tweaks ([#10](https://github.com/joshlopes/ricardo-avaliacao/issues/10)) ([fbb03c9](https://github.com/joshlopes/ricardo-avaliacao/commit/fbb03c91c83d84bb88215630f4ed0b55965fd673))
+
 ## [0.1.0](https://github.com/joshlopes/ricardo-avaliacao/compare/frontend-v0.0.1...frontend-v0.1.0) (2024-10-26)
 
 
