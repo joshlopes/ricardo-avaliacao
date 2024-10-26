@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 import { useUserStore } from "./stores/useUserStore";
 import { useApi } from "./context/ApiProvider";
-import DashboardComponent from "./components/DashboardComponent";
 import { LogoutComponent } from "./components/Security/LogoutComponent";
 import LoginComponent from "./components/Security/LoginComponent";
 import TeacherStudentsComponent from "./components/Teacher/TeacherStudentsComponent";
@@ -105,7 +104,7 @@ function App() {
                     <Box component="main" sx={LAYOUT_STYLES.mainContent}>
                         <Container maxWidth="xl">
                             <Routes>
-                                <Route path="/" element={<DashboardComponent />} />
+                                <Route path="/" element={<TeacherClassesComponent teacherId={user.id} />} />
                                 <Route path="/students" element={<TeacherStudentsComponent teacherId={user.id} />} />
                                 <Route path="/classes" element={<TeacherClassesComponent teacherId={user.id} />} />
                                 <Route
