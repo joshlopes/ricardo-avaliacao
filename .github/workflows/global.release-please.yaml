@@ -1,8 +1,4 @@
-name: "Frontend: Release please"
-
-defaults:
-  run:
-    working-directory: "frontend"
+name: "Global: Release please"
 
 on:
   push:
