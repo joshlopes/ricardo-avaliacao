@@ -71,7 +71,7 @@ function App() {
                     <AppBar position="fixed" sx={LAYOUT_STYLES.appBar}>
                         <Toolbar>
                             <Typography variant="h6" color="primary" sx={{ flexGrow: 1, fontWeight: 600 }}>
-                                Teacher Dashboard
+                                Avaliu - Software de Avaliação
                             </Typography>
                             {user && (
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Box,
     Card,
@@ -9,9 +9,9 @@ import {
     Breadcrumbs,
     Link,
     Avatar,
-    useTheme,
     Paper,
     Button,
+    Tooltip,
 } from '@mui/material';
 import { useLocation, useNavigate } from "react-router-dom";
 import { Subject } from "../../types/Subject";
@@ -23,11 +23,12 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
+import ViewListIcon from '@mui/icons-material/ViewList';
 import {NAVIGATION_STYLES, SHARED_STYLES, STUDENT_STYLES} from '../../styles/constants';
 import AddStudentModal from '../Student/AddStudentModal';
+import TeacherStudentsMatrixView from './TeacherStudentsMatrixView';
 
 const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }) => {
-    const theme = useTheme();
     const location = useLocation();
     const navigate = useNavigate();
     const api = useApi();
@@ -35,6 +36,7 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState<string | null>(null);
     const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
+    const [viewMode, setViewMode] = useState<'grid' | 'matrix'>('grid');
 
     const subject = location.state?.subject as Subject;
     const schoolClass = location.state?.schoolClass as SchoolClass;
@@ -64,6 +66,10 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
 
     const handleAddStudent = () => {
         setIsAddModalOpen(true);
+    };
+
+    const toggleView = () => {
+        setViewMode(prev => prev === 'grid' ? 'matrix' : 'grid');
     };
 
     const renderStudentCard = (student: Student) => (
@@ -121,6 +127,18 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
         );
     }
 
+    if (viewMode === 'matrix') {
+        return (
+            <TeacherStudentsMatrixView
+                teacherId={teacherId}
+                subjectId={subject.id}
+                schoolClass={schoolClass}
+                subjectName={subject.name}
+                onViewChange={toggleView}
+            />
+        );
+    }
+
     return (
         <Box sx={{ maxWidth: '100%', mb: 2 }}>
             <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
@@ -147,19 +165,26 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
                     <Typography variant="h5" fontWeight="500">
                         {schoolClass.name} Students
                     </Typography>
-                    <Button
-                        variant="contained"
-                        startIcon={<AddIcon />}
-                        onClick={handleAddStudent}
-                        sx={{
-                            bgcolor: 'rgba(255, 255, 255, 0.2)',
-                            '&:hover': {
-                                bgcolor: 'rgba(255, 255, 255, 0.3)',
-                            }
-                        }}
-                    >
-                        Add Student
-                    </Button>
+                    <Box sx={{ display: 'flex', gap: 1 }}>
+                        <Tooltip title="Switch to matrix view">
+                            <IconButton onClick={toggleView} sx={{ color: 'white' }}>
+                                <ViewListIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Button
+                            variant="contained"
+                            startIcon={<AddIcon />}
+                            onClick={handleAddStudent}
+                            sx={{
+                                bgcolor: 'rgba(255, 255, 255, 0.2)',
+                                '&:hover': {
+                                    bgcolor: 'rgba(255, 255, 255, 0.3)',
+                                }
+                            }}
+                        >
+                            Add Student
+                        </Button>
+                    </Box>
                 </Box>
                 <Typography variant="subtitle1" sx={{ opacity: 0.9 }}>
                     {subject.name} - Year {schoolClass.year}
