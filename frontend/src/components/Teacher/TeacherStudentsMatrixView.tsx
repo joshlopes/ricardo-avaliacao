@@ -28,8 +28,8 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import {useNavigate} from "react-router-dom";
 import {SchoolClass} from "../../types/SchoolClass";
 import AddIcon from "@mui/icons-material/Add";
-import ViewListIcon from "@mui/icons-material/ViewList";
 import AddStudentModal from "../Student/AddStudentModal";
+import {useTranslation} from "react-i18next";
 
 interface TeacherStudentsMatrixViewProps {
     teacherId: string;
@@ -48,6 +48,7 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                                                                              }) => {
     const api = useApi();
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const [loading, setLoading] = useState(true);
     const [students, setStudents] = useState<Student[]>([]);
@@ -64,9 +65,9 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
             if (response?.ok && response.body) {
                 return response.body.results;
             }
-            throw new Error('Failed to fetch students');
+            throw new Error(t('Failed to fetch students'));
         } catch (err) {
-            throw new Error('Failed to load students');
+            throw new Error(t('Failed to load students'));
         }
     }, [api, teacherId, schoolClass.id, subjectId]);
 
@@ -92,7 +93,7 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
             if (response?.ok && response.body) {
                 return response.body.results;
             }
-            throw new Error('Failed to fetch grades');
+            throw new Error(t('Failed to fetch grades'));
         } catch (err) {
             throw new Error(`Failed to load grades for student ${studentId}`);
         }
@@ -119,7 +120,7 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
             setGrades(gradesData);
         } catch (err) {
             setError('Failed to load data');
-            enqueueSnackbar('Failed to load data', { variant: 'error' });
+            enqueueSnackbar(t('Failed to load data'), { variant: 'error' });
         } finally {
             setLoading(false);
         }
@@ -160,9 +161,9 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                 )
             }));
 
-            enqueueSnackbar('Grade updated successfully', { variant: 'success' });
+            enqueueSnackbar(t('Grade updated successfully'), { variant: 'success' });
         } catch (error) {
-            enqueueSnackbar('Failed to update grade', { variant: 'error' });
+            enqueueSnackbar(t('Failed to update grade'), { variant: 'error' });
         }
     };
 
@@ -177,8 +178,8 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
     if (error) {
         return (
             <Box sx={{ textAlign: 'center', mt: 2 }}>
-                <Typography color="error" gutterBottom>{error}</Typography>
-                <Button variant="contained" onClick={loadAllData}>Retry</Button>
+                <Typography color="error" gutterBottom>{t(error)}</Typography>
+                <Button variant="contained" onClick={loadAllData}>{t("Retry")}</Button>
             </Box>
         );
     }
@@ -198,7 +199,7 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                     sx={NAVIGATION_STYLES.breadcrumbs}
                 >
                     <Link component="button" onClick={() => navigate('/classes')} underline="hover" color="inherit">
-                        Classes
+                        {t("Classes")}
                     </Link>
                     <Typography color="text.primary">{schoolClass.name}</Typography>
                 </Breadcrumbs>
@@ -207,7 +208,7 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
             <Paper elevation={0} sx={SHARED_STYLES.gradientHeader}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                     <Typography variant="h5" fontWeight="500">
-                        {schoolClass.name} Grade Matrix
+                        {schoolClass.name} {t("Grade Matrix")}
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 1 }}>
                         <Tooltip title="Switch to card view">
@@ -226,12 +227,12 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                                 }
                             }}
                         >
-                            Add Student
+                            {t("Add Student")}
                         </Button>
                     </Box>
                 </Box>
                 <Typography variant="subtitle1" sx={{ opacity: 0.9 }}>
-                    {subjectName} - Year {schoolClass.year}
+                    {subjectName} - {schoolClass.year} Ano
                 </Typography>
             </Paper>
 
@@ -262,7 +263,6 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                             <TableCell
                                 sx={{
                                     backgroundColor: 'grey.100',
-                                    position: 'sticky',
                                     left: 0,
                                     zIndex: 2,
                                     minWidth: '200px',
@@ -270,7 +270,7 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                                     borderBottomColor: 'grey.200',
                                 }}
                             >
-                                Categories / Students
+                                {t("Categories")} / {t("Students")}
                             </TableCell>
                             {students.map((student) => (
                                 <TableCell
@@ -335,7 +335,6 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                                             <TableRow key={subtopic.id}>
                                                 <TableCell
                                                     sx={{
-                                                        position: 'sticky',
                                                         left: 0,
                                                         backgroundColor: 'white',
                                                         borderRight: '1px solid',
@@ -361,7 +360,8 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                                                         <GradeCircle
                                                             grade={findGrade(student.id, subtopic.id)}
                                                             subTopic={subtopic}
-                                                            //onChange={(st, g, ng) => onGradeChange(student.id, st, g, ng)}
+                                                            sizePx="20px"
+                                                            onChange={(st, g, ng) => onGradeChange(student.id, st, g, ng)}
                                                         />
                                                     </TableCell>
                                                 ))}

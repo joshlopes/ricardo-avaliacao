@@ -7,6 +7,7 @@ interface GradeCircleProps {
     grade: Grade | undefined;
     subTopic: EvaluationSubTopic;
     onChange?: (subtopic: EvaluationSubTopic, grade: Grade | undefined, newGrade: GradeEnum) => Promise<void>;
+    sizePx?: string,
 }
 
 function getGradeColor(grade: GradeEnum | undefined): string {
@@ -59,7 +60,7 @@ function getGradeLabel(grade: GradeEnum | undefined): string {
     }
 }
 
-const GradeCircle: React.FC<GradeCircleProps> = ({ grade, subTopic, onChange }) => {
+const GradeCircle: React.FC<GradeCircleProps> = ({ grade, subTopic, onChange, sizePx }) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [currentGrade, setCurrentGrade] = useState<GradeEnum | undefined>(grade?.grade);
     const [loading, setLoading] = useState(false);
@@ -98,8 +99,8 @@ const GradeCircle: React.FC<GradeCircleProps> = ({ grade, subTopic, onChange }) 
                 style={{
                     backgroundColor: getGradeColor(currentGrade),
                     borderRadius: '50%',
-                    width: '40px',
-                    height: '40px',
+                    width: sizePx ?? '40px',
+                    height: sizePx ?? '40px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',

@@ -6,9 +6,11 @@ import ClassIcon from '@mui/icons-material/Class';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Box } from '@mui/material';
 import { NAVBAR_STYLES } from './styles/constants';
+import { useTranslation } from 'react-i18next';
 
 const NavbarItem = ({ name, icon: Icon, path }: { name: string, icon: any, path: string }) => {
   const location = useLocation();
+  const { t, i18n } = useTranslation();
   const isActive = location.pathname === path;
 
   return (
@@ -25,7 +27,7 @@ const NavbarItem = ({ name, icon: Icon, path }: { name: string, icon: any, path:
             </ListItemIcon>
           </Box>
           <ListItemText
-              primary={name}
+              primary={t(name)}
               primaryTypographyProps={{
                 sx: NAVBAR_STYLES.itemText
               }}

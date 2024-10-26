@@ -13,6 +13,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import {useApi} from "../../context/ApiProvider";
 import {enqueueSnackbar} from 'notistack';
+import {useTranslation} from "react-i18next";
 
 interface AddStudentModalProps {
     open: boolean;
@@ -30,6 +31,7 @@ const AddStudentModal: React.FC<AddStudentModalProps> = ({
                                                              subjectId,
                                                          }) => {
     const api = useApi();
+    const { t } = useTranslation();
     const [name, setName] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -86,7 +88,7 @@ const AddStudentModal: React.FC<AddStudentModalProps> = ({
                 justifyContent: 'space-between'
             }}>
                 <Typography variant="h6" component="div" sx={{color: 'grey.800', fontWeight: 600}}>
-                    Add New Student
+                    {t("Add New Student")}
                 </Typography>
                 <IconButton
                     onClick={handleClose}
@@ -107,7 +109,7 @@ const AddStudentModal: React.FC<AddStudentModalProps> = ({
                             autoFocus
                             required
                             fullWidth
-                            label="Student Name"
+                            label={t("Student Name")}
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             variant="outlined"
@@ -125,14 +127,14 @@ const AddStudentModal: React.FC<AddStudentModalProps> = ({
                         sx={{mr: 1}}
                         disabled={loading}
                     >
-                        Cancel
+                        {t("Cancel")}
                     </Button>
                     <Button
                         type="submit"
                         variant="contained"
                         disabled={loading || !name.trim()}
                     >
-                        {loading ? 'Adding...' : 'Add Student'}
+                        {loading ? t('Adding...') : t('Add Student')}
                     </Button>
                 </DialogActions>
             </form>

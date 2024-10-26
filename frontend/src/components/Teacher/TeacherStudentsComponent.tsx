@@ -27,11 +27,13 @@ import ViewListIcon from '@mui/icons-material/ViewList';
 import {NAVIGATION_STYLES, SHARED_STYLES, STUDENT_STYLES} from '../../styles/constants';
 import AddStudentModal from '../Student/AddStudentModal';
 import TeacherStudentsMatrixView from './TeacherStudentsMatrixView';
+import {useTranslation} from "react-i18next";
 
 const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const api = useApi();
+    const { t } = useTranslation();
     const [students, setStudents] = React.useState<Student[]>([]);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState<string | null>(null);
@@ -93,7 +95,7 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
                         <LinkButton
                             variant="contained"
                             to="/student-grade"
-                            label="View Grades"
+                            label={t("View Grades")}
                             data={{
                                 schoolClass: schoolClass,
                                 subject: subject,
@@ -154,7 +156,7 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
                     sx={NAVIGATION_STYLES.breadcrumbs}
                 >
                     <Link component="button" onClick={() => navigate('/classes')} underline="hover" color="inherit">
-                        Classes
+                        {t("Classes")}
                     </Link>
                     <Typography color="text.primary">{schoolClass.name}</Typography>
                 </Breadcrumbs>
@@ -163,7 +165,7 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
             <Paper elevation={0} sx={SHARED_STYLES.gradientHeader}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                     <Typography variant="h5" fontWeight="500">
-                        {schoolClass.name} Students
+                        {schoolClass.name} - {students.length} {t("Students")}
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 1 }}>
                         <Tooltip title="Switch to matrix view">
@@ -182,12 +184,12 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
                                 }
                             }}
                         >
-                            Add Student
+                            {t('Add Student')}
                         </Button>
                     </Box>
                 </Box>
                 <Typography variant="subtitle1" sx={{ opacity: 0.9 }}>
-                    {subject.name} - Year {schoolClass.year}
+                    {subject.name} - {schoolClass.year} Ano
                 </Typography>
             </Paper>
 
