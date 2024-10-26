@@ -30,6 +30,7 @@ import { EvaluationSubTopic } from "../../types/EvaluationSubTopic";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {GRADE_STYLES, NAVIGATION_STYLES, SHARED_STYLES} from '../../styles/constants';
+import {useTranslation} from "react-i18next";
 
 const StudentGrade: React.FC<{ teacherId: string }> = ({ teacherId }) => {
     const theme = useTheme();
@@ -43,6 +44,7 @@ const StudentGrade: React.FC<{ teacherId: string }> = ({ teacherId }) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const api = useApi();
+    const { t } = useTranslation();
     const [isLoadingCategories, setIsLoadingCategories] = useState(true);
     const [hasError, setHasError] = useState(false);
     const [evaluationCategories, setEvaluationCategories] = useState<EvaluationCategory[]>([]);
@@ -61,11 +63,11 @@ const StudentGrade: React.FC<{ teacherId: string }> = ({ teacherId }) => {
                     return;
                 }
 
-                throw new Error('Failed to fetch data!');
+                throw new Error(t('Failed to fetch data!'));
             })
             .catch((error) => {
                 console.error('Error:', error);
-                enqueueSnackbar('Failed to fetch data!', { variant: 'error' });
+                enqueueSnackbar(t('Failed to fetch data!'), { variant: 'error' });
                 setHasError(true);
                 setEvaluationCategories([]);
             })
@@ -83,11 +85,11 @@ const StudentGrade: React.FC<{ teacherId: string }> = ({ teacherId }) => {
                     return;
                 }
 
-                throw new Error('Failed to fetch data!');
+                throw new Error(t('Failed to fetch data!'));
             })
             .catch((error) => {
                 console.error('Error:', error);
-                enqueueSnackbar('Failed to fetch data!', { variant: 'error' });
+                enqueueSnackbar(t('Failed to fetch data!'), { variant: 'error' });
                 setHasError(true);
                 setStudentGrades([]);
             })
@@ -105,15 +107,15 @@ const StudentGrade: React.FC<{ teacherId: string }> = ({ teacherId }) => {
         })
             .then((response) => {
                 if (response.ok) {
-                    enqueueSnackbar('Grade updated!', { variant: 'success' });
+                    enqueueSnackbar(t('Grade updated!'), { variant: 'success' });
                     return;
                 }
 
-                throw new Error('Failed to update grade!');
+                throw new Error(t('Failed to update grade!'));
             })
             .catch((error) => {
                 console.error('Error:', error);
-                enqueueSnackbar('Failed to update grade!', { variant: 'error' });
+                enqueueSnackbar(t('Failed to update grade!'), { variant: 'error' });
 
                 throw error;
             });
@@ -141,8 +143,8 @@ const StudentGrade: React.FC<{ teacherId: string }> = ({ teacherId }) => {
     if (hasError) {
         return (
             <Box sx={{ textAlign: 'center', mt: 2 }}>
-                <Typography color="error" gutterBottom>Failed to load data. Please try again.</Typography>
-                <Button variant="contained" color="primary" onClick={fetchAllData} sx={{ mt: 1 }}>Retry</Button>
+                <Typography color="error" gutterBottom>{t("Failed to load data. Please try again.")}</Typography>
+                <Button variant="contained" color="primary" onClick={fetchAllData} sx={{ mt: 1 }}>{t("Retry")}</Button>
             </Box>
         );
     }
@@ -162,7 +164,7 @@ const StudentGrade: React.FC<{ teacherId: string }> = ({ teacherId }) => {
                     sx={NAVIGATION_STYLES.breadcrumbs}
                 >
                     <Link component="button" onClick={() => navigate('/classes')} underline="hover" color="inherit">
-                        Classes
+                        {t("Classes")}
                     </Link>
                     <Link component="button" onClick={() => navigate(-1)} underline="hover" color="inherit">
                         {schoolClass.name}
@@ -174,7 +176,7 @@ const StudentGrade: React.FC<{ teacherId: string }> = ({ teacherId }) => {
             <Paper elevation={0} sx={SHARED_STYLES.gradientHeader}>
                 <Typography variant="h5" fontWeight="500">{student.name}</Typography>
                 <Typography variant="subtitle1" sx={{ opacity: 0.9 }}>
-                    {subject.name} - {schoolClass.name} - Year {schoolClass.year}
+                    {subject.name} - {schoolClass.name} - {schoolClass.year} Ano
                 </Typography>
             </Paper>
 

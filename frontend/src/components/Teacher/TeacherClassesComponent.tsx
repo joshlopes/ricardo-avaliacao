@@ -7,7 +7,6 @@ import {
     Box,
     Chip,
     CardActions,
-    useTheme
 } from '@mui/material';
 import { SchoolClass } from "../../types/SchoolClass";
 import LinkButton from "../Shared/LinkButton";
@@ -17,9 +16,10 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import SubjectIcon from '@mui/icons-material/Subject';
 import { useApi } from "../../context/ApiProvider";
 import {SHARED_STYLES} from "../../styles/constants";
+import {useTranslation} from "react-i18next";
 
 const TeacherClassesComponent: React.FC<{ teacherId: string }> = ({ teacherId }) => {
-    const theme = useTheme();
+    const { t, i18n } = useTranslation();
     const api = useApi();
     const [classes, setClasses] = React.useState<SchoolClass[]>([]);
     const [loading, setLoading] = React.useState(true);
@@ -35,7 +35,7 @@ const TeacherClassesComponent: React.FC<{ teacherId: string }> = ({ teacherId })
                     throw new Error('Failed to fetch classes');
                 }
             } catch (err) {
-                setError('Failed to load classes');
+                setError(t('Failed to load classes'));
             } finally {
                 setLoading(false);
             }
@@ -61,7 +61,7 @@ const TeacherClassesComponent: React.FC<{ teacherId: string }> = ({ teacherId })
                                 <Box sx={SHARED_STYLES.infoItem}>
                                     <CalendarTodayIcon sx={SHARED_STYLES.icon} />
                                     <Typography variant="body2" color="text.secondary">
-                                        Year {schoolClass.year}
+                                        {schoolClass.year} Ano
                                     </Typography>
                                 </Box>
 
@@ -72,21 +72,13 @@ const TeacherClassesComponent: React.FC<{ teacherId: string }> = ({ teacherId })
                                     </Typography>
                                 </Box>
                             </Box>
-
-                            <Box sx={{ mt: 2 }}>
-                                <Chip
-                                    label={classSubjectTeacher.Subject.name}
-                                    size="small"
-                                    sx={SHARED_STYLES.chip}
-                                />
-                            </Box>
                         </CardContent>
 
                         <CardActions sx={SHARED_STYLES.cardActions}>
                             <LinkButton
                                 variant="contained"
                                 to={`/classes/${schoolClass.id}/subject/${classSubjectTeacher.Subject.id}/students`}
-                                label="View Students"
+                                label={t("View Students")}
                                 data={{
                                     schoolClass: schoolClass,
                                     subject: classSubjectTeacher.Subject,
@@ -103,9 +95,9 @@ const TeacherClassesComponent: React.FC<{ teacherId: string }> = ({ teacherId })
         return (
             <Box sx={{ py: 2 }}>
                 <Typography variant="h5" sx={SHARED_STYLES.pageTitle}>
-                    Your Classes
+                    {t('Your Classes')}
                 </Typography>
-                <Box sx={{ mt: 3 }}>Loading...</Box>
+                <Box sx={{ mt: 3 }}>{t('Loading...')}</Box>
             </Box>
         );
     }
@@ -114,9 +106,9 @@ const TeacherClassesComponent: React.FC<{ teacherId: string }> = ({ teacherId })
         return (
             <Box sx={{ py: 2 }}>
                 <Typography variant="h5" sx={SHARED_STYLES.pageTitle}>
-                    Your Classes
+                    {t('Your Classes')}
                 </Typography>
-                <Box sx={{ mt: 3, color: 'error.main' }}>{error}</Box>
+                <Box sx={{ mt: 3, color: 'error.main' }}>{t(error)}</Box>
             </Box>
         );
     }
@@ -124,7 +116,7 @@ const TeacherClassesComponent: React.FC<{ teacherId: string }> = ({ teacherId })
     return (
         <Box sx={{ py: 2 }}>
             <Typography variant="h5" sx={SHARED_STYLES.pageTitle}>
-                Your Classes
+                {t('Your Classes')}
             </Typography>
             <Box sx={{ mt: 3 }}>
                 <Grid container spacing={3}>

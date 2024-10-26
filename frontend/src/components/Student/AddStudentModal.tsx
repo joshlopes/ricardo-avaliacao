@@ -13,6 +13,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import {useApi} from "../../context/ApiProvider";
 import {enqueueSnackbar} from 'notistack';
+import {useTranslation} from "react-i18next";
 
 interface AddStudentModalProps {
     open: boolean;
@@ -30,6 +31,7 @@ const AddStudentModal: React.FC<AddStudentModalProps> = ({
                                                              subjectId,
                                                          }) => {
     const api = useApi();
+    const { t } = useTranslation();
     const [name, setName] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -132,7 +134,7 @@ const AddStudentModal: React.FC<AddStudentModalProps> = ({
                         variant="contained"
                         disabled={loading || !name.trim()}
                     >
-                        {loading ? 'Adding...' : 'Add Student'}
+                        {loading ? t('Adding...') : t('Add Student')}
                     </Button>
                 </DialogActions>
             </form>

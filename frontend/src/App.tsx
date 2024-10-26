@@ -22,9 +22,11 @@ import StudentGrade from "./components/Grade/StudentGrade";
 import { navbarItems } from './Navbar';
 import { theme } from './styles/theme';
 import { LAYOUT_STYLES } from './styles/constants';
+import {useTranslation} from "react-i18next";
 
 function App() {
     const api = useApi();
+    const { t, i18n } = useTranslation();
     const { user, setUser, securityTokens, setApiSecurityTokens } = useUserStore();
 
     const fetchMe = useCallback(() => {
@@ -71,7 +73,7 @@ function App() {
                         <Toolbar>
                             <img src={"/logo.svg"} width={60}/>
                             <Typography variant="h6" color="primary" sx={{ flexGrow: 1, fontWeight: 600 }}>
-                                Avaliu - Software de Avaliação
+                                Avaliu - Software de Avaliação das Aprendizagens
                             </Typography>
                             {user && (
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -92,7 +94,7 @@ function App() {
                                 user && (
                                     <React.Fragment key={item.name}>
                                         <item.component
-                                            name={item.name}
+                                            name={t(item.name)}
                                             icon={item.icon}
                                             path={item.path}
                                         />
