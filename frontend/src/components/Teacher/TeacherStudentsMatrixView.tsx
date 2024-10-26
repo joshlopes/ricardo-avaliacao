@@ -263,7 +263,6 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                             <TableCell
                                 sx={{
                                     backgroundColor: 'grey.100',
-                                    position: 'sticky',
                                     left: 0,
                                     zIndex: 2,
                                     minWidth: '200px',
@@ -336,7 +335,6 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                                             <TableRow key={subtopic.id}>
                                                 <TableCell
                                                     sx={{
-                                                        position: 'sticky',
                                                         left: 0,
                                                         backgroundColor: 'white',
                                                         borderRight: '1px solid',
@@ -362,7 +360,8 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                                                         <GradeCircle
                                                             grade={findGrade(student.id, subtopic.id)}
                                                             subTopic={subtopic}
-                                                            //onChange={(st, g, ng) => onGradeChange(student.id, st, g, ng)}
+                                                            sizePx="20px"
+                                                            onChange={(st, g, ng) => onGradeChange(student.id, st, g, ng)}
                                                         />
                                                     </TableCell>
                                                 ))}
