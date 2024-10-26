@@ -48,6 +48,9 @@ import OrmSubjectRepository from '../ORM/School/OrmSubjectRepository'
 import type EvaluationSubTopicRepository from '../../Domain/Evaluation/EvaluationSubTopicRepository'
 import OrmEvaluationSubTopicsRepository from '../ORM/School/OrmEvaluationSubTopicsRepository'
 import SetStudentGradeHandler from '../../Application/Write/Student/SetStudentGrade/SetStudentGradeHandler'
+import CreateStudentHandler from '../../Application/Write/Student/CreateStudent/CreateStudentHandler'
+import OrmClassStudentRepository from '../ORM/School/OrmClassStudentRepository'
+import type ClassStudentRepository from '../../Domain/School/ClassStudentRepository'
 
 const myContainer = new Container()
 
@@ -74,6 +77,7 @@ myContainer.bind<SchoolClassRepository>(TYPES.SchoolClassRepository).to(OrmSchoo
 myContainer.bind<EvaluationCategoryRepository>(TYPES.EvaluationCategoryRepository).to(OrmEvaluationCategoryRepository)
 myContainer.bind<SubjectRepository>(TYPES.SubjectRepository).to(OrmSubjectRepository)
 myContainer.bind<EvaluationSubTopicRepository>(TYPES.EvaluationSubTopicRepository).to(OrmEvaluationSubTopicsRepository)
+myContainer.bind<ClassStudentRepository>(TYPES.ClassStudentRepository).to(OrmClassStudentRepository)
 
 // Command handlers
 myContainer.bind(TYPES.CommandHandler).to(LoginCommandHandler)
@@ -87,6 +91,7 @@ myContainer.bind(TYPES.CommandHandler).to(ListAllTeacherClassesCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(GetStudentSubjectGradesCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(GetEvaluationCategoriesHandler)
 myContainer.bind(TYPES.CommandHandler).to(SetStudentGradeHandler)
+myContainer.bind(TYPES.CommandHandler).to(CreateStudentHandler)
 myContainer.bind<CommandHandlerManager>(CommandHandlerManager).toSelf()
 
 // Events

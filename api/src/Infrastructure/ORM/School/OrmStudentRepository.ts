@@ -52,6 +52,7 @@ export default class OrmStudentRepository implements StudentRepository {
 
   async upsert (student: Student): Promise<Student> {
     const data = {
+      id: student.id.toString(),
       name: student.name
     }
 

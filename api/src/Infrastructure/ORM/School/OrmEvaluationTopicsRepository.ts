@@ -56,6 +56,7 @@ export default class OrmEvaluationTopicsRepository implements EvaluationTopicRep
 
   async upsert (evaluationTopic: EvaluationTopic): Promise<EvaluationTopic> {
     const data = {
+      id: evaluationTopic.id.toString(),
       name: evaluationTopic.name,
       evaluationCategoryId: evaluationTopic.evaluationCategory.id.toString()
     }
