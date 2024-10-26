@@ -34,6 +34,9 @@ const resources = {
             "Grade updated!" : "Nota atualizada!",
             "Failed to update grade!" : "Falha ao atualizar nota!",
             "Failed to load data. Please try again." : "Falha ao carregar dados. Por favor, tente novamente.",
+            "Cancel": "Cancelar",
+            "Student Name": "Nome do Aluno",
+            "Add New Student": "Adicionar Novo Aluno",
         }
     },
 };
