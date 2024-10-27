@@ -51,10 +51,10 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
             if (response?.ok && response.body) {
                 setStudents(response.body.results);
             } else {
-                throw new Error('Failed to fetch students');
+                throw new Error(t('Failed to fetch students'));
             }
         } catch (err) {
-            setError('Failed to load students');
+            setError(t('Failed to load students'));
         } finally {
             setLoading(false);
         }
@@ -87,7 +87,7 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
                                 {student.name}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                Student ID: {student.id}
+                                {t("Student ID")}: {student.id}
                             </Typography>
                         </Box>
                     </Box>
@@ -112,7 +112,7 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
         return (
             <Box sx={{ py: 2 }}>
                 <Typography variant="h5" sx={SHARED_STYLES.pageTitle}>
-                    Loading Students...
+                    {t("Loading Students...")}
                 </Typography>
             </Box>
         );
@@ -122,7 +122,7 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
         return (
             <Box sx={{ py: 2 }}>
                 <Typography variant="h5" sx={SHARED_STYLES.pageTitle}>
-                    Students
+                    {t("Students")}
                 </Typography>
                 <Box sx={{ mt: 3, color: 'error.main' }}>{error}</Box>
             </Box>

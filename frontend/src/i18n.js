@@ -19,6 +19,7 @@ const resources = {
             "Adding...": "A adicionar...",
             "Categories": "Categorias",
             "Students": "Alunos",
+            "Student ID": "ID do Aluno",
             "View Grades": "Ver aprendizagens",
             "Failed to fetch data!" : "Falha ao obter dados!",
             "Failed to fetch students": "Falha ao obter alunos",
@@ -38,7 +39,8 @@ const resources = {
             "Student Name": "Nome do Aluno",
             "Add New Student": "Adicionar Novo Aluno",
             "Grade Matrix": "Aprendizagens Essenciais",
-            "Grades": "Aprendizagens Essenciais"
+            "Grades": "Aprendizagens Essenciais",
+            "Loading Students...": "A carregar Alunos...",
         }
     },
 };
