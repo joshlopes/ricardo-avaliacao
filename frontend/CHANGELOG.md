@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/joshlopes/ricardo-avaliacao/compare/frontend-v0.2.1...frontend-v0.3.0) (2024-10-28)
+
+
+### Features
+
+* add more translations ([966f25a](https://github.com/joshlopes/ricardo-avaliacao/commit/966f25a16458ec66bf30689332e066815561c3d9))
+
 ## [0.2.1](https://github.com/joshlopes/ricardo-avaliacao/compare/frontend-v0.2.0...frontend-v0.2.1) (2024-10-26)
 
 
