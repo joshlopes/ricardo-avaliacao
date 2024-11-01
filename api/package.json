@@ -59,7 +59,7 @@
     "@types/jest": "^29.5.14",
     "@types/js-yaml": "^4.0.9",
     "@types/jsonwebtoken": "^9.0.7",
-    "@types/node": "^20.17.1",
+    "@types/node": "^20.17.5",
     "@types/promptly": "^3.0.5",
     "@types/supertest": "^6.0.2",
     "@types/uuid": "^10.0.0",
