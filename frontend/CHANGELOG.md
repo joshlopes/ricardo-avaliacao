@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.3](https://github.com/joshlopes/ricardo-avaliacao/compare/frontend-v0.3.2...frontend-v0.3.3) (2024-11-08)
+
+
+### Bug Fixes
+
+* **deps:** update frontend dependencies ([#37](https://github.com/joshlopes/ricardo-avaliacao/issues/37)) ([74c91b0](https://github.com/joshlopes/ricardo-avaliacao/commit/74c91b0404ef35114e516de93f00e000e3a3afa4))
+
 ## [0.3.2](https://github.com/joshlopes/ricardo-avaliacao/compare/frontend-v0.3.1...frontend-v0.3.2) (2024-11-01)
 
 
