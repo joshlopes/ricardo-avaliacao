@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/joshlopes/ricardo-avaliacao/compare/api-v0.2.3...api-v0.2.4) (2024-11-08)
+
+
+### Bug Fixes
+
+* **deps:** update api dependencies ([#38](https://github.com/joshlopes/ricardo-avaliacao/issues/38)) ([486b2eb](https://github.com/joshlopes/ricardo-avaliacao/commit/486b2eb17c58be17157893225826b0236266ccc6))
+
 ## [0.2.3](https://github.com/joshlopes/ricardo-avaliacao/compare/api-v0.2.2...api-v0.2.3) (2024-10-28)
 
 
