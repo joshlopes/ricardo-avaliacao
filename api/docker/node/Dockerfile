@@ -1,4 +1,4 @@
-FROM node:20.18.0-alpine as app_base
+FROM node:20.18.1-alpine as app_base
 
 RUN apk --no-cache add mariadb-client
 
