@@ -186,61 +186,70 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
 
     return (
         <Box sx={{ maxWidth: '100%', mb: 2 }}>
-            <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
-                <IconButton
-                    onClick={() => navigate(-1)}
-                    size="small"
-                    sx={NAVIGATION_STYLES.backButton}
-                >
-                    <ArrowBackIcon />
-                </IconButton>
-                <Breadcrumbs
-                    separator={<NavigateNextIcon fontSize="small" />}
-                    sx={NAVIGATION_STYLES.breadcrumbs}
-                >
-                    <Link component="button" onClick={() => navigate('/classes')} underline="hover" color="inherit">
-                        {t("Classes")}
-                    </Link>
-                    <Typography color="text.primary">{schoolClass.name}</Typography>
-                </Breadcrumbs>
-            </Box>
-
-            <Paper elevation={0} sx={SHARED_STYLES.gradientHeader}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-                    <Typography variant="h5" fontWeight="500">
-                        {schoolClass.name} {t("Grade Matrix")}
-                    </Typography>
-                    <Box sx={{ display: 'flex', gap: 1 }}>
-                        <Tooltip title="Switch to card view">
-                            <IconButton onClick={onViewChange} sx={{ color: 'white' }}>
-                                <GridViewIcon />
-                            </IconButton>
-                        </Tooltip>
-                        <Button
-                            variant="contained"
-                            startIcon={<AddIcon />}
-                            onClick={handleAddStudent}
-                            sx={{
-                                bgcolor: 'rgba(255, 255, 255, 0.2)',
-                                '&:hover': {
-                                    bgcolor: 'rgba(255, 255, 255, 0.3)',
-                                }
-                            }}
-                        >
-                            {t("Add Student")}
-                        </Button>
-                    </Box>
+            <Box sx={{ 
+                position: 'sticky',
+                top: 0,
+                zIndex: 1100,
+                bgcolor: 'background.default',
+                pb: 2
+            }}>
+                <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
+                    <IconButton
+                        onClick={() => navigate(-1)}
+                        size="small"
+                        sx={NAVIGATION_STYLES.backButton}
+                    >
+                        <ArrowBackIcon />
+                    </IconButton>
+                    <Breadcrumbs
+                        separator={<NavigateNextIcon fontSize="small" />}
+                        sx={NAVIGATION_STYLES.breadcrumbs}
+                    >
+                        <Link component="button" onClick={() => navigate('/classes')} underline="hover" color="inherit">
+                            {t("Classes")}
+                        </Link>
+                        <Typography color="text.primary">{schoolClass.name}</Typography>
+                    </Breadcrumbs>
                 </Box>
-                <Typography variant="subtitle1" sx={{ opacity: 0.9 }}>
-                    {subjectName} - {schoolClass.year} Ano
-                </Typography>
-            </Paper>
+
+                <Paper elevation={0} sx={SHARED_STYLES.gradientHeader}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                        <Typography variant="h5" fontWeight="500">
+                            {schoolClass.name} {t("Grade Matrix")}
+                        </Typography>
+                        <Box sx={{ display: 'flex', gap: 1 }}>
+                            <Tooltip title="Switch to card view">
+                                <IconButton onClick={onViewChange} sx={{ color: 'white' }}>
+                                    <GridViewIcon />
+                                </IconButton>
+                            </Tooltip>
+                            <Button
+                                variant="contained"
+                                startIcon={<AddIcon />}
+                                onClick={handleAddStudent}
+                                sx={{
+                                    bgcolor: 'rgba(255, 255, 255, 0.2)',
+                                    '&:hover': {
+                                        bgcolor: 'rgba(255, 255, 255, 0.3)',
+                                    }
+                                }}
+                            >
+                                {t("Add Student")}
+                            </Button>
+                        </Box>
+                    </Box>
+                    <Typography variant="subtitle1" sx={{ opacity: 0.9 }}>
+                        {subjectName} - {schoolClass.year} Ano
+                    </Typography>
+                </Paper>
+            </Box>
 
             <TableContainer
                 component={Paper}
                 sx={{
                     mt: 2,
                     overflow: 'auto',
+                    maxHeight: 'calc(100vh - 200px)',
                     '& .MuiTableCell-head.vertical-header': {
                         height: '160px',
                         verticalAlign: 'bottom',
@@ -257,14 +266,15 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                     }
                 }}
             >
-                <Table size="small" sx={{ minWidth: 650 }}>
+                <Table size="small" stickyHeader sx={{ minWidth: 650 }}>
                     <TableHead>
                         <TableRow>
                             <TableCell
                                 sx={{
                                     backgroundColor: 'grey.100',
+                                    position: 'sticky',
                                     left: 0,
-                                    zIndex: 2,
+                                    zIndex: 3,
                                     minWidth: '200px',
                                     borderBottom: '2px solid',
                                     borderBottomColor: 'grey.200',
@@ -279,6 +289,9 @@ const TeacherStudentsMatrixView: React.FC<TeacherStudentsMatrixViewProps> = ({
                                     className="vertical-header"
                                     sx={{
                                         backgroundColor: 'grey.100',
+                                        position: 'sticky',
+                                        top: 0,
+                                        zIndex: 2,
                                         minWidth: '60px',
                                         fontWeight: 500,
                                         borderBottom: '2px solid',
