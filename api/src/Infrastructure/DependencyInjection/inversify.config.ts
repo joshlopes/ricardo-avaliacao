@@ -51,7 +51,7 @@ import SetStudentGradeHandler from '../../Application/Write/Student/SetStudentGr
 import CreateStudentHandler from '../../Application/Write/Student/CreateStudent/CreateStudentHandler'
 import OrmClassStudentRepository from '../ORM/School/OrmClassStudentRepository'
 import type ClassStudentRepository from '../../Domain/School/ClassStudentRepository'
-import UpdateStudentHandler from "../../Application/Write/Student/UpdateStudent/UpdateStudentHandler";
+import UpdateStudentHandler from '../../Application/Write/Student/UpdateStudent/UpdateStudentHandler'
 
 const myContainer = new Container()
 

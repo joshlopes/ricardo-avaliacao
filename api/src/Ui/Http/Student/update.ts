@@ -10,13 +10,13 @@ export const update = async (req: Request, resp: Response): Promise<void> => {
   }
 
   await handleCommand(
-      new UpdateStudent(
-          StudentId.fromString(req.params.id),
-          req.body.name as string
-      ),
-      resp,
-      () => {
-        resp.status(204).send()
-      }
-    )
+    new UpdateStudent(
+      StudentId.fromString(req.params.id),
+      req.body.name as string
+    ),
+    resp,
+    () => {
+      resp.status(204).send()
+    }
+  )
 }
