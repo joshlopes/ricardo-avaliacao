@@ -1,6 +1,6 @@
-FROM node:20.18.1-alpine as app_base
+FROM node:20-alpine as app_base
 
-RUN apk --no-cache add mariadb-client
+RUN apk --no-cache add mariadb-client openssl
 
 # Set the working directory
 WORKDIR /app
