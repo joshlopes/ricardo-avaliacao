@@ -51,6 +51,7 @@ import SetStudentGradeHandler from '../../Application/Write/Student/SetStudentGr
 import CreateStudentHandler from '../../Application/Write/Student/CreateStudent/CreateStudentHandler'
 import OrmClassStudentRepository from '../ORM/School/OrmClassStudentRepository'
 import type ClassStudentRepository from '../../Domain/School/ClassStudentRepository'
+import UpdateStudentHandler from "../../Application/Write/Student/UpdateStudent/UpdateStudentHandler";
 
 const myContainer = new Container()
 
@@ -92,6 +93,7 @@ myContainer.bind(TYPES.CommandHandler).to(GetStudentSubjectGradesCommandHandler)
 myContainer.bind(TYPES.CommandHandler).to(GetEvaluationCategoriesHandler)
 myContainer.bind(TYPES.CommandHandler).to(SetStudentGradeHandler)
 myContainer.bind(TYPES.CommandHandler).to(CreateStudentHandler)
+myContainer.bind(TYPES.CommandHandler).to(UpdateStudentHandler)
 myContainer.bind<CommandHandlerManager>(CommandHandlerManager).toSelf()
 
 // Events

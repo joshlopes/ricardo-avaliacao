@@ -23,9 +23,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import {NAVIGATION_STYLES, SHARED_STYLES, STUDENT_STYLES} from '../../styles/constants';
 import AddStudentModal from '../Student/AddStudentModal';
+import EditStudentModal from '../Student/EditStudentModal';
 import TeacherStudentsMatrixView from './TeacherStudentsMatrixView';
 import {useTranslation} from "react-i18next";
 
@@ -38,6 +40,8 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState<string | null>(null);
     const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
+    const [selectedStudent, setSelectedStudent] = React.useState<Student | null>(null);
     const [viewMode, setViewMode] = useState<'grid' | 'matrix'>('grid');
 
     const subject = location.state?.subject as Subject;
@@ -70,6 +74,11 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
         setIsAddModalOpen(true);
     };
 
+    const handleEditStudent = (student: Student) => {
+        setSelectedStudent(student);
+        setIsEditModalOpen(true);
+    };
+
     const toggleView = () => {
         setViewMode(prev => prev === 'grid' ? 'matrix' : 'grid');
     };
@@ -85,6 +94,15 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
                         <Box>
                             <Typography variant="h6" sx={{ fontWeight: 500 }}>
                                 {student.name}
+                                <IconButton
+                                    onClick={() => handleEditStudent(student)}
+                                    sx={{
+                                        color: 'primary.main',
+                                        '&:hover': { color: 'primary.dark' },
+                                    }}
+                                >
+                                    <EditIcon />
+                                </IconButton>
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
                                 {t("Student ID")}: {student.id}
@@ -204,6 +222,17 @@ const TeacherStudentsComponent: React.FC<{ teacherId: string }> = ({ teacherId }
                 classId={schoolClass.id}
                 subjectId={subject.id}
             />
+
+            {selectedStudent && (
+                <EditStudentModal
+                    open={isEditModalOpen}
+                    onClose={() => setIsEditModalOpen(false)}
+                    onSuccess={fetchStudents}
+                    student={selectedStudent}
+                    classId={schoolClass.id}
+                    subjectId={subject.id}
+                />
+            )}
         </Box>
     );
 };

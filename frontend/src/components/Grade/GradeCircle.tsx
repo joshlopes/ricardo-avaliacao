@@ -31,11 +31,11 @@ function getGradeLetter(grade: GradeEnum | undefined): string {
         case GradeEnum.MASTERED:
             return 'C';
         case GradeEnum.ACHIEVED:
-            return 'A';
+            return 'D';
         case GradeEnum.EMERGENT:
             return 'E';
         case GradeEnum.IN_PROGRESS:
-            return 'D';
+            return 'I';
         case GradeEnum.NOT_WORKED:
             return 'N';
         default:
@@ -48,7 +48,7 @@ function getGradeLabel(grade: GradeEnum | undefined): string {
         case GradeEnum.MASTERED:
             return 'Consolidada';
         case GradeEnum.ACHIEVED:
-            return 'Atingida';
+            return 'Desenvolvida';
         case GradeEnum.EMERGENT:
             return 'Emergente';
         case GradeEnum.IN_PROGRESS:
