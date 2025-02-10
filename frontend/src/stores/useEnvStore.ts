@@ -7,12 +7,20 @@ type EnvState = {
 export const useEnvStore = create<EnvState>((set, get) => {
     return {
         getEnv: (key: string) => {
-            const value = (window as any)['globalConfig'][key] || process.env['REACT_APP_' + key]
-            if (value === undefined) {
-                throw new Error(`Key ${key} not found in configuration`)
+            // First try to get from window.globalConfig (runtime config)
+            const globalConfig = (window as any)['globalConfig'];
+            if (globalConfig && globalConfig[key] !== undefined) {
+                return globalConfig[key];
             }
 
-            return value
+            // Then try to get from Vite's environment variables
+            const envKey = 'VITE_' + key;
+            const value = import.meta.env[envKey];
+            if (value !== undefined) {
+                return value;
+            }
+
+            throw new Error(`Key ${key} not found in configuration`);
         }
     };
 });
