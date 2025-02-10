@@ -9,7 +9,7 @@ RUN npm install
 COPY . .
 
 ARG API_HOST
-ENV API_HOST ${API_HOST}
+ENV VITE_API_HOST=${API_HOST}
 
 RUN npm run build
 
@@ -17,7 +17,7 @@ FROM nginx:stable-alpine AS production
 
 RUN apk add --no-cache bash
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 COPY --from=build /app/dist /usr/share/nginx/html
 
