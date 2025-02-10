@@ -71,7 +71,7 @@ function App() {
                         <Toolbar>
                             <img src={"/logo.svg"} width={60} alt="Logo" />
                             <Typography variant="h6" color="primary" sx={{ ml: 2, fontWeight: 600 }}>
-                                Avaliu - Avaliação das Aprendizagens
+                                IEAM - Instrumento Específico de Avaliação das Aprendizagens
                             </Typography>
 
                             <Box sx={LAYOUT_STYLES.navContainer}>

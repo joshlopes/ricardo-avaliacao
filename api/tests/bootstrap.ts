@@ -5,9 +5,9 @@ import InMemoryLogger from "./Helper/InMemoryLogger";
 import {TYPES} from "../src/Infrastructure/DependencyInjection/types";
 
 dotenv.config({
-    path: path.join(__dirname, '/../.env.test'),
+    path: path.join(__dirname, `/../${process.env.DOT_FILE ?? '.env.test'}`),
     override: true,
-    debug: false
+    debug: true
 })
 
 myContainer.rebind(TYPES.Logger).toConstantValue(new InMemoryLogger())
