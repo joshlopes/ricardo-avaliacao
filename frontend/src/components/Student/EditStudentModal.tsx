@@ -46,11 +46,7 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({
         setLoading(true);
 
         try {
-            const response = await api?.put(`/students/${student.id}`, {
-                name,
-                schoolClassId: classId,
-                subjectId,
-            });
+            const response = await api?.put(`/students/${student.id}`, {name});
 
             if (!response?.ok) {
                 throw new Error(t('Failed to update student'));
