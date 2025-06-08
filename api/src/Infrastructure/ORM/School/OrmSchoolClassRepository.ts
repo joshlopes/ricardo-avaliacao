@@ -29,6 +29,9 @@ export default class OrmSchoolClassRepository implements SchoolClassRepository {
             teacher: true,
             Subject: true,
             schoolClass: true
+          },
+          where: {
+            teacherId: teacherId.toString()
           }
         }
       }
